@@ -1,7 +1,7 @@
 // data/products.js
 import { turboCompressor } from "../../assets/images";
 import {
-    Blivac,
+    Blovac,
     Horisan,
     IHI,
     NOP,
@@ -47,17 +47,17 @@ Tidak hanya efisien, kompresor ini juga dirancang untuk tahan lama, minim perawa
     },
     {
         id: 2,
-        slug: "blivac-compressor-pro",
+        slug: "blovac-compressor-pro",
         category: "compressor",
-        brand: "blivac",
-        brandName: "Blivac",
-        brandLogo: Blivac,
+        brand: "blovac",
+        brandName: "Blovac",
+        brandLogo: Blovac,
         image: turboCompressor,
         images: [turboCompressor],
-        title: "Blivac Compressor Pro",
+        title: "Blovac Compressor Pro",
         subtitle: "Kompresor berkualitas tinggi untuk industri",
         description:
-            "Kompresor Blivac Pro dirancang khusus untuk aplikasi industri yang membutuhkan performa tinggi dan keandalan maksimal. Dengan teknologi terdepan dan konstruksi yang kokoh, kompresor ini memberikan efisiensi energi optimal untuk berbagai kebutuhan industri.",
+            "Kompresor Blovac Pro dirancang khusus untuk aplikasi industri yang membutuhkan performa tinggi dan keandalan maksimal. Dengan teknologi terdepan dan konstruksi yang kokoh, kompresor ini memberikan efisiensi energi optimal untuk berbagai kebutuhan industri.",
         specifications: {
             Kapasitas: "100-1000 m³/min",
             Tekanan: "0.8-1.2 MPa",

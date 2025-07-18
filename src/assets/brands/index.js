@@ -1,4 +1,4 @@
-export {default as Blivac} from './Blivac.png'
+export {default as Blovac} from './Blovac.png'
 export {default as Horisan} from './Horisan.png'
 export {default as IHI} from './IHI.png'
 export {default as NOP} from './NOP.png'

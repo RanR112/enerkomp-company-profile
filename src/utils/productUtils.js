@@ -3,7 +3,7 @@
 // Brand mapping untuk konsistensi
 export const BRAND_MAP = {
     ihi: "IHI",
-    blivac: "Blivac",
+    blovac: "Blovac",
     horisan: "Horisan",
     nop: "NOP",
     smk: "SMK",

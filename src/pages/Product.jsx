@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { productBg, productHero } from "../assets/images";
 import {
-    productBg,
-    productHero,
-    turboCompressor
-} from "../assets/images";
-import {
-    Blivac,
+    Blovac,
     Horisan,
     IHI,
     NOP,
@@ -19,6 +15,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../sass/pages/Product/Product.css";
 import ProductCard from "../components/ProductCard";
 import { products } from "../utils/data/productData";
+import Form from "../components/Form";
 
 export default function Product() {
     const [activeCategory, setActiveCategory] = useState("all");
@@ -27,7 +24,7 @@ export default function Product() {
     const productSectionRef = useRef(null);
 
     const brandLogos = [
-        { id: "blivac", name: "Blivac", logo: Blivac },
+        { id: "blovac", name: "Blovac", logo: Blovac },
         { id: "horisan", name: "Horisan", logo: Horisan },
         { id: "ihi", name: "IHI", logo: IHI },
         { id: "nop", name: "NOP", logo: NOP },
@@ -57,82 +54,6 @@ export default function Product() {
         { id: "oil-pump", name: "Oil Pump" },
         { id: "industrial-vacuum", name: "Industrial Vacuum" },
     ];
-
-    // Sample product data with brands
-    // const products = [
-    //     {
-    //         id: 1,
-    //         category: "compressor",
-    //         brand: "ihi",
-    //         brandLogo: IHI,
-    //         image: turboCompressor,
-    //         title: "IHI Turbo Compressor",
-    //         subtitle: "Kompresor sentrifugal IHI yang memiliki desain optimal",
-    //     },
-    //     {
-    //         id: 2,
-    //         category: "compressor",
-    //         brand: "blivac",
-    //         brandLogo: Blivac,
-    //         image: turboCompressor,
-    //         title: "Blivac Compressor Pro",
-    //         subtitle: "Kompresor berkualitas tinggi untuk industri",
-    //     },
-    //     {
-    //         id: 3,
-    //         category: "air-dryer",
-    //         brand: "suto",
-    //         brandLogo: SUTO,
-    //         image: turboCompressor,
-    //         title: "SUTO Air Dryer",
-    //         subtitle: "Pengering udara berkualitas tinggi untuk industri",
-    //     },
-    //     {
-    //         id: 4,
-    //         category: "impact-tools",
-    //         brand: "horisan",
-    //         brandLogo: Horisan,
-    //         image: turboCompressor,
-    //         title: "Horisan Impact Tool",
-    //         subtitle: "Alat impact pneumatik untuk aplikasi berat",
-    //     },
-    //     {
-    //         id: 5,
-    //         category: "oil-pump",
-    //         brand: "nop",
-    //         brandLogo: NOP,
-    //         image: turboCompressor,
-    //         title: "NOP Oil Pump",
-    //         subtitle: "Pompa oli industri dengan efisiensi tinggi",
-    //     },
-    //     {
-    //         id: 6,
-    //         category: "industrial-vacuum",
-    //         brand: "teral",
-    //         brandLogo: Teral,
-    //         image: turboCompressor,
-    //         title: "Teral Industrial Vacuum",
-    //         subtitle: "Vacuum industri untuk pembersihan profesional",
-    //     },
-    //     {
-    //         id: 7,
-    //         category: "compressor",
-    //         brand: "trident",
-    //         brandLogo: Trident,
-    //         image: turboCompressor,
-    //         title: "Trident Compressor",
-    //         subtitle: "Kompresor andal untuk berbagai aplikasi industri",
-    //     },
-    //     {
-    //         id: 8,
-    //         category: "air-dryer",
-    //         brand: "smk",
-    //         brandLogo: SMK,
-    //         image: turboCompressor,
-    //         title: "SMK Air Treatment",
-    //         subtitle: "Sistem pengolahan udara canggih",
-    //     },
-    // ];
 
     // Filter products based on category and brand
     const filteredProducts = products.filter((product) => {
@@ -287,12 +208,12 @@ export default function Product() {
                             variants={fadeInUp}
                         >
                             <h1 className="hero-title">
-                                TEMUKAN RAGAM
+                                Temukan Ragam
                                 <span className="highlight">
                                     {" "}
-                                    PRODUK INDUSTRI{" "}
+                                    Produk Industri{" "}
                                 </span>
-                                ANDAL
+                                Andal
                             </h1>
                             <p className="hero-description">
                                 PT Enerkomp menyediakan berbagai produk unggulan
@@ -495,7 +416,10 @@ export default function Product() {
                             >
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((product, index) => (
-                                        <ProductCard product={product} variants={cardAnimation}/>
+                                        <ProductCard
+                                            product={product}
+                                            variants={cardAnimation}
+                                        />
                                     ))
                                 ) : (
                                     <motion.div
@@ -524,6 +448,10 @@ export default function Product() {
                     </div>
                 </div>
             </motion.section>
+            <section className="catalog-form">
+                <h3 className="catalog-form-title">DAPATKAN KATALOG TERBARU <span className="highlight">KAMI</span></h3>
+                <Form type="catalog" />
+            </section>
         </div>
     );
 }

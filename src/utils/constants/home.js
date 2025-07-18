@@ -1,7 +1,7 @@
 import {
     AHM,
     Ajinomoto,
-    Blivac,
+    Blovac,
     Chemco,
     Daihatsu,
     Horisan,
@@ -41,7 +41,7 @@ import {
 export const heroImages = [Banner1, Banner2, Banner3];
 
 export const brandLogos = [
-    Blivac,
+    Blovac,
     Horisan,
     IHI,
     NOP,

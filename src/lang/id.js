@@ -100,7 +100,7 @@ export const ID = {
     },
     about: {
         hero: {
-            title: "KAMI MEMBERIKAN SOLUSI KOMPRESOR & PERALATAN INDUSTRI TERPERCAYA",
+            title: "Kami Memberikan Solusi Kompresor & Peralatan Industri Terpercaya",
             description:
                 "PT Enerkomp hadir dengan visi yang kuat untuk menghadirkan solusi kompresor, dryer, dan peralatan industri yang andal bagi berbagai sektor usaha di Indonesia. Didirikan lebih dari 15 tahun lalu, kami telah berkembang menjadi mitra terpercaya dalam penyediaan peralatan berkualitas tinggi dan layanan purna jual yang komprehensif.",
         },

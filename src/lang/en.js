@@ -100,7 +100,7 @@ export const EN = {
     },
     about: {
         hero: {
-            title: "WE PROVIDE TRUSTED COMPRESSOR & INDUSTRIAL EQUIPMENT SOLUTIONS",
+            title: "We Provide Trusted Compressor & Industrial Equipment Solutions",
             description:
                 "PT Enerkomp is present with a strong vision to provide reliable compressor, dryer, and industrial equipment solutions for various business sectors in Indonesia. Founded more than 15 years ago, we have grown to become a trusted partner in providing high-quality equipment and comprehensive after-sales service.",
         },

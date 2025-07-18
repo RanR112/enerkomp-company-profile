@@ -12,7 +12,7 @@ import {
 } from "../assets/images";
 
 import {
-    Blivac,
+    Blovac,
     Horisan,
     IHI,
     NOP,

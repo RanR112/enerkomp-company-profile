@@ -23,9 +23,9 @@ const Navbar = () => {
         { name: t("nav.home"), path: "/" },
         { name: t("nav.about"), path: "/about" },
         { name: t("nav.products"), path: "/products" },
-        { name: t("nav.services"), path: "/service" },
+        // { name: t("nav.services"), path: "/service" },
         { name: t("nav.contact"), path: "/contact" },
-        { name: t("nav.blog"), path: "/blog" },
+        // { name: t("nav.blog"), path: "/blog" },
     ];
 
     // Check if current route is product detail
