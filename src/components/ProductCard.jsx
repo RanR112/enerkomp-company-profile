@@ -6,7 +6,7 @@ import { generateSlug, getBrandName } from "../utils/productUtils";
 import "../sass/components/ProductCard/ProductCard.css";
 
 const ProductCard = ({ product, index, variants }) => {
-    const { t } = useLanguage();
+    const { t, currentLanguage } = useLanguage();
     const navigate = useNavigate();
 
     // Handle detail button click
@@ -21,6 +21,29 @@ const ProductCard = ({ product, index, variants }) => {
         const slug = product.slug || generateSlug(product.brand, product.title);
         navigate(`/product/${slug}`);
     };
+
+    // Get translated product content
+    const getTranslatedContent = () => {
+        // Check if product has translations
+        if (product.translations && product.translations[currentLanguage]) {
+            return {
+                title:
+                    product.translations[currentLanguage].title ||
+                    product.title,
+                subtitle:
+                    product.translations[currentLanguage].subtitle ||
+                    product.subtitle,
+            };
+        }
+
+        // Fallback to original content
+        return {
+            title: product.title,
+            subtitle: product.subtitle,
+        };
+    };
+
+    const { title, subtitle } = getTranslatedContent();
 
     return (
         <motion.div
@@ -43,20 +66,21 @@ const ProductCard = ({ product, index, variants }) => {
 
             {/* Gambar Produk */}
             <div className="product-image">
-                <img src={product.image} alt={product.title} />
+                <img src={product.image} alt={title} />
             </div>
 
             {/* Konten Produk */}
             <div className="product-content">
-                <h3>{product.title}</h3>
-                <p>{product.subtitle}</p>
+                <h3>{title}</h3>
+                <p>{subtitle}</p>
                 <motion.button
                     className="btn-outline"
                     onClick={handleDetailClick}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    {t("home.products.viewDetailBtn")}
+                    {t("products.detail.viewDetails") ||
+                        t("home.products.viewDetailBtn")}
                 </motion.button>
             </div>
         </motion.div>

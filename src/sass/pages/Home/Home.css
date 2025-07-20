@@ -78,7 +78,7 @@
   transition: all 0.5s ease;
 }
 .home .hero .hover-wrapper:hover .hero-text-overlay {
-  width: 65dvw;
+  width: 105dvw;
   transition: all 0.5s ease;
 }
 .home .hero .hover-wrapper:hover .hero-text {
@@ -87,7 +87,7 @@
 }
 @media (max-width: 768px) {
   .home .hero .hover-wrapper:hover .hero-text {
-    right: 2dvw;
+    right: 0;
   }
 }
 .home .hero .diagonal-line {
@@ -109,10 +109,10 @@
 }
 .home .hero .hero-text-overlay {
   position: absolute;
-  right: -18dvw;
+  right: -58dvw;
   top: 0;
   bottom: 0;
-  width: 60dvw;
+  width: 100dvw;
   background: var(--LayerSecondary);
   transform: skewX(-15deg);
   transform-origin: top;
@@ -127,7 +127,7 @@
 .home .hero .hero-text {
   color: var(--White);
   right: 2dvw;
-  max-width: 600px;
+  max-width: 40dvw;
   position: absolute;
   z-index: 4;
   transition: all 0.5s ease;
@@ -135,6 +135,8 @@
 @media (max-width: 768px) {
   .home .hero .hero-text {
     max-width: 100%;
+    padding: 0 1rem;
+    right: 0;
   }
 }
 .home .hero .hero-text h1 {
@@ -142,6 +144,11 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
+}
+@media (max-width: 1440px) {
+  .home .hero .hero-text h1 {
+    font-size: 2.8rem;
+  }
 }
 @media (max-width: 768px) {
   .home .hero .hero-text h1 {
@@ -162,6 +169,7 @@
   margin-bottom: 2.5rem;
   opacity: 0.95;
   font-weight: 400;
+  text-align: justify;
 }
 @media (max-width: 768px) {
   .home .hero .hero-text p {
@@ -249,7 +257,7 @@
   transform: translateY(-2px);
 }
 .home #brand {
-  scroll-margin-top: 80px; /* sesuaikan dengan tinggi navbar */
+  scroll-margin-top: 80px;
 }
 .home .brand-marquee {
   background: var(--White);
@@ -658,6 +666,11 @@
   padding: 2rem 6rem 8rem;
   background: var(--White);
 }
+@media (max-width: 768px) {
+  .home .products {
+    padding: 2rem 1rem 8rem;
+  }
+}
 .home .products h2 {
   font-size: 3rem;
   color: var(--Primary);
@@ -673,10 +686,20 @@
   color: var(--Accent);
 }
 .home .products .products-grid {
+  width: 100%;
   display: grid;
   background: none;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+}
+@media (max-width: 768px) {
+  .home .products .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: auto;
+  }
 }
 .home .cta {
   position: relative;
@@ -785,7 +808,7 @@
   .home .trusted-brands .brands-marquee .marquee .marquee-content .brand-item {
     width: 100px;
     height: 40px;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
   }
 }
 .home .trusted-brands .brands-marquee .marquee .marquee-content .brand-item:hover {
@@ -810,6 +833,11 @@
   max-width: 800px;
   margin: 0 auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+  .home .trusted-brands .contact-section {
+    width: 90%;
+  }
 }
 .home .trusted-brands .contact-section h3 {
   font-size: 2rem;

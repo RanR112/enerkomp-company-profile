@@ -252,6 +252,182 @@ export const EN = {
             title: "DOCUMENTATION",
         },
     },
+    products: {
+        hero: {
+            title: {
+                part1: "Discover a Range of",
+                highlight: "Reliable Industrial",
+                part2: "Products",
+            },
+            description:
+                "PT Enerkomp provides various leading products to support your industrial performance, from compressors, air dryers, filters, to air and energy processing systems. Each product is designed to deliver efficiency, reliability, and high quality that has been trusted by various industrial sectors. Find solutions that suit your operational needs only at PT Enerkomp.",
+            backgroundAlt: "Industrial facility",
+            imageAlt: "Trade show booth",
+            buttons: {
+                viewProducts: "View Products",
+                getCatalog: "Get Catalog",
+            },
+        },
+        brandCarousel: {
+            prevButton: "Previous slide",
+            nextButton: "Next slide",
+        },
+        categories: {
+            all: "All Categories",
+            compressor: "Compressor",
+            airDryer: "Air Dryer",
+            impactTools: "Impact Tools",
+            oilPump: "Oil Pump",
+            industrialVacuum: "Industrial Vacuum",
+        },
+        sidebar: {
+            categories: "CATEGORIES",
+            brands: "BRANDS",
+            allBrands: "All Brands",
+        },
+        catalog: {
+            allProducts: "All Products",
+            brandProducts: "{{brandName}} Products",
+            showingResults: "Showing {{count}} products",
+            noProducts: "No products match the selected filter.",
+            resetFilter: "Reset Filter",
+        },
+        catalogForm: {
+            title: {
+                part1: "GET OUR LATEST",
+                highlight: "CATALOG",
+            },
+        },
+        detail: {
+            loading: "Loading product...",
+            notFound: "Product not found",
+            backToProducts: "Back to Products",
+            previousImage: "Previous image",
+            nextImage: "Next image",
+            contactUs: "Contact Us",
+            downloadCatalog: "Download Catalog",
+            specifications: "Product Specifications",
+            features: "Key Features",
+            relatedProducts: "Related Products",
+            viewDetails: "View Detail",
+        },
+    },
+    contact: {
+        hero: {
+            title: {
+                part1: "We Are Here for",
+                highlight: "You",
+            },
+            description:
+                "Our team is always ready to provide the best support to answer your questions, help find solutions, and ensure your experience with us runs smoothly. Don't hesitate to contact us anytime through the form, email, or phone. We are committed to providing fast responses and friendly service for all your needs.",
+            imageAlt: "Industrial facility",
+            tradeShowAlt: "Trade show booth",
+        },
+        form: {
+            title: {
+                part1: "CONTACT",
+                highlight: "US",
+            },
+        },
+        cta: {
+            title: {
+                part1: "Want to",
+                highlight: "Connect Directly?",
+            },
+            subtitle: "Use the Contact Information Below",
+        },
+        contactInfo: {
+            linkedin: {
+                title: "LinkedIn",
+                description: "PT ENERKOMP PERSADA RAYA",
+            },
+            phone: {
+                title: "Phone",
+                description: "(021) 8932 9679",
+            },
+            email: {
+                title: "Email",
+                description: "sales@enerkomp.id",
+            },
+        },
+        offices: {
+            jakarta: {
+                name: "JAKARTA OFFICE",
+                address:
+                    "Grand Slipi Tower Building 42nd Floor Unit G-H Kav 22-24, West Jakarta, DKI Jakarta 11480",
+                location: "West Jakarta",
+                mapAlt: "Jakarta office location map showing West Jakarta area",
+            },
+            cikarang: {
+                name: "CIKARANG OFFICE",
+                address:
+                    "CBD Shop, Jl. Niaga Raya Block B-11, Pasirsari, South Cikarang, Bekasi Regency, West Java 17530",
+                location: "Bekasi Regency",
+                mapAlt: "Cikarang office location map showing Bekasi Regency area",
+            },
+        },
+    },
+    form: {
+        fields: {
+            company: "Company",
+            address: "Address",
+            country: "Country",
+            name: "Name",
+            email: "Email",
+            phone: "Phone",
+            fax: "Fax",
+            message: "Message",
+        },
+        placeholders: {
+            company: "Enter company name",
+            address: "Enter full address",
+            country: "Enter country",
+            name: "Enter full name",
+            email: "example@email.com",
+            phone: "Enter phone number",
+            fax: "Enter fax number (optional)",
+            message: "Write your message or question",
+        },
+        validation: {
+            required: "This field is required",
+            invalidEmail: "Invalid email format",
+            invalidPhone: "Invalid phone number format",
+            termsRequired: "You must agree to the terms",
+        },
+        termsAgreement:
+            'If you agree to the above "Notes on contact through the inquiry form", please click the checkbox.',
+        buttons: {
+            submit: "SUBMIT",
+            submitting: "SUBMITTING...",
+        },
+        messages: {
+            catalogSuccess:
+                "Form submitted successfully! Catalog will be downloaded shortly.",
+            contactSuccess:
+                "Your message has been sent successfully! We will respond soon.",
+            error: "An error occurred. Please try again.",
+        },
+        catalogNote:
+            "*Catalog will be downloaded automatically after you fill out the form above.",
+        infoCard: {
+            catalog: {
+                title: {
+                    part1: "FILL OUT THE FORM TO",
+                    highlight: "DOWNLOAD CATALOG",
+                },
+                description:
+                    "To download the complete catalog, please fill out the following form.",
+            },
+            contact: {
+                title: {
+                    part1: "WE WILL ANSWER",
+                    highlight: "YOUR CONSULTATION",
+                },
+                description:
+                    "Please fill in the required questions or messages in the following form, then press the Submit button.",
+            },
+        },
+    },
     footer: {
         brandName: "PT. ENERKOMP PERSADA RAYA",
         address:

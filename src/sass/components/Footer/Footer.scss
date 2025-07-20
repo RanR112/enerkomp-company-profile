@@ -1,16 +1,16 @@
 :root {
-    --Primary: #2D4C52;
-    --Secondary: #46777E;
-    --Third: #6BA4A8;
-    --Fourth: #D8F6DA;
-    --Accent: #F3994B;
-    --Hover: #D95D39;
-    --White: #FFFFFF;
+    --Primary: #2d4c52;
+    --Secondary: #46777e;
+    --Third: #6ba4a8;
+    --Fourth: #d8f6da;
+    --Accent: #f3994b;
+    --Hover: #d95d39;
+    --White: #ffffff;
     --Black: #000000;
     --LayerPrimary: rgba(45, 76, 82, 0.7);
     --LayerSecondary: rgba(45, 76, 82, 0.85);
-    --Card: #F4F6F6;
-    --Footer: #1C2E33;
+    --Card: #f4f6f6;
+    --Footer: #1c2e33;
 }
 
 .footer {
@@ -235,16 +235,17 @@
 
         .footer-columns {
             grid-template-columns: 1fr;
+            grid-template-rows: auto;
             gap: 2rem;
 
             .col {
-                h3 {
-                    font-size: 1.2rem;
-                    margin-bottom: 1rem;
-                }
+                grid-column: auto;
+                grid-row: auto;
+                text-align: center;
 
-                ul li {
-                    font-size: 1rem;
+                h3:after {
+                    left: 50%;
+                    transform: translateX(-50%);
                 }
             }
         }

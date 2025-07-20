@@ -13,6 +13,7 @@ import { aboutBanner, Banner1 } from "../assets/images";
 import { call } from "../assets/icons";
 import { useLanguage } from "../hooks/useLanguage";
 import ProductCard from "../components/ProductCard"; // Import komponen baru
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
     const { t } = useLanguage();
@@ -167,14 +168,16 @@ const Home = () => {
                                     </h1>
                                     <p>{t("home.hero.subtitle")}</p>
                                     <div className="hero-buttons">
-                                        <motion.button
-                                            className="btn-primary"
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
-                                            <img src={call} alt="" />{" "}
-                                            {t("home.hero.contactBtn")}
-                                        </motion.button>
+                                        <NavLink to={'/contact'}>
+                                            <motion.button
+                                                className="btn-primary"
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                            >
+                                                <img src={call} alt="" />{" "}
+                                                {t("home.hero.contactBtn")}
+                                            </motion.button>
+                                        </NavLink>
                                         <motion.button
                                             className="btn-secondary"
                                             whileHover={{ scale: 1.05 }}

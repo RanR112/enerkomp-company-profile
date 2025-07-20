@@ -16,8 +16,11 @@ import "../sass/pages/Product/Product.css";
 import ProductCard from "../components/ProductCard";
 import { products } from "../utils/data/productData";
 import Form from "../components/Form";
+import { call } from "../assets/icons";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Product() {
+    const { t } = useLanguage();
     const [activeCategory, setActiveCategory] = useState("all");
     const [activeBrand, setActiveBrand] = useState("all");
     const [currentBrandIndex, setCurrentBrandIndex] = useState(0);
@@ -47,12 +50,15 @@ export default function Product() {
 
     // Sample product categories
     const productCategories = [
-        { id: "all", name: "Semua Kategori" },
-        { id: "compressor", name: "Compressor" },
-        { id: "air-dryer", name: "Air Dryer" },
-        { id: "impact-tools", name: "Impact Tools" },
-        { id: "oil-pump", name: "Oil Pump" },
-        { id: "industrial-vacuum", name: "Industrial Vacuum" },
+        { id: "all", name: t("products.categories.all") },
+        { id: "compressor", name: t("products.categories.compressor") },
+        { id: "air-dryer", name: t("products.categories.airDryer") },
+        { id: "impact-tools", name: t("products.categories.impactTools") },
+        { id: "oil-pump", name: t("products.categories.oilPump") },
+        {
+            id: "industrial-vacuum",
+            name: t("products.categories.industrialVacuum"),
+        },
     ];
 
     // Filter products based on category and brand
@@ -113,6 +119,32 @@ export default function Product() {
                 });
             }
         }, 100);
+    };
+
+    // Get dynamic category title
+    const getCategoryTitle = () => {
+        if (activeCategory === "all" && activeBrand === "all") {
+            return t("products.catalog.allProducts");
+        }
+        if (activeCategory !== "all" && activeBrand === "all") {
+            return productCategories.find((cat) => cat.id === activeCategory)
+                ?.name;
+        }
+        if (activeCategory === "all" && activeBrand !== "all") {
+            const brandName = brandLogos.find(
+                (brand) => brand.id === activeBrand
+            )?.name;
+            return t("products.catalog.brandProducts", { brandName });
+        }
+        if (activeCategory !== "all" && activeBrand !== "all") {
+            const brandName = brandLogos.find(
+                (brand) => brand.id === activeBrand
+            )?.name;
+            const categoryName = productCategories.find(
+                (cat) => cat.id === activeCategory
+            )?.name;
+            return `${brandName} - ${categoryName}`;
+        }
     };
 
     // Animation variants
@@ -179,7 +211,7 @@ export default function Product() {
                 <div className="hero-background">
                     <img
                         src={productBg}
-                        alt="Industrial facility"
+                        alt={t("products.hero.backgroundAlt")}
                         className="hero-bg-image"
                     />
                     <div className="hero-overlay"></div>
@@ -198,7 +230,7 @@ export default function Product() {
                         >
                             <img
                                 src={productHero}
-                                alt="Trade show booth"
+                                alt={t("products.hero.imageAlt")}
                                 className="hero-image"
                             />
                         </motion.div>
@@ -208,24 +240,46 @@ export default function Product() {
                             variants={fadeInUp}
                         >
                             <h1 className="hero-title">
-                                Temukan Ragam
+                                {t("products.hero.title.part1")}
                                 <span className="highlight">
                                     {" "}
-                                    Produk Industri{" "}
+                                    {t("products.hero.title.highlight")}{" "}
                                 </span>
-                                Andal
+                                {t("products.hero.title.part2")}
                             </h1>
-                            <p className="hero-description">
-                                PT Enerkomp menyediakan berbagai produk unggulan
-                                untuk mendukung performa industri Anda, mulai
-                                dari kompresor, air dryer, filter, hingga sistem
-                                pengolahan udara dan energi. Setiap produk
-                                dirancang untuk memberikan efisiensi, keandalan,
-                                dan kualitas tinggi yang telah dipercaya oleh
-                                berbagai sektor industri. Temukan solusi yang
-                                sesuai dengan kebutuhan operasional Anda hanya
-                                di PT Enerkomp.
+                            <p className="hero-description-product">
+                                {t("products.hero.description")}
                             </p>
+                            <div className="hero-buttons">
+                                <motion.button
+                                    className="btn-primary"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => {
+                                        const targetElement =
+                                            document.getElementById("product");
+                                        targetElement?.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
+                                    }}
+                                >
+                                    {t("products.hero.buttons.viewProducts")}
+                                </motion.button>
+                                <motion.button
+                                    className="btn-secondary"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => {
+                                        const targetElement =
+                                            document.getElementById("catalog");
+                                        targetElement?.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
+                                    }}
+                                >
+                                    {t("products.hero.buttons.getCatalog")}
+                                </motion.button>
+                            </div>
                         </motion.div>
                     </motion.div>
                 </div>
@@ -237,6 +291,7 @@ export default function Product() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
+                id="product"
             >
                 <div className="brand-carousel-container">
                     <div className="brand-carousel-wrapper">
@@ -245,6 +300,7 @@ export default function Product() {
                             onClick={handlePrevBrand}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
+                            aria-label={t("products.brandCarousel.prevButton")}
                         >
                             <ChevronLeft size={24} />
                         </motion.button>
@@ -293,6 +349,7 @@ export default function Product() {
                             onClick={handleNextBrand}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
+                            aria-label={t("products.brandCarousel.nextButton")}
                         >
                             <ChevronRight size={24} />
                         </motion.button>
@@ -314,7 +371,9 @@ export default function Product() {
                         className="sidebar-categories"
                         variants={fadeInUp}
                     >
-                        <h3 className="sidebar-title">KATEGORI</h3>
+                        <h3 className="sidebar-title">
+                            {t("products.sidebar.categories")}
+                        </h3>
                         <div className="category-list">
                             {productCategories.map((category) => (
                                 <motion.button
@@ -335,7 +394,9 @@ export default function Product() {
                             ))}
                         </div>
 
-                        <h3 className="sidebar-title brand-title">BRAND</h3>
+                        <h3 className="sidebar-title brand-title">
+                            {t("products.sidebar.brands")}
+                        </h3>
                         <div className="brand-list">
                             <motion.button
                                 className={`brand-item ${
@@ -345,7 +406,7 @@ export default function Product() {
                                 whileHover={{ x: 5 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                Semua Brand
+                                {t("products.sidebar.allBrands")}
                             </motion.button>
                             {brandLogos.map((brand) => (
                                 <motion.button
@@ -370,37 +431,14 @@ export default function Product() {
                             variants={fadeInUp}
                         >
                             <h2 className="category-title">
-                                {activeCategory === "all" &&
-                                    activeBrand === "all" &&
-                                    "Semua Produk"}
-                                {activeCategory !== "all" &&
-                                    activeBrand === "all" &&
-                                    productCategories.find(
-                                        (cat) => cat.id === activeCategory
-                                    )?.name}
-                                {activeCategory === "all" &&
-                                    activeBrand !== "all" &&
-                                    `Produk ${
-                                        brandLogos.find(
-                                            (brand) => brand.id === activeBrand
-                                        )?.name
-                                    }`}
-                                {activeCategory !== "all" &&
-                                    activeBrand !== "all" &&
-                                    `${
-                                        brandLogos.find(
-                                            (brand) => brand.id === activeBrand
-                                        )?.name
-                                    } - ${
-                                        productCategories.find(
-                                            (cat) => cat.id === activeCategory
-                                        )?.name
-                                    }`}
+                                {getCategoryTitle()}
                             </h2>
                             {(activeCategory !== "all" ||
                                 activeBrand !== "all") && (
                                 <p className="filter-info">
-                                    Menampilkan {filteredProducts.length} produk
+                                    {t("products.catalog.showingResults", {
+                                        count: filteredProducts.length,
+                                    })}
                                 </p>
                             )}
                         </motion.div>
@@ -417,6 +455,7 @@ export default function Product() {
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((product, index) => (
                                         <ProductCard
+                                            key={product.id}
                                             product={product}
                                             variants={cardAnimation}
                                         />
@@ -427,8 +466,7 @@ export default function Product() {
                                         variants={fadeInUp}
                                     >
                                         <p>
-                                            Tidak ada produk yang sesuai dengan
-                                            filter yang dipilih.
+                                            {t("products.catalog.noProducts")}
                                         </p>
                                         <motion.button
                                             className="reset-filter-btn"
@@ -439,7 +477,7 @@ export default function Product() {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
-                                            Reset Filter
+                                            {t("products.catalog.resetFilter")}
                                         </motion.button>
                                     </motion.div>
                                 )}
@@ -448,8 +486,14 @@ export default function Product() {
                     </div>
                 </div>
             </motion.section>
-            <section className="catalog-form">
-                <h3 className="catalog-form-title">DAPATKAN KATALOG TERBARU <span className="highlight">KAMI</span></h3>
+
+            <section className="catalog-form" id="catalog">
+                <h3 className="catalog-form-title">
+                    {t("products.catalogForm.title.part1")}{" "}
+                    <span className="highlight">
+                        {t("products.catalogForm.title.highlight")}
+                    </span>
+                </h3>
                 <Form type="catalog" />
             </section>
         </div>

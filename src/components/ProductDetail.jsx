@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Phone, Download } from "lucide-react";
 import { findProductBySlug, getRelatedProducts } from "../utils/productUtils";
+import { useLanguage } from "../hooks/useLanguage";
 import "../sass/components/ProductDetail/ProductDetail.css";
 
 // Import images (sesuaikan dengan struktur project Anda)
@@ -27,6 +28,7 @@ import ProductCard from "./ProductCard";
 export default function ProductDetail() {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const { t, currentLanguage } = useLanguage();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
@@ -67,6 +69,33 @@ export default function ProductDetail() {
         }
     };
 
+    // Get translated product content
+    const getTranslatedContent = () => {
+        if (!product) return {};
+
+        // Check if product has translations
+        if (product.translations && product.translations[currentLanguage]) {
+            const translation = product.translations[currentLanguage];
+            return {
+                title: translation.title || product.title,
+                subtitle: translation.subtitle || product.subtitle,
+                description: translation.description || product.description,
+                specifications:
+                    translation.specifications || product.specifications,
+                features: translation.features || product.features,
+            };
+        }
+
+        // Fallback to original content
+        return {
+            title: product.title,
+            subtitle: product.subtitle,
+            description: product.description,
+            specifications: product.specifications,
+            features: product.features,
+        };
+    };
+
     // Animation variants
     const fadeIn = {
         hidden: { opacity: 0 },
@@ -89,6 +118,7 @@ export default function ProductDetail() {
         return (
             <div className="product-detail-loading">
                 <div className="loading-spinner"></div>
+                <p>{t("products.detail.loading")}</p>
             </div>
         );
     }
@@ -96,13 +126,16 @@ export default function ProductDetail() {
     if (!product) {
         return (
             <div className="product-not-found">
-                <h2>Produk tidak ditemukan</h2>
+                <h2>{t("products.detail.notFound")}</h2>
                 <button onClick={() => navigate("/products")}>
-                    Kembali ke Produk
+                    {t("products.detail.backToProducts")}
                 </button>
             </div>
         );
     }
+
+    const { title, subtitle, description, specifications, features } =
+        getTranslatedContent();
 
     return (
         <div className="product-detail-page">
@@ -113,11 +146,13 @@ export default function ProductDetail() {
                 animate="visible"
                 variants={fadeIn}
             >
-                <span onClick={() => navigate("/")}>Home</span>
+                <span onClick={() => navigate("/")}>{t("nav.home")}</span>
                 <span>/</span>
-                <span onClick={() => navigate("/products")}>Produk</span>
+                <span onClick={() => navigate("/products")}>
+                    {t("nav.products")}
+                </span>
                 <span>/</span>
-                <span>{product.title}</span>
+                <span>{title}</span>
             </motion.div>
 
             {/* Product Detail Content */}
@@ -134,7 +169,7 @@ export default function ProductDetail() {
                             <motion.img
                                 key={currentImageIndex}
                                 src={product.images[currentImageIndex]}
-                                alt={product.title}
+                                alt={title}
                                 className="main-product-image"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -148,12 +183,16 @@ export default function ProductDetail() {
                                 <button
                                     className="image-nav-btn prev"
                                     onClick={prevImage}
+                                    aria-label={t(
+                                        "products.detail.previousImage"
+                                    )}
                                 >
                                     <ChevronLeft size={24} />
                                 </button>
                                 <button
                                     className="image-nav-btn next"
                                     onClick={nextImage}
+                                    aria-label={t("products.detail.nextImage")}
                                 >
                                     <ChevronRight size={24} />
                                 </button>
@@ -176,7 +215,7 @@ export default function ProductDetail() {
                                 >
                                     <img
                                         src={image}
-                                        alt={`${product.title} ${index + 1}`}
+                                        alt={`${title} ${index + 1}`}
                                     />
                                 </button>
                             ))}
@@ -196,16 +235,14 @@ export default function ProductDetail() {
                     </div>
 
                     {/* Product Title */}
-                    <h1 className="product-title">{product.title}</h1>
-                    <p className="product-subtitle">{product.subtitle}</p>
+                    <h1 className="product-title">{title}</h1>
+                    <p className="product-subtitle">{subtitle}</p>
 
                     {/* Product Description */}
                     <div className="product-description">
-                        {product.description
-                            .split("\n\n")
-                            .map((paragraph, index) => (
-                                <p key={index}>{paragraph}</p>
-                            ))}
+                        {description.split("\n\n").map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                        ))}
                     </div>
 
                     {/* Action Buttons */}
@@ -216,7 +253,7 @@ export default function ProductDetail() {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Phone size={20} />
-                            Hubungi Kami
+                            {t("products.detail.contactUs")}
                         </motion.button>
 
                         <motion.button
@@ -225,7 +262,7 @@ export default function ProductDetail() {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Download size={20} />
-                            Download Katalog
+                            {t("products.detail.downloadCatalog")}
                         </motion.button>
                     </div>
                 </motion.div>
@@ -238,16 +275,14 @@ export default function ProductDetail() {
                 animate="visible"
                 variants={fadeIn}
             >
-                <h2>Spesifikasi Produk</h2>
+                <h2>{t("products.detail.specifications")}</h2>
                 <div className="specs-grid">
-                    {Object.entries(product.specifications).map(
-                        ([key, value]) => (
-                            <div key={key} className="spec-item">
-                                <span className="spec-label">{key}:</span>
-                                <span className="spec-value">{value}</span>
-                            </div>
-                        )
-                    )}
+                    {Object.entries(specifications).map(([key, value]) => (
+                        <div key={key} className="spec-item">
+                            <span className="spec-label">{key}:</span>
+                            <span className="spec-value">{value}</span>
+                        </div>
+                    ))}
                 </div>
             </motion.div>
 
@@ -258,9 +293,9 @@ export default function ProductDetail() {
                 animate="visible"
                 variants={fadeIn}
             >
-                <h2>Fitur Unggulan</h2>
+                <h2>{t("products.detail.features")}</h2>
                 <div className="features-grid">
-                    {product.features.map((feature, index) => (
+                    {features.map((feature, index) => (
                         <motion.div
                             key={index}
                             className="feature-item"
@@ -283,10 +318,13 @@ export default function ProductDetail() {
                     animate="visible"
                     variants={fadeIn}
                 >
-                    <h2>Produk Terkait</h2>
+                    <h2>{t("products.detail.relatedProducts")}</h2>
                     <div className="related-products-grid">
                         {relatedProducts.map((relatedProduct) => (
-                            <ProductCard product={relatedProduct}/>
+                            <ProductCard
+                                key={relatedProduct.id}
+                                product={relatedProduct}
+                            />
                         ))}
                     </div>
                 </motion.div>

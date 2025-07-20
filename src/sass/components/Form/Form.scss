@@ -19,14 +19,15 @@
     padding: 0 2rem 2rem;
     min-height: 100vh;
 
-    @media (max-width: 768px) {
+    @media (max-width: 884px) {
         padding: 0 1rem 2rem;
     }
 }
 
 .catalog-form-wrapper {
-    max-width: 1200px;
+    max-width: 100dvw;
     margin: 0 auto;
+    justify-content: center;
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 3rem;
@@ -34,12 +35,11 @@
 
     @media (max-width: 1024px) {
         grid-template-columns: 1fr 300px;
-        gap: 2rem;
+        gap: 0rem;
     }
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        gap: 2rem;
     }
 }
 

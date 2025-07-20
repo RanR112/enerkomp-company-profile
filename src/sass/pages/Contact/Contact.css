@@ -123,6 +123,7 @@
   opacity: 0.95;
   max-width: 90%;
   position: relative;
+  text-align: justify;
 }
 @media (max-width: 768px) {
   .hero-content .hero-container .hero-text-wrapper .hero-description {

@@ -142,6 +142,7 @@
   opacity: 0.95;
   max-width: 90%;
   position: relative;
+  text-align: justify;
 }
 @media (max-width: 768px) {
   .hero-content .hero-container .hero-text-wrapper .hero-description {
@@ -183,6 +184,11 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
+@media (max-width: 478px) {
+  .statistics-section .statistics-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .statistics-section .stat-item {
   text-align: center;
   color: var(--White);
@@ -211,20 +217,23 @@
   padding: 0 2rem;
   display: flex;
   overflow-x: auto;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: 0 1rem;
 }
 .content-navigation .nav-container::-webkit-scrollbar {
   display: none;
 }
 .content-navigation .nav-tab {
+  flex: 0 0 auto;
   background: none;
   border: none;
-  padding: 1.5rem 2rem;
-  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--Secondary);
   cursor: pointer;
@@ -233,6 +242,7 @@
   transition: all 0.3s ease;
   min-width: -moz-fit-content;
   min-width: fit-content;
+  scroll-snap-align: start;
 }
 .content-navigation .nav-tab:hover {
   color: var(--Primary);
@@ -242,6 +252,21 @@
   color: var(--Primary);
   border-bottom-color: var(--Accent);
   background: var(--Card);
+}
+@media (min-width: 768px) {
+  .content-navigation .nav-container {
+    justify-content: center;
+  }
+  .content-navigation .nav-tab {
+    padding: 1.2rem 2rem;
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1200px) {
+  .content-navigation .nav-tab {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.1rem;
+  }
 }
 
 .main-content {
@@ -352,6 +377,7 @@
 .factor-item p {
   color: var(--Secondary);
   line-height: 1.6;
+  text-align: justify;
 }
 
 .problems-list {

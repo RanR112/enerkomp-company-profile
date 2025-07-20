@@ -198,6 +198,7 @@
                 opacity: 0.95;
                 max-width: 90%;
                 position: relative;
+                text-align: justify;
 
                 @media (max-width: 768px) {
                     max-width: 100%;
@@ -239,6 +240,10 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
+
+        @media (max-width: 478px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     .stat-item {
@@ -264,7 +269,6 @@
     background: var(--White);
     border-bottom: 2px solid var(--Card);
     position: sticky;
-
     top: 0;
     z-index: 10;
 
@@ -272,11 +276,13 @@
         @include container;
         display: flex;
         overflow-x: auto;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         margin: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        scroll-snap-type: x mandatory;
+        padding: 0 1rem;
 
         &::-webkit-scrollbar {
             display: none;
@@ -284,10 +290,11 @@
     }
 
     .nav-tab {
+        flex: 0 0 auto;
         background: none;
         border: none;
-        padding: 1.5rem 2rem;
-        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
         font-weight: 600;
         color: var(--Secondary);
         cursor: pointer;
@@ -295,6 +302,7 @@
         white-space: nowrap;
         transition: all 0.3s ease;
         min-width: fit-content;
+        scroll-snap-align: start;
 
         &:hover {
             color: var(--Primary);
@@ -307,7 +315,26 @@
             background: var(--Card);
         }
     }
+
+    @media (min-width: 768px) {
+        .nav-container {
+            justify-content: center;
+        }
+
+        .nav-tab {
+            padding: 1.2rem 2rem;
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .nav-tab {
+            padding: 1.5rem 2.5rem;
+            font-size: 1.1rem;
+        }
+    }
 }
+
 
 // Main Content
 .main-content {
@@ -423,6 +450,7 @@
     p {
         color: var(--Secondary);
         line-height: 1.6;
+        text-align: justify;
     }
 }
 

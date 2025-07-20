@@ -253,6 +253,183 @@ export const ID = {
             title: "DOKUMENTASI",
         },
     },
+    products: {
+        hero: {
+            title: {
+                part1: "Temukan Ragam",
+                highlight: "Produk Industri",
+                part2: "Andal",
+            },
+            description:
+                "PT Enerkomp menyediakan berbagai produk unggulan untuk mendukung performa industri Anda, mulai dari kompresor, air dryer, filter, hingga sistem pengolahan udara dan energi. Setiap produk dirancang untuk memberikan efisiensi, keandalan, dan kualitas tinggi yang telah dipercaya oleh berbagai sektor industri. Temukan solusi yang sesuai dengan kebutuhan operasional Anda hanya di PT Enerkomp.",
+            backgroundAlt: "Fasilitas industri",
+            imageAlt: "Stand pameran dagang",
+            buttons: {
+                viewProducts: "Lihat Produk",
+                getCatalog: "Dapatkan Katalog",
+            },
+        },
+        brandCarousel: {
+            prevButton: "Slide sebelumnya",
+            nextButton: "Slide selanjutnya",
+        },
+        categories: {
+            all: "Semua Kategori",
+            compressor: "Compressor",
+            airDryer: "Air Dryer",
+            impactTools: "Impact Tools",
+            oilPump: "Oil Pump",
+            industrialVacuum: "Industrial Vacuum",
+        },
+        sidebar: {
+            categories: "KATEGORI",
+            brands: "BRAND",
+            allBrands: "Semua Brand",
+        },
+        catalog: {
+            allProducts: "Semua Produk",
+            brandProducts: "Produk {{brandName}}",
+            showingResults: "Menampilkan {{count}} produk",
+            noProducts:
+                "Tidak ada produk yang sesuai dengan filter yang dipilih.",
+            resetFilter: "Reset Filter",
+        },
+        catalogForm: {
+            title: {
+                part1: "DAPATKAN KATALOG TERBARU",
+                highlight: "KAMI",
+            },
+        },
+        detail: {
+            loading: "Memuat produk...",
+            notFound: "Produk tidak ditemukan",
+            backToProducts: "Kembali ke Produk",
+            previousImage: "Gambar sebelumnya",
+            nextImage: "Gambar selanjutnya",
+            contactUs: "Hubungi Kami",
+            downloadCatalog: "Download Katalog",
+            specifications: "Spesifikasi Produk",
+            features: "Fitur Unggulan",
+            relatedProducts: "Produk Terkait",
+            viewDetails: "Lihat Detail",
+        },
+    },
+    contact: {
+        hero: {
+            title: {
+                part1: "Kami di Sini untuk",
+                highlight: "Anda",
+            },
+            description:
+                "Tim kami selalu siap memberikan dukungan terbaik untuk menjawab pertanyaan Anda, membantu menemukan solusi, dan memastikan pengalaman Anda bersama kami berjalan lancar. Jangan ragu untuk menghubungi kami kapan saja melalui formulir, email, atau telepon. Kami berkomitmen memberikan respons cepat dan pelayanan yang ramah untuk setiap kebutuhan Anda.",
+            imageAlt: "Fasilitas industri",
+            tradeShowAlt: "Stand pameran dagang",
+        },
+        form: {
+            title: {
+                part1: "HUBUNGI",
+                highlight: "KAMI",
+            },
+        },
+        cta: {
+            title: {
+                part1: "Ingin",
+                highlight: "Terhubung Langsung?",
+            },
+            subtitle: "Gunakan Informasi Kontak di Bawah Ini",
+        },
+        contactInfo: {
+            linkedin: {
+                title: "LinkedIn",
+                description: "PT ENERKOMP PERSADA RAYA",
+            },
+            phone: {
+                title: "Telepon",
+                description: "(021) 8932 9679",
+            },
+            email: {
+                title: "Email",
+                description: "sales@enerkomp.id",
+            },
+        },
+        offices: {
+            jakarta: {
+                name: "KANTOR JAKARTA",
+                address:
+                    "Gd. Grand Slipi Tower Lt 42 Unit G-H Kav 22-24, Jakarta Barat, DKI Jakarta 11480",
+                location: "Jakarta Barat",
+                mapAlt: "Peta lokasi kantor Jakarta menunjukkan area Jakarta Barat",
+            },
+            cikarang: {
+                name: "KANTOR CIKARANG",
+                address:
+                    "Ruko CBD, Jl. Niaga Raya Blok B-11, Pasirsari, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530",
+                location: "Kabupaten Bekasi",
+                mapAlt: "Peta lokasi kantor Cikarang menunjukkan area Kabupaten Bekasi",
+            },
+        },
+    },
+    form: {
+        fields: {
+            company: "Perusahaan",
+            address: "Alamat",
+            country: "Negara",
+            name: "Nama",
+            email: "Email",
+            phone: "Telepon",
+            fax: "Fax",
+            message: "Pesan",
+        },
+        placeholders: {
+            company: "Masukkan nama perusahaan",
+            address: "Masukkan alamat lengkap",
+            country: "Masukkan negara",
+            name: "Masukkan nama lengkap",
+            email: "contoh@email.com",
+            phone: "Masukkan nomor telepon",
+            fax: "Masukkan nomor fax (opsional)",
+            message: "Tuliskan pesan atau pertanyaan Anda",
+        },
+        validation: {
+            required: "Field ini wajib diisi",
+            invalidEmail: "Format email tidak valid",
+            invalidPhone: "Format nomor telepon tidak valid",
+            termsRequired: "Anda harus menyetujui persyaratan",
+        },
+        termsAgreement:
+            'Jika Anda setuju dengan "Catatan kontak melalui formulir inquiry" di atas, silakan klik kotak centang.',
+        buttons: {
+            submit: "KIRIM",
+            submitting: "MENGIRIM...",
+        },
+        messages: {
+            catalogSuccess:
+                "Form berhasil dikirim! Katalog akan segera diunduh.",
+            contactSuccess:
+                "Pesan Anda berhasil dikirim! Kami akan segera merespons.",
+            error: "Terjadi kesalahan. Silakan coba lagi.",
+        },
+        catalogNote:
+            "*Katalog akan terdownload otomatis setelah anda mengisi form diatas.",
+        infoCard: {
+            catalog: {
+                title: {
+                    part1: "ISI FORMULIR UNTUK",
+                    highlight: "MENGUNDUH KATALOG",
+                },
+                description:
+                    "Untuk mengunduh katalog secara lengkap, silakan isi formulir berikut.",
+            },
+            contact: {
+                title: {
+                    part1: "KAMI AKAN MENJAWAB",
+                    highlight: "KONSULTASI ANDA",
+                },
+                description:
+                    "Silakan isi pertanyaan atau pesan yang diperlukan pada formulir berikut, lalu tekan tombol Kirim.",
+            },
+        },
+    },
     footer: {
         brandName: "PT. ENERKOMP PERSADA RAYA",
         address:

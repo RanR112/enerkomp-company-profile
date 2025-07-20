@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "../sass/components/Form/Form.css";
 import { catalogBanner, contactBanner } from "../assets/images";
+import { useLanguage } from "../hooks/useLanguage";
 
 const Form = ({ type }) => {
+    const { t } = useLanguage();
+
     const [formData, setFormData] = useState({
         perusahaan: "",
         alamat: "",
@@ -53,7 +56,7 @@ const Form = ({ type }) => {
         // Check required fields
         requiredFields.forEach((field) => {
             if (!formData[field].trim()) {
-                newErrors[field] = "Field ini wajib diisi";
+                newErrors[field] = t("form.validation.required");
             }
         });
 
@@ -62,17 +65,17 @@ const Form = ({ type }) => {
             formData.email &&
             !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
         ) {
-            newErrors.email = "Format email tidak valid";
+            newErrors.email = t("form.validation.invalidEmail");
         }
 
         // Phone validation
         if (formData.phone && !/^[0-9+\-\s()]+$/.test(formData.phone)) {
-            newErrors.phone = "Format nomor telepon tidak valid";
+            newErrors.phone = t("form.validation.invalidPhone");
         }
 
         // Terms agreement
         if (!agreedToTerms) {
-            newErrors.terms = "Anda harus menyetujui persyaratan";
+            newErrors.terms = t("form.validation.termsRequired");
         }
 
         setErrors(newErrors);
@@ -194,7 +197,8 @@ const Form = ({ type }) => {
                     <div className="catalog-form">
                         <div className="form-group">
                             <label htmlFor="perusahaan">
-                                Perusahaan<span className="required">*</span>
+                                {t("form.fields.company")}
+                                <span className="required">*</span>
                             </label>
                             <input
                                 type="text"
@@ -202,6 +206,7 @@ const Form = ({ type }) => {
                                 name="perusahaan"
                                 value={formData.perusahaan}
                                 onChange={handleInputChange}
+                                placeholder={t("form.placeholders.company")}
                                 className={errors.perusahaan ? "error" : ""}
                             />
                             {errors.perusahaan && (
@@ -213,7 +218,8 @@ const Form = ({ type }) => {
 
                         <div className="form-group">
                             <label htmlFor="alamat">
-                                Alamat<span className="required">*</span>
+                                {t("form.fields.address")}
+                                <span className="required">*</span>
                             </label>
                             <input
                                 type="text"
@@ -221,6 +227,7 @@ const Form = ({ type }) => {
                                 name="alamat"
                                 value={formData.alamat}
                                 onChange={handleInputChange}
+                                placeholder={t("form.placeholders.address")}
                                 className={errors.alamat ? "error" : ""}
                             />
                             {errors.alamat && (
@@ -233,7 +240,8 @@ const Form = ({ type }) => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="negara">
-                                    Negara<span className="required">*</span>
+                                    {t("form.fields.country")}
+                                    <span className="required">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -241,6 +249,7 @@ const Form = ({ type }) => {
                                     name="negara"
                                     value={formData.negara}
                                     onChange={handleInputChange}
+                                    placeholder={t("form.placeholders.country")}
                                     className={errors.negara ? "error" : ""}
                                 />
                                 {errors.negara && (
@@ -254,7 +263,8 @@ const Form = ({ type }) => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="nama">
-                                    Nama<span className="required">*</span>
+                                    {t("form.fields.name")}
+                                    <span className="required">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -262,6 +272,7 @@ const Form = ({ type }) => {
                                     name="nama"
                                     value={formData.nama}
                                     onChange={handleInputChange}
+                                    placeholder={t("form.placeholders.name")}
                                     className={errors.nama ? "error" : ""}
                                 />
                                 {errors.nama && (
@@ -273,7 +284,8 @@ const Form = ({ type }) => {
 
                             <div className="form-group">
                                 <label htmlFor="email">
-                                    Email<span className="required">*</span>
+                                    {t("form.fields.email")}
+                                    <span className="required">*</span>
                                 </label>
                                 <input
                                     type="email"
@@ -281,6 +293,7 @@ const Form = ({ type }) => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
+                                    placeholder={t("form.placeholders.email")}
                                     className={errors.email ? "error" : ""}
                                 />
                                 {errors.email && (
@@ -294,7 +307,8 @@ const Form = ({ type }) => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="phone">
-                                    Phone<span className="required">*</span>
+                                    {t("form.fields.phone")}
+                                    <span className="required">*</span>
                                 </label>
                                 <input
                                     type="tel"
@@ -302,6 +316,7 @@ const Form = ({ type }) => {
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleInputChange}
+                                    placeholder={t("form.placeholders.phone")}
                                     className={errors.phone ? "error" : ""}
                                 />
                                 {errors.phone && (
@@ -312,20 +327,24 @@ const Form = ({ type }) => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="fax">Fax</label>
+                                <label htmlFor="fax">
+                                    {t("form.fields.fax")}
+                                </label>
                                 <input
                                     type="text"
                                     id="fax"
                                     name="fax"
                                     value={formData.fax}
                                     onChange={handleInputChange}
+                                    placeholder={t("form.placeholders.fax")}
                                 />
                             </div>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="pesan">
-                                Pesan<span className="required">*</span>
+                                {t("form.fields.message")}
+                                <span className="required">*</span>
                             </label>
                             <textarea
                                 id="pesan"
@@ -333,6 +352,7 @@ const Form = ({ type }) => {
                                 value={formData.pesan}
                                 onChange={handleInputChange}
                                 rows="5"
+                                placeholder={t("form.placeholders.message")}
                                 className={errors.pesan ? "error" : ""}
                             />
                             {errors.pesan && (
@@ -353,9 +373,7 @@ const Form = ({ type }) => {
                                 />
                                 <span className="checkmark"></span>
                                 <span className="required">*</span>
-                                If you agree to the above "Notes on contact
-                                through the inquiry form", please click the
-                                checkbox.
+                                {t("form.termsAgreement")}
                             </label>
                             {errors.terms && (
                                 <span className="error-message">
@@ -370,27 +388,28 @@ const Form = ({ type }) => {
                             disabled={isSubmitting}
                             onClick={handleSubmit}
                         >
-                            {isSubmitting ? "MENGIRIM..." : "KIRIM"}
+                            {isSubmitting
+                                ? t("form.buttons.submitting")
+                                : t("form.buttons.submit")}
                         </button>
 
                         {submitStatus === "success" && (
                             <div className="success-message">
                                 {type === "catalog"
-                                    ? "Form berhasil dikirim! Katalog akan segera diunduh."
-                                    : "Pesan Anda berhasil dikirim! Kami akan segera merespons."}
+                                    ? t("form.messages.catalogSuccess")
+                                    : t("form.messages.contactSuccess")}
                             </div>
                         )}
 
                         {submitStatus === "error" && (
                             <div className="error-message">
-                                Terjadi kesalahan. Silakan coba lagi.
+                                {t("form.messages.error")}
                             </div>
                         )}
 
                         {type === "catalog" && (
                             <p className="download-note">
-                                *Katalog akan terdownload otomatis setelah anda
-                                mengisi form diatas.
+                                {t("form.catalogNote")}
                             </p>
                         )}
                     </div>
@@ -410,29 +429,22 @@ const Form = ({ type }) => {
                     {type === "catalog" ? (
                         <>
                             <h3>
-                                ISI FORMULIR UNTUK <br />
+                                {t("form.infoCard.catalog.title.part1")} <br />
                                 <span className="highlight">
-                                    MENGUNDUH KATALOG
+                                    {t("form.infoCard.catalog.title.highlight")}
                                 </span>
                             </h3>
-                            <p>
-                                Untuk mengunduh katalog secara lengkap, silakan
-                                isi formulir berikut.
-                            </p>
+                            <p>{t("form.infoCard.catalog.description")}</p>
                         </>
                     ) : (
                         <>
                             <h3>
-                                KAMI AKAN MENJAWAB <br />
+                                {t("form.infoCard.contact.title.part1")} <br />
                                 <span className="highlight">
-                                    KONSULTASI ANDA
+                                    {t("form.infoCard.contact.title.highlight")}
                                 </span>
                             </h3>
-                            <p>
-                                Silakan isi pertanyaan atau pesan yang
-                                diperlukan pada formulir berikut, lalu tekan
-                                tombol Kirim.
-                            </p>
+                            <p>{t("form.infoCard.contact.description")}</p>
                         </>
                     )}
                 </div>

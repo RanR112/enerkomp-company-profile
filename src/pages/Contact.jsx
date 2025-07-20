@@ -4,8 +4,11 @@ import { aboutHero, Banner1 } from "../assets/images";
 import Form from "../components/Form";
 import "../sass/pages/Contact/Contact.css";
 import { Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Contact() {
+    const { t } = useLanguage();
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -31,39 +34,37 @@ export default function Contact() {
     const contacts = [
         {
             icon: <Linkedin />,
-            title: "LinkedIn",
-            description: "PT ENERKOMP PERSADA RAYA",
+            title: t("contact.contactInfo.linkedin.title"),
+            description: t("contact.contactInfo.linkedin.description"),
         },
         {
             icon: <PhoneCall />,
-            title: "Phone",
-            description: "(021) 8932 9679",
+            title: t("contact.contactInfo.phone.title"),
+            description: t("contact.contactInfo.phone.description"),
         },
         {
             icon: <Mail />,
-            title: "Email",
-            description: "sales@enerkomp.id",
+            title: t("contact.contactInfo.email.title"),
+            description: t("contact.contactInfo.email.description"),
         },
     ];
 
     const offices = [
         {
             id: 1,
-            name: "OFFICE JAKARTA",
-            address:
-                "Gd. Grand Slipi Tower Lt 42 Unit G-H Kav 22-24, Jakarta Barat, DKI Jakarta 11480",
+            name: t("contact.offices.jakarta.name"),
+            address: t("contact.offices.jakarta.address"),
             map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7286484399715!2d107.14552427531228!3d-6.2993431936898014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699b00014091d5%3A0xe6f438c17a3cb457!2sPT%20ENERKOMP%20PERSADA%20RAYA!5e0!3m2!1sid!2sid!4v1752876501139!5m2!1sid!2sid",
-            location: "West Jakarta",
-            mapAlt: "Jakarta office location map showing West Jakarta area",
+            location: t("contact.offices.jakarta.location"),
+            mapAlt: t("contact.offices.jakarta.mapAlt"),
         },
         {
             id: 2,
-            name: "OFFICE CIKARANG",
-            address:
-                "Ruko CBD, Jl. Niaga Raya Blok B-11, Pasirsari, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530",
+            name: t("contact.offices.cikarang.name"),
+            address: t("contact.offices.cikarang.address"),
             map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7286484399715!2d107.14552427531228!3d-6.2993431936898014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699b00014091d5%3A0xe6f438c17a3cb457!2sPT%20ENERKOMP%20PERSADA%20RAYA!5e0!3m2!1sid!2sid!4v1752876501139!5m2!1sid!2sid",
-            location: "Bekasi Regency",
-            mapAlt: "Cikarang office location map showing Bekasi Regency area",
+            location: t("contact.offices.cikarang.location"),
+            mapAlt: t("contact.offices.cikarang.mapAlt"),
         },
     ];
 
@@ -165,7 +166,7 @@ export default function Contact() {
                 <div className="hero-background">
                     <img
                         src={Banner1}
-                        alt="Industrial facility"
+                        alt={t("contact.hero.imageAlt")}
                         className="hero-bg-image"
                     />
                     <div className="hero-overlay"></div>
@@ -184,7 +185,7 @@ export default function Contact() {
                         >
                             <img
                                 src={aboutHero}
-                                alt="Trade show booth"
+                                alt={t("contact.hero.tradeShowAlt")}
                                 className="hero-image"
                             />
                         </motion.div>
@@ -194,29 +195,30 @@ export default function Contact() {
                             variants={fadeInUp}
                         >
                             <h1 className="hero-title">
-                                Kami di Sini untuk
-                                <span className="highlight"> Anda</span>
+                                {t("contact.hero.title.part1")}
+                                <span className="highlight">
+                                    {" "}
+                                    {t("contact.hero.title.highlight")}
+                                </span>
                             </h1>
                             <p className="hero-description">
-                                Tim kami selalu siap memberikan dukungan terbaik
-                                untuk menjawab pertanyaan Anda, membantu
-                                menemukan solusi, dan memastikan pengalaman Anda
-                                bersama kami berjalan lancar. Jangan ragu untuk
-                                menghubungi kami kapan saja melalui formulir,
-                                email, atau telepon. Kami berkomitmen memberikan
-                                respons cepat dan pelayanan yang ramah untuk
-                                setiap kebutuhan Anda.
+                                {t("contact.hero.description")}
                             </p>
                         </motion.div>
                     </motion.div>
                 </div>
             </motion.section>
+
             <section className="catalog-form">
                 <h3 className="catalog-form-title">
-                    HUBUNGI <span className="highlight">KAMI</span>
+                    {t("contact.form.title.part1")}{" "}
+                    <span className="highlight">
+                        {t("contact.form.title.highlight")}
+                    </span>
                 </h3>
                 <Form type="contact" />
             </section>
+
             <motion.section
                 className="cta"
                 initial={{ opacity: 0, y: 0 }}
@@ -227,16 +229,17 @@ export default function Contact() {
                 <div className="container">
                     <div className="cta-content">
                         <h2>
-                            Ingin{" "}
+                            {t("contact.cta.title.part1")}{" "}
                             <span className="highlight">
                                 {" "}
-                                Terhubung Langsung?
+                                {t("contact.cta.title.highlight")}
                             </span>
                         </h2>
-                        <h3>Gunakan Informasi Kontak di Bawah Ini</h3>
+                        <h3>{t("contact.cta.subtitle")}</h3>
                     </div>
                 </div>
             </motion.section>
+
             <motion.section
                 className="contact"
                 variants={containerVariants}
@@ -267,7 +270,6 @@ export default function Contact() {
                                 <div className="contact-card">
                                     <div className="shimmer"></div>
                                     <div className="contact-icon">
-                                        {/* You'll need to import and use the actual icons here */}
                                         {contact.icon}
                                     </div>
                                     <h3>{contact.title}</h3>
@@ -278,6 +280,7 @@ export default function Contact() {
                     </motion.div>
                 </div>
             </motion.section>
+
             <motion.section
                 className="map-section"
                 variants={containerVariants}
@@ -314,11 +317,13 @@ export default function Contact() {
 
                                 <div className="office-map">
                                     <div className="map-placeholder">
-                                        <iframe className="map"
+                                        <iframe
+                                            className="map"
                                             src={office.map}
                                             allowfullscreen=""
                                             loading="lazy"
                                             referrerpolicy="no-referrer-when-downgrade"
+                                            title={office.mapAlt}
                                         ></iframe>
                                         <div className="map-overlay">
                                             <div className="location-pin">
