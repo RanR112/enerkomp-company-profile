@@ -445,8 +445,49 @@ export const ID = {
         brands: ["IHI", "CJIN", "Oli", "Kompresor", "Mesin"],
     },
     search: {
-        placeholder: "Cari...",
-        noResults: "Tidak ada hasil ditemukan",
-        searching: "Mencari...",
+        placeholder: "Cari produk, layanan...",
+        results: {
+            title: "Hasil Pencarian",
+            for: "Mencari:",
+            found: "hasil ditemukan ",
+        },
+        categories: {
+            title: "Kategori",
+            all: "Semua Hasil",
+            products: "Produk",
+            services: "Layanan",
+            about: "Tentang",
+            contact: "Kontak",
+        },
+        filters: "Filter",
+        in: "di",
+        loading: "Mencari...",
+        readMore: "Baca Selengkapnya",
+        empty: {
+            title: "Tidak ada kata kunci pencarian",
+            description: "Silakan masukkan kata kunci untuk mencari hasil.",
+        },
+        noResults: {
+            title: "Tidak ada hasil ditemukan",
+            description:
+                "Coba sesuaikan kata kunci pencarian atau jelajahi kategori kami.",
+        },
+    },
+    notFound: {
+        title: "Ups! Halaman Tidak Ditemukan",
+        description:
+            "Halaman yang Anda cari sepertinya tersesat di hutan digital. Jangan khawatir, hal ini bisa terjadi pada siapa saja!",
+        currentPath: "Jalur saat ini:",
+        goHome: "Kembali ke Beranda",
+        goBack: "Kembali",
+        search: "Cari",
+        autoRedirect: "Otomatis mengarahkan ke halaman utama dalam",
+        help: {
+            title: "Butuh Bantuan?",
+            home: "Halaman Utama",
+            about: "Tentang Kami",
+            contact: "Hubungi Support",
+            products: "Produk Kami",
+        },
     },
 };

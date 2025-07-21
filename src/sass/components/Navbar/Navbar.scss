@@ -367,7 +367,7 @@
     &__form {
         background: var(--White);
         border-radius: 16px;
-        padding: 2rem;
+        padding: 1rem;
         box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
     }
 
@@ -380,7 +380,7 @@
     &__input-icon {
         position: absolute;
         left: 1.5rem;
-        color: var(--Secondary);
+        color: var(--Primary);
         z-index: 1;
     }
 

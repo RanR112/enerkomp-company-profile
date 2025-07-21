@@ -443,8 +443,49 @@ export const EN = {
         brands: ["IHI", "CJIN", "Oil", "Compressor", "Machine"],
     },
     search: {
-        placeholder: "Search...",
-        noResults: "No results found",
-        searching: "Searching...",
+        placeholder: "Search products, services...",
+        results: {
+            title: "Search Results",
+            for: "Searching for:",
+            found: "results found ",
+        },
+        categories: {
+            title: "Categories",
+            all: "All Results",
+            products: "Products",
+            services: "Services",
+            about: "About",
+            contact: "Contact",
+        },
+        filters: "Filters",
+        in: "in",
+        loading: "Searching...",
+        readMore: "Read More",
+        empty: {
+            title: "No search query",
+            description: "Please enter a search term to find results.",
+        },
+        noResults: {
+            title: "No results found",
+            description:
+                "Try adjusting your search terms or browse our categories.",
+        },
+    },
+    notFound: {
+        title: "Oops! Page Not Found",
+        description:
+            "The page you're looking for seems to have wandered off into the digital wilderness. Don't worry, it happens to the best of us!",
+        currentPath: "Current path:",
+        goHome: "Go Home",
+        goBack: "Go Back",
+        search: "Search",
+        autoRedirect: "Automatically redirecting to home page in",
+        help: {
+            title: "Need Help?",
+            home: "Home Page",
+            about: "About Us",
+            contact: "Contact Support",
+            products: "Our Products",
+        },
     },
 };

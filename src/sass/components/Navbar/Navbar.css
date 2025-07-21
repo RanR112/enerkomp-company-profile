@@ -326,7 +326,7 @@
 .search-modal__form {
   background: var(--White);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1rem;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
 }
 .search-modal__input-wrapper {
@@ -337,7 +337,7 @@
 .search-modal__input-icon {
   position: absolute;
   left: 1.5rem;
-  color: var(--Secondary);
+  color: var(--Primary);
   z-index: 1;
 }
 .search-modal__input {
