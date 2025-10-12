@@ -444,6 +444,10 @@ export const ID = {
             linkedin: "Linkedin",
         },
         brands: ["IHI", "CJIN", "Oli", "Kompresor", "Mesin"],
+        legal: "Hukum",
+        legals: {
+            privacyPolicy: "Kebijakan Privasi",
+        },
     },
     search: {
         placeholder: "Cari produk, layanan...",
@@ -489,6 +493,33 @@ export const ID = {
             about: "Tentang Kami",
             contact: "Hubungi Support",
             products: "Produk Kami",
+        },
+    },
+    privacy: {
+        title: "Pernyataan Privasi",
+        intro: "Di PT Enerkomp Persada Raya, kami menghargai dan menjunjung tinggi privasi Anda, sebagaimana diatur dalam Kebijakan Privasi kami. Setiap informasi pribadi yang Anda kirimkan melalui situs web kami atau platform digital terafiliasi (selanjutnya disebut sebagai “Informasi Pribadi”) akan ditangani sesuai dengan Pernyataan Privasi ini dan kebijakan perlindungan data internal kami.",
+        sections: {
+            purpose: {
+                heading: "1. Tujuan Penggunaan",
+                content:
+                    "Enerkomp mengumpulkan dan menggunakan Informasi Pribadi semata-mata untuk keperluan memberikan informasi produk, penawaran harga, layanan purna jual, dan dukungan teknis kepada pelanggan serta mitra kami. Kami juga dapat menggunakan informasi ini untuk meningkatkan dan menyempurnakan penawaran, layanan, serta pengalaman pelanggan terkait kompresor dan peralatan industri lain yang kami distribusikan.",
+            },
+            data: {
+                heading: "2. Jenis Data Pribadi yang Dikumpulkan dan Dibagikan",
+                content:
+                    "Jenis Informasi Pribadi yang dapat dikumpulkan dan dibagikan kepada prinsipal atau distributor terafiliasi kami meliputi, namun tidak terbatas pada:",
+                items: [
+                    "Spesifikasi kompresor atau peralatan (jenis, kuantitas, aplikasi, jenis gas, tekanan dan suhu hisap/tekan, laju aliran, frekuensi, tujuan penggunaan, dan pertanyaan teknis lainnya)",
+                    "Detail kontak (nama, nama perusahaan, jabatan, alamat email, nomor telepon, negara, dan alamat perusahaan)",
+                ],
+            },
+            disclosure: {
+                heading: "3. Pengungkapan kepada Pihak Ketiga",
+                content1:
+                    "Kami dapat membagikan Informasi Pribadi Anda kepada prinsipal kami, seperti IHI, atau distributor tepercaya untuk memenuhi permintaan atau pertanyaan Anda. Hal ini dapat mencakup dukungan teknis, proposal produk, atau tindak lanjut konsultasi.",
+                content2:
+                    "Jika Anda tidak ingin Informasi Pribadi Anda dibagikan kepada pihak ketiga mana pun, mohon nyatakan dengan jelas “Jangan bagikan Informasi Pribadi saya kepada pihak ketiga” pada pesan atau formulir permintaan saat menghubungi kami.",
+            },
         },
     },
 };

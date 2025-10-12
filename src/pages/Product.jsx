@@ -462,6 +462,7 @@ export default function Product() {
                                         <ProductCard
                                             key={product.id}
                                             product={product}
+                                            index={index}
                                             variants={cardAnimation}
                                         />
                                     ))

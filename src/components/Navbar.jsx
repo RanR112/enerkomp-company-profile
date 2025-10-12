@@ -30,6 +30,7 @@ const Navbar = () => {
 
     // Check if current route is product detail
     const isProductDetailRoute = location.pathname.startsWith("/product/");
+    const isLegalRoute = location.pathname.startsWith("/legal/");
 
     // Handle scroll effect
     useEffect(() => {
@@ -39,7 +40,7 @@ const Navbar = () => {
         };
 
         // If on product detail route, force isScrolled to true
-        if (isProductDetailRoute) {
+        if (isProductDetailRoute || isLegalRoute) {
             setIsScrolled(true);
         } else {
             // Only add scroll listener for other routes
@@ -196,12 +197,12 @@ const Navbar = () => {
                         </div>
 
                         {/* Search */}
-                        <button
+                        {/* <button
                             className="navbar__search-btn"
                             onClick={handleSearchClick}
                         >
                             <Search size={20} />
-                        </button>
+                        </button> */}
 
                         {/* Mobile Menu Toggle */}
                         <button

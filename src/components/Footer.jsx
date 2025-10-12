@@ -4,9 +4,19 @@ import { Facebook, Instagram, Linkedin, PhoneCall, Mail } from "lucide-react";
 import "../sass/components/Footer/Footer.css";
 import { footer, LogoWhite } from "../assets/images";
 import { useLanguage } from "../hooks/useLanguage";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
     const { t } = useLanguage();
+    const navigate = useNavigate();
+
+    const footerLegals = [
+        { name: t("footer.legals.privacyPolicy"), path: "/legal/privacy-policy" },
+    ]
+    
+    const handleFooterClick = (path) => {
+        navigate(path);
+    };
 
     // Animation variants
     const containerVariants = {
@@ -166,6 +176,25 @@ const Footer = () => {
                             >
                                 {brand}
                             </motion.li>
+                        ))}
+                    </motion.ul>
+                </motion.div>
+
+                {/* Legal list*/}
+                <motion.div className="col" variants={itemVariants}>
+                    <motion.h3 variants={itemVariants}>
+                        {t("footer.legal")}
+                    </motion.h3>
+                    <motion.ul className="brands">
+                        {footerLegals.map((item) => (
+                        <motion.li
+                        key={item.name}
+                            variants={brandItemVariants}
+                            whileHover="hover"
+                            onClick={() => handleFooterClick(item.path)}
+                        >
+                            {item.name}
+                        </motion.li>
                         ))}
                     </motion.ul>
                 </motion.div>

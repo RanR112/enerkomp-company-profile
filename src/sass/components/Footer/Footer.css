@@ -136,20 +136,20 @@
 .footer .footer-columns .col:nth-child(1) .social li:hover svg {
   transform: rotate(15deg) scale(1.2);
 }
-.footer .footer-columns .col:nth-child(2) .brands li {
+.footer .footer-columns .col:nth-child(2) .brands li, .footer .footer-columns .col:nth-child(3) .brands li {
   font-weight: 500;
   position: relative;
 }
-.footer .footer-columns .col:nth-child(2) .brands li:hover {
+.footer .footer-columns .col:nth-child(2) .brands li:hover, .footer .footer-columns .col:nth-child(3) .brands li:hover {
   font-weight: 600;
 }
-.footer .footer-columns .col:nth-child(2) .brands li:hover:before {
+.footer .footer-columns .col:nth-child(2) .brands li:hover:before, .footer .footer-columns .col:nth-child(3) .brands li:hover:before {
   content: "▸";
   position: absolute;
   left: -15px;
   color: var(--Third);
 }
-.footer .footer-columns .col:nth-child(3) .contacts li:hover svg {
+.footer .footer-columns .col:nth-child(4) .contacts li:hover svg {
   animation: pulse 1s infinite;
 }
 @media (min-width: 1200px) {

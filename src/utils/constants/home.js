@@ -66,33 +66,7 @@ export const servicesIcon = [
     maintenance,
 ];
 
-export const products = [
-    {
-        title: "IHI Turbo Compressor",
-        subtitle: "Kompresor centrifugal berkualitas tinggi untuk industri",
-        image: turboCompressor,
-        brandLogo: IHI,
-    },
-    {
-        title: "Air Quality & Audit",
-        subtitle: "Alat quality dan audit untuk lingkungan kerja",
-        image: airQuality,
-        brandLogo: SUTO,
-    },
-    {
-        title: "Epoxy Metal Repair Putty",
-        subtitle:
-            "Perekat dan sealant berkinerja tinggi yang dirancang untuk beragam aplikasi industri",
-        image: epoxyMetal,
-        brandLogo: NOP,
-    },
-    {
-        title: "IHI Air Treatment",
-        subtitle: "Air Treatment System",
-        image: airDryer,
-        brandLogo: IHI,
-    },
-];
+
 
 export const trustedBrands = [
     Chemco,

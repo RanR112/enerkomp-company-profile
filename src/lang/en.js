@@ -253,7 +253,7 @@ export const EN = {
         },
     },
     products: {
-        hero: { 
+        hero: {
             title: {
                 text1: "",
                 highlight: "Reliable",
@@ -442,6 +442,10 @@ export const EN = {
             linkedin: "LinkedIn",
         },
         brands: ["IHI", "CJIN", "Oil", "Compressor", "Machine"],
+        legal: "Legal",
+        legals: {
+            privacyPolicy: "Privacy Policy"
+        }
     },
     search: {
         placeholder: "Search products, services...",
@@ -487,6 +491,33 @@ export const EN = {
             about: "About Us",
             contact: "Contact Support",
             products: "Our Products",
+        },
+    },
+    privacy: {
+        title: "Privacy Statement",
+        intro: "At PT Enerkomp Persada Raya, we value and respect your privacy, pursuant to our Privacy Policy. Any personal information submitted to us through our website or any affiliated digital platform (hereinafter referred to as “Personal Information”) will be handled in accordance with this Privacy Statement and our internal data protection policies.",
+        sections: {
+            purpose: {
+                heading: "1. Purpose of Use",
+                content:
+                    "Enerkomp collects and uses Personal Information solely for purposes related to providing our customers and partners with relevant product information, quotations, after-sales services, and technical support. We may also use this information to enhance and improve our offerings, services, and customer experience related to compressors and other industrial equipment we distribute.",
+            },
+            data: {
+                heading: "2. Types of Personal Data Collected and Shared",
+                content:
+                    "The types of Personal Information that may be collected and shared with our principals or affiliated distributors include, but are not limited to:",
+                items: [
+                    "Compressor or equipment specifications (type, quantity, application, gas type, suction/discharge pressure and temperature, flow rate, frequency, usage purpose, and other technical inquiries)",
+                    "Contact details (name, company name, job title, email address, telephone number, country, and company address)",
+                ],
+            },
+            disclosure: {
+                heading: "3. Disclosure to Third Parties",
+                content1:
+                    "We may share your Personal Information with our principals, such as IHI, or trusted distributors in order to fulfill your inquiry or request. This may include technical support, product proposals, or consultation follow-up.",
+                content2:
+                    "If you do not wish for your Personal Information to be shared with any third parties, please clearly state “Do not disclose my Personal Information to third parties” in the message or inquiry form when contacting us.",
+            },
         },
     },
 };

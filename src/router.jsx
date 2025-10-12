@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { About, Blog, Contact, Home, Product, Service } from "./pages";
+import { About, Blog, Contact, Home, Product, Service, PrivacyPolicy } from "./pages";
 import Layout from "./layouts/Layout";
 import ProductDetail from "./components/ProductDetail";
 import SearchResults from "./components/SearchResult";
@@ -41,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "search",
                 element: <SearchResults key="search-result" />,
+            },
+            {
+                path: "legal/privacy-policy",
+                element: <PrivacyPolicy key="privacy-policy" />,
             },
         ],
     },

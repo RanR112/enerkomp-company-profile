@@ -5,7 +5,6 @@ import {
     aboutImages,
     brandLogos,
     heroImages,
-    products,
     servicesIcon,
     trustedBrands,
 } from "../utils/constants/home";
@@ -14,6 +13,7 @@ import { call } from "../assets/icons";
 import { useLanguage } from "../hooks/useLanguage";
 import ProductCard from "../components/ProductCard"; // Import komponen baru
 import { NavLink } from "react-router-dom";
+import { products } from "../utils/data/productData";
 
 const Home = () => {
     const { t } = useLanguage();
@@ -88,34 +88,6 @@ const Home = () => {
             alt: "Air compressor maintenance and repair services in Indonesia",
             title: t("home.whyChoose.services.maintenance.title"),
             description: t("home.whyChoose.services.maintenance.description"),
-        },
-    ];
-
-    // Products data with translations
-    const translatedProducts = [
-        {
-            title: t("home.products.items.turboCompressor.title"),
-            subtitle: t("home.products.items.turboCompressor.subtitle"),
-            image: products[0].image,
-            brandLogo: products[0].brandLogo,
-        },
-        {
-            title: t("home.products.items.airQuality.title"),
-            subtitle: t("home.products.items.airQuality.subtitle"),
-            image: products[1].image,
-            brandLogo: products[1].brandLogo,
-        },
-        {
-            title: t("home.products.items.epoxyMetal.title"),
-            subtitle: t("home.products.items.epoxyMetal.subtitle"),
-            image: products[2].image,
-            brandLogo: products[2].brandLogo,
-        },
-        {
-            title: t("home.products.items.airTreatment.title"),
-            subtitle: t("home.products.items.airTreatment.subtitle"),
-            image: products[3].image,
-            brandLogo: products[3].brandLogo,
         },
     ];
 
@@ -373,9 +345,9 @@ const Home = () => {
                         className="products-grid"
                         variants={containerVariants}
                     >
-                        {translatedProducts.map((product, index) => (
+                        {products.filter(product => product.isFeatured).slice(0, 4).map((product, index) => (
                             <ProductCard
-                                key={index}
+                                key={product.id}
                                 product={product}
                                 index={index}
                                 variants={itemVariants}

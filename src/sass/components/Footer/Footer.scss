@@ -152,7 +152,7 @@
             }
 
             /* Brand list specific styles */
-            &:nth-child(2) {
+            &:nth-child(2), &:nth-child(3) {
                 .brands li {
                     font-weight: 500;
                     position: relative;
@@ -171,7 +171,7 @@
             }
 
             /* Contact specific styles */
-            &:nth-child(3) {
+            &:nth-child(4) {
                 .contacts li {
                     &:hover {
                         svg {
