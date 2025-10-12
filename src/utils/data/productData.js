@@ -23,59 +23,22 @@ export const products = [
         images: [turboCompressor, turboCompressor, turboCompressor],
         title: "IHI Turbo Compressor",
         subtitle: "Kompresor sentrifugal IHI yang memiliki desain optimal",
-        description: `IHI Centrifugal Compressor adalah solusi kompresor generasi terbaru yang dirancang dengan teknologi canggih untuk memenuhi kebutuhan industri modern akan efisiensi dan keandalan. Kompresor ini menggabungkan performa tinggi dengan pengoperasian yang mudah, memberikan keuntungan jangka panjang bagi industri yang mengandalkan udara bersih dan stabil dalam proses produksinya.
-
-Dengan desain yang kompak namun tangguh, kompresor ini memaksimalkan efisiensi energi melalui sistem kontrol pintar yang menyesuaikan kinerja berdasarkan kebutuhan pengguna. Dirancang khusus tanpa menggunakan oli pada jalur udara, IHI Compressor menjamin udara bersih 100% dan telah tersertifikasi Class 0 - menjadikannya pilihan ideal bagi industri makanan, farmasi, elektronik, hingga otomotif.
-
-Tidak hanya efisien, kompresor ini juga dirancang untuk tahan lama, minim perawatan, serta mampu beroperasi secara andal dalam lingkungan industri yang paling menantang sekalipun.`,
-        specifications: {
-            Kapasitas: "50-500 m³/min",
-            Tekanan: "0.7-1.0 MPa",
-            Daya: "75-500 kW",
-            Efisiensi: "Class 0 Oil-Free",
-            Sertifikasi: "ISO 8573-1 Class 0",
-            Aplikasi: "Industri makanan, farmasi, elektronik, otomotif",
-        },
-        features: [
-            "Desain kompak dan tangguh",
-            "Sistem kontrol pintar",
-            "100% oil-free operation",
-            "Class 0 certified",
-            "Efisiensi energi tinggi",
-            "Maintenance minimal",
-        ],
+        description: "Kompresor sentrifugal berdaya tinggi yang dirancang untuk penggunaan industri skala besar, menawarkan penghematan energi dan perawatan yang minim.",
+        specifications: false,
+        features: false,
         translations: {
             EN: {
                 title: "IHI Turbo Compressor",
                 subtitle: "IHI centrifugal compressor with optimal design",
-                description: `IHI Centrifugal Compressor is the latest generation compressor solution designed with advanced technology to meet modern industry needs for efficiency and reliability. This compressor combines high performance with easy operation, providing long-term benefits for industries that rely on clean and stable air in their production processes.
-
-With a compact yet robust design, this compressor maximizes energy efficiency through smart control systems that adjust performance based on user needs. Specifically designed without using oil in the air path, IHI Compressor guarantees 100% clean air and is Class 0 certified - making it an ideal choice for food, pharmaceutical, electronics, and automotive industries.
-
-Not only efficient, this compressor is also designed to be durable, require minimal maintenance, and able to operate reliably in the most challenging industrial environments.`,
-                specifications: {
-                    Capacity: "50-500 m³/min",
-                    Pressure: "0.7-1.0 MPa",
-                    Power: "75-500 kW",
-                    Efficiency: "Class 0 Oil-Free",
-                    Certification: "ISO 8573-1 Class 0",
-                    Application:
-                        "Food, pharmaceutical, electronics, automotive industries",
-                },
-                features: [
-                    "Compact and robust design",
-                    "Smart control system",
-                    "100% oil-free operation",
-                    "Class 0 certified",
-                    "High energy efficiency",
-                    "Minimal maintenance",
-                ],
+                description: "High-efficency centrifugal compressors designed for large-scale industrial use, offering energy savings and low maintenance.",
+                specifications: false,
+                features: false,
             },
         },
     },
     {
         id: 2,
-        slug: "blovac-compressor-pro",
+        slug: "ihi-air-dryer-rd-series",
         category: "compressor",
         brand: "blovac",
         brandName: "Blovac",

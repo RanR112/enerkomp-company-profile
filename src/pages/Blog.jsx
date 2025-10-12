@@ -1,16 +1,10 @@
 import React from "react";
+import '../sass/pages/Blog/Blog.css'
 
 export default function Blog() {
     return (
-        <div
-            style={{
-                padding: "2rem",
-                minHeight: "100vh",
-                background: "#f8f9fa",
-            }}
-        >
-            <h1>Blog</h1>
-            <p>This is the blog page.</p>
+        <div className="blog">
+            <h1>BLOG</h1>
         </div>
     );
 }

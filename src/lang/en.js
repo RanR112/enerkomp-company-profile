@@ -18,46 +18,46 @@ export const EN = {
         about: {
             title: "About Enerkomp",
             description1:
-                "PT ENERKOMP PERSADA RAYA is a provider of integrated air solutions products & services.",
+                "PT ENERKOMP PERSADA RAYA is a trusted provider of integrated air compressor solutions in Indonesia.",
             description2:
-                "We are the official distributor of IHI Turbo Compressor in Indonesia. Enerkomp Persada Raya has a mission to provide complete professional services to our customers throughout Indonesia.",
+                "We are the official distributor of IHI Compressor and IHI Turbo Compressorin Indonesia, supplying high-performance equipment for various industries. In addition, we also provide screw compressors, Taitian compressors, and other industrial compressor solutions tailored to customer needs.",
             description3:
-                "In addition, our company is also committed to always maintaining the highest standards for Air Supply and Air Solutions to our customers.",
+                " Our mission is to deliver complete professional services and reliable air compressor systems throughout Indonesia. With years of experience, Enerkomp Persada Raya ensures that every compressor solution meets the highest standards for performance, efficiency, and durability",
         },
         whyChoose: {
-            title: "Why Choose Enerkomp?",
+            title: "Why Choose Enerkomp - Industrial Air Compressor Solutions in Indonesia",
             subtitle:
-                "We are committed to providing the highest quality industrial air solutions, supported by the best service and support throughout Indonesia.",
+                " We provide air compressor sales, spare parts, and maintenance serviceswith reliable support across Jakarta, Surabaya, and all Indonesia.",
             services: {
                 originalParts: {
                     title: "Original Spare Parts",
                     description:
-                        "Original IHI spare parts with full warranty and quality assurance for optimal performance.",
+                        "Genuine IHI centrifugal & screw compressor spare parts with full warranty for reliable performance.",
                 },
                 support24: {
                     title: "24/7 Support",
                     description:
-                        "Technical support and maintenance services 24 hours non-stop for your operational smoothness.",
+                        "Non-stop air compressor technical support and emergency repair services, available 24/7.",
                 },
                 experience: {
                     title: "15+ Years Experience",
                     description:
-                        "Proven track record in industrial air solutions with extensive expertise and knowledge.",
+                        "Proven expertise in industrial compressor systems with over 15 years of service in Indonesia.",
                 },
                 freeSurvey: {
                     title: "Free Survey",
                     description:
-                        "Free site survey and consultation to determine the best solution according to your needs.",
+                        "Free on-site compressor inspection & consultation to recommend the best solution for your facility.",
                 },
                 expertTeam: {
                     title: "Expert Team",
                     description:
-                        "Certified technicians and engineers dedicated to providing professional installation and service.",
+                        "Certified compressor engineers & technicians ensuring professional installation and after-sales service.",
                 },
                 maintenance: {
                     title: "Maintenance & Repair",
                     description:
-                        "Professional maintenance and repair to keep your air system running optimally.",
+                        "Preventive and corrective compressor maintenance & repair to keep your air system running optimally.",
                 },
             },
         },
@@ -102,7 +102,7 @@ export const EN = {
         hero: {
             title: "We Provide Trusted Compressor & Industrial Equipment Solutions",
             description:
-                "PT Enerkomp is present with a strong vision to provide reliable compressor, dryer, and industrial equipment solutions for various business sectors in Indonesia. Founded more than 15 years ago, we have grown to become a trusted partner in providing high-quality equipment and comprehensive after-sales service.",
+                "PT Enerkomp Persada Raya provides centrifugal compressors, screw compressors, dryers, and spare parts for industries across Indonesia. With over 15 years of experience, we are trusted to deliver energy-efficient air compressor solutions, along with professional maintenance and 24/7 support. Contact us today for air compressor sales, service, and spare parts in Indonesia.",
         },
         statistics: {
             compressors: "Installed Compressor Units",
@@ -253,14 +253,14 @@ export const EN = {
         },
     },
     products: {
-        hero: {
+        hero: { 
             title: {
-                part1: "Discover a Range of",
-                highlight: "Reliable Industrial",
-                part2: "Products",
+                text1: "",
+                highlight: "Reliable",
+                text2: "Air Compressors, Dryer & Industrial Equipment in Indonesia",
             },
             description:
-                "PT Enerkomp provides various leading products to support your industrial performance, from compressors, air dryers, filters, to air and energy processing systems. Each product is designed to deliver efficiency, reliability, and high quality that has been trusted by various industrial sectors. Find solutions that suit your operational needs only at PT Enerkomp.",
+                "PT Enerkomp Persada Raya provides a wide range of industrial air solutions including turbo centrifugal compressors, screw compressors, air dryers, filters, and energy processing systems. Our products are trusted by industries across Indonesia for their efficiency, durability, and reliable performance. With over 15 years of experience, Enerkomp is your partner for air compressor sales, spare parts, and maintenance services. Find the right solution for your operations with us today.",
             backgroundAlt: "Industrial facility",
             imageAlt: "Trade show booth",
             buttons: {

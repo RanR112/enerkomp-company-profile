@@ -392,6 +392,7 @@ $container-max-widths: (
             align-items: center;
             gap: var(--gap-base);
             position: relative;
+            height: 2rem;
 
             @include respond-to("sm") {
                 gap: var(--gap-small);
@@ -437,6 +438,11 @@ $container-max-widths: (
         gap: var(--gap-base);
         flex-wrap: nowrap;
         overflow: hidden;
+        height: 5rem;
+
+        @include respond-to("md") {
+            height: 3.2rem;
+        }
 
         @include respond-to("sm") {
             gap: var(--gap-small);

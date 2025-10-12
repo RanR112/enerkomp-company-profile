@@ -195,6 +195,11 @@
     width: 70%;
   }
 }
+@media (max-width: 480px) {
+  .home .btn-layer {
+    width: 100%;
+  }
+}
 .home .btn-primary {
   background: var(--Accent);
   color: var(--White);
@@ -352,7 +357,7 @@
   }
 }
 .home .about .about-content .about-text h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--White);
   margin-bottom: 2rem;
   text-align: center;
@@ -361,7 +366,7 @@
   color: var(--Accent);
 }
 .home .about .about-content .about-text p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   color: var(--White);
   margin-bottom: 1.5rem;
@@ -369,10 +374,10 @@
 }
 @media (max-width: 1200px) {
   .home .about .about-content .about-text h2 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
   }
   .home .about .about-content .about-text p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 .home .about .about-content .about-image {

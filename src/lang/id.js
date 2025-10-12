@@ -18,46 +18,46 @@ export const ID = {
         about: {
             title: "Tentang Enerkomp",
             description1:
-                "PT ENERKOMP PERSADA RAYA adalah penyedia produk solusi & layanan udara terintegrasi.",
+                "PT ENERKOMP PERSADA RAYA adalah penyedia terpercaya solusi kompresor udara terintegrasi di Indonesia.",
             description2:
-                "Kami merupakan distributor resmi IHI Turbo Compressor di Indonesia. Enerkomp Persada Raya memiliki misi untuk memberikan pelayanan profesional yang lengkap kepada pelanggan kami di seluruh Indonesia.",
+                "Kami merupakan distributor resmi IHI Compressor dan IHI Turbo Compressor di Indonesia, yang memasok peralatan berkinerja tinggi untuk berbagai industri. Selain itu, kami juga menyediakan screw compressor, Taitian compressor, serta berbagai solusi kompresor industri lainnya yang disesuaikan dengan kebutuhan pelanggan.",
             description3:
-                "Selain itu, perusahaan kami juga berkomitmen untuk senantiasa menjaga standar tertinggi untuk Pasokan Udara dan Solusi Udara kepada pelanggan kami.",
+                "Misi kami adalah memberikan layanan profesional yang lengkap dan sistem kompresor udara yang andal di seluruh Indonesia. Dengan pengalaman bertahun-tahun, Enerkomp Persada Raya memastikan setiap solusi kompresor yang diberikan memenuhi standar tertinggi dalam hal kinerja, efisiensi, dan ketahanan.",
         },
         whyChoose: {
-            title: "Mengapa Harus Enerkomp?",
+            title: "Mengapa Memilih Enerkomp – Solusi Kompresor Udara Industri di Indonesia",
             subtitle:
-                "Kami berkomitmen untuk menyediakan solusi udara industri dengan kualitas tertinggi, didukung oleh layanan dan dukungan terbaik di seluruh Indonesia.",
+                "Kami menyediakan penjualan kompresor udara, suku cadang, dan layanan perawatan dengan dukungan yang andal di Jakarta, Surabaya, dan seluruh wilayah Indonesia.",
             services: {
                 originalParts: {
                     title: "Suku Cadang Asli",
                     description:
-                        "Suku cadang asli IHI dengan garansi penuh dan jaminan kualitas untuk performa optimal.",
+                        "Suku cadang asli kompresor sentrifugal & screw IHI dengan garansi penuh untuk kinerja yang andal.",
                 },
                 support24: {
                     title: "Dukungan 24/7",
                     description:
-                        "Layanan dukungan teknis dan perawatan selama 24 jam nonstop demi kelancaran operasional Anda.",
+                        "Layanan dukungan teknis dan perbaikan darurat kompresor udara tanpa henti, tersedia 24 jam sehari, 7 hari seminggu.",
                 },
                 experience: {
-                    title: "Pengalaman +15 Tahun",
+                    title: "Pengalaman Lebih dari 15 Tahun",
                     description:
-                        "Rekam jejak terbukti dalam solusi udara industri dengan keahlian dan pengetahuan yang luas.",
+                        "Keahlian terbukti dalam sistem kompresor industri dengan pengalaman lebih dari 15 tahun di Indonesia.",
                 },
                 freeSurvey: {
-                    title: "Survey Gratis",
+                    title: "Survei Gratis",
                     description:
-                        "Survey lokasi dan konsultasi tanpa biaya untuk menentukan solusi terbaik sesuai kebutuhan Anda.",
+                        "Pemeriksaan dan konsultasi kompresor di lokasi secara gratis untuk merekomendasikan solusi terbaik bagi fasilitas Anda.",
                 },
                 expertTeam: {
                     title: "Tim Ahli",
                     description:
-                        "Teknisi dan insinyur bersertifikat yang berdedikasi memberikan instalasi dan layanan secara profesional.",
+                        "Insinyur dan teknisi kompresor bersertifikat yang memastikan pemasangan profesional dan layanan purna jual yang berkualitas.",
                 },
                 maintenance: {
                     title: "Perawatan & Perbaikan",
                     description:
-                        "Perawatan dan perbaikan profesional untuk menjaga sistem udara Anda tetap optimal.",
+                        "Layanan perawatan preventif dan perbaikan kompresor untuk menjaga sistem udara Anda tetap berjalan secara optimal.",
                 },
             },
         },
@@ -102,7 +102,7 @@ export const ID = {
         hero: {
             title: "Kami Memberikan Solusi Kompresor & Peralatan Industri Terpercaya",
             description:
-                "PT Enerkomp hadir dengan visi yang kuat untuk menghadirkan solusi kompresor, dryer, dan peralatan industri yang andal bagi berbagai sektor usaha di Indonesia. Didirikan lebih dari 15 tahun lalu, kami telah berkembang menjadi mitra terpercaya dalam penyediaan peralatan berkualitas tinggi dan layanan purna jual yang komprehensif.",
+                "PT Enerkomp Persada Raya menyediakan kompresor sentrifugal, kompresor screw, dryer, dan suku cadang untuk berbagai industri di seluruh Indonesia. Dengan pengalaman lebih dari 15 tahun, kami dipercaya untuk memberikan solusi kompresor udara yang hemat energi, disertai dengan layanan perawatan profesional dan dukungan 24/7. Hubungi kami sekarang untuk penjualan, layanan, dan suku cadang kompresor udara di Indonesia.",
         },
         statistics: {
             compressors: "Unit Kompresor Terpasang",
@@ -256,12 +256,12 @@ export const ID = {
     products: {
         hero: {
             title: {
-                part1: "Temukan Ragam",
-                highlight: "Produk Industri",
-                part2: "Andal",
+                text1: "Kompresor Udara, Pengering, dan Peralatan Industri",
+                highlight: "Terpercaya",
+                text2: "di Indonesia",
             },
             description:
-                "PT Enerkomp menyediakan berbagai produk unggulan untuk mendukung performa industri Anda, mulai dari kompresor, air dryer, filter, hingga sistem pengolahan udara dan energi. Setiap produk dirancang untuk memberikan efisiensi, keandalan, dan kualitas tinggi yang telah dipercaya oleh berbagai sektor industri. Temukan solusi yang sesuai dengan kebutuhan operasional Anda hanya di PT Enerkomp.",
+                "PT Enerkomp Persada Raya menyediakan berbagai solusi udara industri, termasuk kompresor turbo sentrifugal, kompresor screw, pengering udara (air dryer), filter, dan sistem pengolahan energi. Produk kami dipercaya oleh berbagai industri di seluruh Indonesia karena efisiensi, ketahanan, dan kinerja andalnya. Dengan pengalaman lebih dari 15 tahun, Enerkomp menjadi mitra terpercaya Anda dalam penjualan kompresor udara, suku cadang, dan layanan perawatan. Temukan solusi terbaik untuk operasional Anda bersama kami hari ini.",
             backgroundAlt: "Fasilitas industri",
             imageAlt: "Stand pameran dagang",
             buttons: {

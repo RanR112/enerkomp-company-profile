@@ -189,13 +189,14 @@
   background: var(--Hover);
 }
 .product-detail-page .product-detail-container .product-info-section .product-actions .btn-secondary {
-  background: var(--Card);
+  background: transparent;
   color: var(--Black);
-  border: 2px solid var(--Third);
+  border: 2px solid var(--Primary);
 }
 .product-detail-page .product-detail-container .product-info-section .product-actions .btn-secondary:hover {
-  background: var(--Fourth);
-  border-color: var(--Secondary);
+  background: var(--Primary);
+  border-color: var(--Primary);
+  color: var(--White);
 }
 .product-detail-page .product-specifications {
   max-width: 1200px;

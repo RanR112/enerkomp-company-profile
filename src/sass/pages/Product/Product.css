@@ -380,6 +380,7 @@
   align-items: center;
   gap: var(--gap-base);
   position: relative;
+  height: 2rem;
 }
 @media (max-width: 479px) {
   .brand-carousel-section .brand-carousel-container .brand-carousel-wrapper {
@@ -422,6 +423,12 @@
   gap: var(--gap-base);
   flex-wrap: nowrap;
   overflow: hidden;
+  height: 5rem;
+}
+@media (max-width: 767px) {
+  .brand-carousel .brand-logos-container {
+    height: 3.2rem;
+  }
 }
 @media (max-width: 479px) {
   .brand-carousel .brand-logos-container {
@@ -858,7 +865,7 @@
     transform: scale(0.98);
   }
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (min-resolution: 192dpi) {
   .hero-image,
   .brand-logo,
   .product-image {

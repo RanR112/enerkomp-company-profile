@@ -20,7 +20,7 @@ import { call } from "../assets/icons";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function Product() {
-    const { t } = useLanguage();
+    const { t, currentLanguage } = useLanguage();
     const [activeCategory, setActiveCategory] = useState("all");
     const [activeBrand, setActiveBrand] = useState("all");
     const [currentBrandIndex, setCurrentBrandIndex] = useState(0);
@@ -211,7 +211,7 @@ export default function Product() {
                 <div className="hero-background">
                     <img
                         src={productBg}
-                        alt={t("products.hero.backgroundAlt")}
+                        alt="Enerkomp company catalog showcasing air compressors, dryers, and industrial equipment in Indonesia"
                         className="hero-bg-image"
                     />
                     <div className="hero-overlay"></div>
@@ -240,12 +240,12 @@ export default function Product() {
                             variants={fadeInUp}
                         >
                             <h1 className="hero-title">
-                                {t("products.hero.title.part1")}
+                                {t("products.hero.title.text1")}
                                 <span className="highlight">
                                     {" "}
                                     {t("products.hero.title.highlight")}{" "}
                                 </span>
-                                {t("products.hero.title.part2")}
+                                {t("products.hero.title.text2")}
                             </h1>
                             <p className="hero-description-product">
                                 {t("products.hero.description")}

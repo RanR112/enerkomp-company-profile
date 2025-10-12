@@ -207,6 +207,12 @@
     }
 
     // Buttons
+    .btn-layer {
+        @media (max-width: 480px) {
+            width: 100%;
+        }
+    }
+
     .btn-primary {
         background: var(--Accent);
         color: var(--White);
@@ -376,7 +382,7 @@
                 }
 
                 h2 {
-                    font-size: 3rem;
+                    font-size: 2.5rem;
                     color: var(--White);
                     margin-bottom: 2rem;
                     text-align: center;
@@ -387,7 +393,7 @@
                 }
 
                 p {
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                     line-height: 1.7;
                     color: var(--White);
                     margin-bottom: 1.5rem;
@@ -396,11 +402,11 @@
 
                 @media (max-width: 1200px) {
                     h2 {
-                        font-size: 2.5rem;
+                        font-size: 2.3rem;
                     }
 
                     p {
-                        font-size: 1.3rem;
+                        font-size: 1.1rem;
                     }
                 }
             }

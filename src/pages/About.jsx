@@ -167,21 +167,25 @@ const About = () => {
     const values = [
         {
             icon: lock,
+            alt: "Enerkomp core value integrity honesty responsibility",
             title: t("about.values.items.0.title"),
             description: t("about.values.items.0.description"),
         },
         {
             icon: idea,
+            alt: "Enerkomp core value innovation industrial solutions",
             title: t("about.values.items.1.title"),
             description: t("about.values.items.1.description"),
         },
         {
             icon: graduate,
+            alt: "Enerkomp core value professionalism technical expertise",
             title: t("about.values.items.2.title"),
             description: t("about.values.items.2.description"),
         },
         {
             icon: teamwork,
+            alt: "Enerkomp core value cooperation teamwork collaboration",
             title: t("about.values.items.3.title"),
             description: t("about.values.items.3.description"),
         },
@@ -671,7 +675,7 @@ const About = () => {
                                     <img
                                         src={item.icon}
                                         className="icon"
-                                        alt={item.title}
+                                        alt={item.alt}
                                     />
                                     <h4>{item.title}</h4>
                                     <p>{item.description}</p>

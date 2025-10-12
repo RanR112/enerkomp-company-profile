@@ -54,7 +54,7 @@ export default function Contact() {
             id: 1,
             name: t("contact.offices.jakarta.name"),
             address: t("contact.offices.jakarta.address"),
-            map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7286484399715!2d107.14552427531228!3d-6.2993431936898014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699b00014091d5%3A0xe6f438c17a3cb457!2sPT%20ENERKOMP%20PERSADA%20RAYA!5e0!3m2!1sid!2sid!4v1752876501139!5m2!1sid!2sid",
+            map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.476733850875!2d106.79526027531156!3d-6.200664193787108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f72e767d6f3f%3A0xcc7e91446f32e54c!2sIHI%20TURBO%20COMPRESSOR%20INDONESIA%20%7C%20PT.%20ENERKOMP%20PERSADA%20RAYA!5e0!3m2!1sid!2sid!4v1760250604826!5m2!1sid!2sid",
             location: t("contact.offices.jakarta.location"),
             mapAlt: t("contact.offices.jakarta.mapAlt"),
         },

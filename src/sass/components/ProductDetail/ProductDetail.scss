@@ -215,13 +215,14 @@
                 }
 
                 .btn-secondary {
-                    background: var(--Card);
+                    background: transparent;
                     color: var(--Black);
-                    border: 2px solid var(--Third);
+                    border: 2px solid var(--Primary);
 
                     &:hover {
-                        background: var(--Fourth);
-                        border-color: var(--Secondary);
+                        background: var(--Primary);
+                        border-color: var(--Primary);
+                        color: var(--White);
                     }
                 }
             }

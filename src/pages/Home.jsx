@@ -54,32 +54,38 @@ const Home = () => {
     // Services data with translations
     const services = [
         {
-            icon: servicesIcon[0], // You'll need to import these icons
+            icon: servicesIcon[0],
+            alt: "Original IHI air compressor spare parts with warranty",
             title: t("home.whyChoose.services.originalParts.title"),
             description: t("home.whyChoose.services.originalParts.description"),
         },
         {
             icon: servicesIcon[1],
+            alt: "24 7 air compressor technical support and maintenance services",
             title: t("home.whyChoose.services.support24.title"),
             description: t("home.whyChoose.services.support24.description"),
         },
         {
             icon: servicesIcon[2],
+            alt: "15 years experience in industrial air compressor solutions in Indonesia",
             title: t("home.whyChoose.services.experience.title"),
             description: t("home.whyChoose.services.experience.description"),
         },
         {
             icon: servicesIcon[3],
+            alt: "Free on-site air compressor survey and consultation",
             title: t("home.whyChoose.services.freeSurvey.title"),
             description: t("home.whyChoose.services.freeSurvey.description"),
         },
         {
             icon: servicesIcon[4],
+            alt: "Certified compressor engineers and technicians Enerkomp",
             title: t("home.whyChoose.services.expertTeam.title"),
             description: t("home.whyChoose.services.expertTeam.description"),
         },
         {
             icon: servicesIcon[5],
+            alt: "Air compressor maintenance and repair services in Indonesia",
             title: t("home.whyChoose.services.maintenance.title"),
             description: t("home.whyChoose.services.maintenance.description"),
         },
@@ -168,7 +174,7 @@ const Home = () => {
                                     </h1>
                                     <p>{t("home.hero.subtitle")}</p>
                                     <div className="hero-buttons">
-                                        <NavLink to={'/contact'}>
+                                        <NavLink to={'/contact'} className="btn-layer">
                                             <motion.button
                                                 className="btn-primary"
                                                 whileHover={{ scale: 1.05 }}
@@ -291,7 +297,7 @@ const Home = () => {
                             .map((word, index) =>
                                 word === "Enerkomp" || word === "Enerkomp?" ? (
                                     <span key={index} className="highlight">
-                                        {word}
+                                        {word + " "}
                                     </span>
                                 ) : (
                                     word + " "
@@ -329,7 +335,7 @@ const Home = () => {
                                     <div className="shimmer"></div>
                                     <div className="service-icon">
                                         {/* You'll need to import and use the actual icons here */}
-                                        <img src={service.icon} alt="" />
+                                        <img src={service.icon} alt={service.alt} />
                                     </div>
                                     <h3>{service.title}</h3>
                                     <p>{service.description}</p>
