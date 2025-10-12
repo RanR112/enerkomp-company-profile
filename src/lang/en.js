@@ -288,8 +288,7 @@ export const EN = {
         },
         catalog: {
             allProducts: "All Products",
-            brandProducts: "{{brandName}} Products",
-            showingResults: "Showing {{count}} products",
+            showingResults: "Showing products",
             noProducts: "No products match the selected filter.",
             resetFilter: "Reset Filter",
         },

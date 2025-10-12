@@ -11,7 +11,7 @@ import {
     Teral,
     Trident,
     Taitian,
-    Raifu
+    Raifu,
 } from "../assets/brands";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../sass/pages/Product/Product.css";
@@ -60,10 +60,6 @@ export default function Product() {
         { id: "air-dryer", name: t("products.categories.airDryer") },
         { id: "impact-tools", name: t("products.categories.impactTools") },
         { id: "oil-pump", name: t("products.categories.oilPump") },
-        {
-            id: "industrial-vacuum",
-            name: t("products.categories.industrialVacuum"),
-        },
     ];
 
     // Filter products based on category and brand
@@ -139,7 +135,7 @@ export default function Product() {
             const brandName = brandLogos.find(
                 (brand) => brand.id === activeBrand
             )?.name;
-            return t("products.catalog.brandProducts", { brandName });
+            return brandName;
         }
         if (activeCategory !== "all" && activeBrand !== "all") {
             const brandName = brandLogos.find(
@@ -441,9 +437,16 @@ export default function Product() {
                             {(activeCategory !== "all" ||
                                 activeBrand !== "all") && (
                                 <p className="filter-info">
-                                    {t("products.catalog.showingResults", {
-                                        count: filteredProducts.length,
-                                    })}
+                                    {(() => {
+                                        const base = t(
+                                            "products.catalog.showingResults"
+                                        ); // "Showing products"
+                                        const [first, ...rest] =
+                                            base.split(" ");
+                                        return `${first} ${
+                                            filteredProducts.length
+                                        } ${rest.join(" ")}`;
+                                    })()}
                                 </p>
                             )}
                         </motion.div>

@@ -289,8 +289,7 @@ export const ID = {
         },
         catalog: {
             allProducts: "Semua Produk",
-            brandProducts: "Produk {{brandName}}",
-            showingResults: "Menampilkan {{count}} produk",
+            showingResults: "Menampilkan produk",
             noProducts:
                 "Tidak ada produk yang sesuai dengan filter yang dipilih.",
             resetFilter: "Reset Filter",
