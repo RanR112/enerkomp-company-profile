@@ -11,9 +11,12 @@ const Footer = () => {
     const navigate = useNavigate();
 
     const footerLegals = [
-        { name: t("footer.legals.privacyPolicy"), path: "/legal/privacy-policy" },
-    ]
-    
+        {
+            name: t("footer.legals.privacyPolicy"),
+            path: "/legal/privacy-policy",
+        },
+    ];
+
     const handleFooterClick = (path) => {
         navigate(path);
     };
@@ -140,24 +143,42 @@ const Footer = () => {
                         {t("footer.followUs")}
                     </motion.h3>
                     <motion.ul className="social">
-                        <motion.li
-                            variants={socialItemVariants}
-                            whileHover="hover"
+                        <a
+                            href="https://web.facebook.com/profile.php?id=61576563574412&locale=id_ID"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <Facebook /> {t("footer.social.facebook")}
-                        </motion.li>
-                        <motion.li
-                            variants={socialItemVariants}
-                            whileHover="hover"
+                            <motion.li
+                                variants={socialItemVariants}
+                                whileHover="hover"
+                            >
+                                <Facebook /> {t("footer.social.facebook")}
+                            </motion.li>
+                        </a>
+                        <a
+                            href="https://www.instagram.com/enerkomp/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <Instagram /> {t("footer.social.instagram")}
-                        </motion.li>
-                        <motion.li
-                            variants={socialItemVariants}
-                            whileHover="hover"
+                            <motion.li
+                                variants={socialItemVariants}
+                                whileHover="hover"
+                            >
+                                <Instagram /> {t("footer.social.instagram")}
+                            </motion.li>
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/company/pt-enerkomp-persada-raya/posts/?feedView=all"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <Linkedin /> {t("footer.social.linkedin")}
-                        </motion.li>
+                            <motion.li
+                                variants={socialItemVariants}
+                                whileHover="hover"
+                            >
+                                <Linkedin /> {t("footer.social.linkedin")}
+                            </motion.li>
+                        </a>
                     </motion.ul>
                 </motion.div>
 
@@ -187,14 +208,14 @@ const Footer = () => {
                     </motion.h3>
                     <motion.ul className="brands">
                         {footerLegals.map((item) => (
-                        <motion.li
-                        key={item.name}
-                            variants={brandItemVariants}
-                            whileHover="hover"
-                            onClick={() => handleFooterClick(item.path)}
-                        >
-                            {item.name}
-                        </motion.li>
+                            <motion.li
+                                key={item.name}
+                                variants={brandItemVariants}
+                                whileHover="hover"
+                                onClick={() => handleFooterClick(item.path)}
+                            >
+                                {item.name}
+                            </motion.li>
                         ))}
                     </motion.ul>
                 </motion.div>
@@ -217,7 +238,7 @@ const Footer = () => {
                             whileHover="hover"
                         >
                             <Mail />
-                            sales@enerkomp.id
+                            sales@enerkomp.co.id
                         </motion.li>
                     </motion.ul>
                 </motion.div>

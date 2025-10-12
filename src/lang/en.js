@@ -441,7 +441,7 @@ export const EN = {
             instagram: "Instagram",
             linkedin: "LinkedIn",
         },
-        brands: ["IHI", "CJIN", "Oil", "Compressor", "Machine"],
+        brands: ["IHI", "Taitian", "Raifu", "NOP", "Blovac"],
         legal: "Legal",
         legals: {
             privacyPolicy: "Privacy Policy"

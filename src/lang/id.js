@@ -443,7 +443,7 @@ export const ID = {
             instagram: "Instagram",
             linkedin: "Linkedin",
         },
-        brands: ["IHI", "CJIN", "Oli", "Kompresor", "Mesin"],
+        brands: ["IHI", "Taitian", "Raifu", "NOP", "Blovac"],
         legal: "Hukum",
         legals: {
             privacyPolicy: "Kebijakan Privasi",

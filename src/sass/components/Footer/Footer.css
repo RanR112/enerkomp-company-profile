@@ -133,6 +133,10 @@
   color: var(--Third);
   transition: all 0.3s ease;
 }
+.footer .footer-columns .col .social a {
+  text-decoration: none;
+  color: var(--White);
+}
 .footer .footer-columns .col:nth-child(1) .social li:hover svg {
   transform: rotate(15deg) scale(1.2);
 }

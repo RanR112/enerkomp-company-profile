@@ -140,6 +140,13 @@
                 }
             }
 
+            .social {
+                a {
+                    text-decoration: none;
+                    color: var(--White);
+                }
+            }
+
             /* Social media specific styles */
             &:nth-child(1) {
                 .social li {
