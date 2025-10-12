@@ -276,6 +276,7 @@ export const ID = {
         categories: {
             all: "Semua Kategori",
             compressor: "Compressor",
+            vacuum: "Vacuum",
             airDryer: "Air Dryer",
             impactTools: "Impact Tools",
             oilPump: "Oil Pump",

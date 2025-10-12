@@ -268,47 +268,50 @@ export default function ProductDetail() {
                 </motion.div>
             </motion.div>
 
-            {/* Product Specifications */}
-            <motion.div
-                className="product-specifications"
-                initial="hidden"
-                animate="visible"
-                variants={fadeIn}
-            >
-                <h2>{t("products.detail.specifications")}</h2>
-                <div className="specs-grid">
-                    {Object.entries(specifications).map(([key, value]) => (
-                        <div key={key} className="spec-item">
-                            <span className="spec-label">{key}:</span>
-                            <span className="spec-value">{value}</span>
-                        </div>
-                    ))}
-                </div>
-            </motion.div>
+            {specifications && specifications !== false && (
+                <motion.div
+                    className="product-specifications"
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeIn}
+                >
+                    <h2>{t("products.detail.specifications")}</h2>
+                    <div className="specs-grid">
+                        {Object.entries(specifications).map(([key, value]) => (
+                            <div key={key} className="spec-item">
+                                <span className="spec-label">{key}:</span>
+                                <span className="spec-value">{value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+            )}
 
             {/* Product Features */}
-            <motion.div
-                className="product-features"
-                initial="hidden"
-                animate="visible"
-                variants={fadeIn}
-            >
-                <h2>{t("products.detail.features")}</h2>
-                <div className="features-grid">
-                    {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            className="feature-item"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <div className="feature-icon">✓</div>
-                            <span>{feature}</span>
-                        </motion.div>
-                    ))}
-                </div>
-            </motion.div>
+            {features && features !== false && (
+                <motion.div
+                    className="product-features"
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeIn}
+                >
+                    <h2>{t("products.detail.features")}</h2>
+                    <div className="features-grid">
+                        {features.map((feature, index) => (
+                            <motion.div
+                                key={index}
+                                className="feature-item"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <div className="feature-icon">✓</div>
+                                <span>{feature}</span>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            )}
 
             {/* Related Products */}
             {relatedProducts.length > 0 && (

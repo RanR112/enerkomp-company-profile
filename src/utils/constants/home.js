@@ -15,6 +15,8 @@ import {
     Teral,
     Toyota,
     Trident,
+    Taitian,
+    Raifu
 } from "../../assets/brands";
 import {
     certified,
@@ -49,6 +51,8 @@ export const brandLogos = [
     SUTO,
     Teral,
     Trident,
+    Taitian,
+    Raifu
 ];
 
 export const aboutImages = [slide1, slide2, slide3];

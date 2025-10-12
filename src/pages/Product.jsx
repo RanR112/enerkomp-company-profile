@@ -10,6 +10,8 @@ import {
     SUTO,
     Teral,
     Trident,
+    Taitian,
+    Raifu
 } from "../assets/brands";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../sass/pages/Product/Product.css";
@@ -35,6 +37,8 @@ export default function Product() {
         { id: "suto", name: "SUTO", logo: SUTO },
         { id: "teral", name: "Teral", logo: Teral },
         { id: "trident", name: "Trident", logo: Trident },
+        { id: "taitian", name: "Taitian", logo: Taitian },
+        { id: "raifu", name: "Raifu", logo: Raifu },
     ];
 
     // Auto slide brands every 3 seconds
@@ -52,6 +56,7 @@ export default function Product() {
     const productCategories = [
         { id: "all", name: t("products.categories.all") },
         { id: "compressor", name: t("products.categories.compressor") },
+        { id: "vacuum", name: t("products.categories.vacuum") },
         { id: "air-dryer", name: t("products.categories.airDryer") },
         { id: "impact-tools", name: t("products.categories.impactTools") },
         { id: "oil-pump", name: t("products.categories.oilPump") },
@@ -327,8 +332,8 @@ export default function Product() {
                                                 handleBrandClick(brand.id)
                                             }
                                             whileHover={{
-                                                scale: 1.1,
-                                                y: -5,
+                                                // scale: 1.05,
+                                                // y: -5,
                                                 transition: { duration: 0.2 },
                                             }}
                                             whileTap={{ scale: 0.95 }}

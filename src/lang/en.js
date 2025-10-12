@@ -275,6 +275,7 @@ export const EN = {
         categories: {
             all: "All Categories",
             compressor: "Compressor",
+            vacuum: "Vacuum",
             airDryer: "Air Dryer",
             impactTools: "Impact Tools",
             oilPump: "Oil Pump",
