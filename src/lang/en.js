@@ -11,7 +11,7 @@ export const EN = {
         hero: {
             title: "Compression Technology that Integrates with Your Industrial Needs",
             subtitle:
-                "Official distributor of IHI Turbo Compressor in Indonesia. Present with precise, efficient air system solutions and professional technical support throughout Indonesia.",
+                "Authorized distributor of IHI Turbo Compressor in Indonesia. Present with precise, efficient air system solutions and professional technical support throughout Indonesia.",
             contactBtn: "Contact Us",
             learnMoreBtn: "Learn More →",
         },
@@ -278,7 +278,9 @@ export const EN = {
             vacuum: "Vacuum",
             airDryer: "Air Dryer",
             impactTools: "Impact Tools",
+            precisionTools: "Precision Tools",
             oilPump: "Oil Pump",
+            waterPump: "Water Pump",
             industrialVacuum: "Industrial Vacuum",
         },
         sidebar: {
@@ -310,6 +312,10 @@ export const EN = {
             features: "Key Features",
             relatedProducts: "Related Products",
             viewDetails: "View Detail",
+        },
+        pagination: {
+            previous: "Previous",
+            next: "Next",
         },
     },
     contact: {
@@ -443,8 +449,8 @@ export const EN = {
         brands: ["IHI", "Taitian", "Raifu", "NOP", "Blovac"],
         legal: "Legal",
         legals: {
-            privacyPolicy: "Privacy Policy"
-        }
+            privacyPolicy: "Privacy Policy",
+        },
     },
     search: {
         placeholder: "Search products, services...",

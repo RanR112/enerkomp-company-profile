@@ -5,8 +5,11 @@ import Form from "../components/Form";
 import "../sass/pages/Contact/Contact.css";
 import { Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function Contact() {
+    useAnalytics('/contact', 'Contact');
+
     const { t } = useLanguage();
 
     const containerVariants = {

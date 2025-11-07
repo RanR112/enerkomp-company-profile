@@ -14,8 +14,11 @@ import { useLanguage } from "../hooks/useLanguage";
 import ProductCard from "../components/ProductCard"; // Import komponen baru
 import { NavLink } from "react-router-dom";
 import { products } from "../utils/data/productData";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 const Home = () => {
+    useAnalytics('/', 'Home');
+
     const { t } = useLanguage();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

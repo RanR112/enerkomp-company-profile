@@ -70,210 +70,25 @@ import {
     WaterPumpTeralMsuDeepWellSubmersiblePumps,
     WaterPumpTeralMsuhDeepWellSubmersiblePumps,
     WaterPumpTeralMsusDeepWellSubmersiblePumps,
+    ShimAndGaugeFeelerGauge,
 } from "../../assets/Produk";
 import {
     Blovac,
-    Horisan,
     IHI,
     NOP,
     SMK,
-    SUTO,
     Teral,
     Trident,
     Taitian,
     Raifu,
+    SG,
 } from "../../assets/brands";
 import { brandLogos } from "../constants/home";
 
 export const products = [
-    // ─── VACUUM (7 produk) ────────────────────────────────────
-    {
-        id: 1,
-        slug: "blovac-blowback-drum",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacBlowbackDrum,
-        images: [VacuumBlovacBlovacBlowbackDrum],
-        title: "Blovac Blowback Drum",
-        subtitle: "Sistem vacuum industri dengan teknologi blowback otomatis",
-        description:
-            "Blovac Blowback Drum menawarkan pembersihan kontinu tanpa henti operasi, ideal untuk aplikasi debu berat di pabrik dan workshop.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac Blowback Drum",
-                subtitle:
-                    "Industrial vacuum system with automatic blowback technology",
-                description:
-                    "The Blovac Blowback Drum enables continuous operation with automatic filter cleaning, perfect for heavy-duty dust applications in factories and workshops.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 2,
-        slug: "blovac-silent-vs300-vs500-standard-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacSilentVs300Vs500StandardModel,
-        images: [VacuumBlovacBlovacSilentVs300Vs500StandardModel],
-        title: "Blovac Silent VS300-VS500 Standard Model",
-        subtitle: "Vacuum industri senyap dengan kapasitas menengah",
-        description:
-            "Dirancang untuk lingkungan kerja yang membutuhkan kebisingan rendah tanpa mengorbankan daya hisap.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac Silent VS300-VS500 Standard Model",
-                subtitle: "Quiet industrial vacuum with medium capacity",
-                description:
-                    "Designed for low-noise environments without compromising suction power.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 3,
-        slug: "blovac-silent-vs300h-vs500h-high-vacuum-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacSilentVs300hVs500hHighVacuumModel,
-        images: [VacuumBlovacBlovacSilentVs300hVs500hHighVacuumModel],
-        title: "Blovac Silent VS300H-VS500H High Vacuum Model",
-        subtitle: "Model vacuum tekanan tinggi untuk aplikasi khusus",
-        description:
-            "Menyediakan tingkat vakum lebih dalam untuk kebutuhan proses industri yang memerlukan tekanan rendah ekstrem.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac Silent VS300H-VS500H High Vacuum Model",
-                subtitle: "High vacuum model for specialized applications",
-                description:
-                    "Delivers deeper vacuum levels for industrial processes requiring extreme low pressure.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 4,
-        slug: "blovac-silent-vs530w-vs550w-high-capacity-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacSilentVs530wVs550wHighCapacityModel,
-        images: [VacuumBlovacBlovacSilentVs530wVs550wHighCapacityModel],
-        title: "Blovac Silent VS530W-VS550W High Capacity Model",
-        subtitle: "Kapasitas besar untuk volume debu tinggi",
-        description:
-            "Dirancang untuk menangani volume debu sangat besar dalam operasi berkelanjutan.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac Silent VS530W-VS550W High Capacity Model",
-                subtitle: "High-capacity model for high dust volume",
-                description:
-                    "Designed to handle very high dust volumes in continuous operation.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 5,
-        slug: "blovac-v300-v500-standard-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacV300V500StandardModel,
-        images: [VacuumBlovacBlovacV300V500StandardModel],
-        title: "Blovac V300-V500 Standard Model",
-        subtitle: "Model standar andalan untuk berbagai aplikasi",
-        description:
-            "Solusi vacuum serbaguna yang telah terbukti di berbagai industri manufaktur.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac V300-V500 Standard Model",
-                subtitle: "Reliable standard model for various applications",
-                description:
-                    "A versatile vacuum solution proven across multiple manufacturing industries.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 6,
-        slug: "blovac-v300h-v500h-high-vacuum-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacV300hV500hHighVacuumModel,
-        images: [VacuumBlovacBlovacV300hV500hHighVacuumModel],
-        title: "Blovac V300H-V500H High Vacuum Model",
-        subtitle: "Versi high vacuum dari model standar",
-        description:
-            "Meningkatkan kemampuan vakum untuk aplikasi yang memerlukan tekanan lebih rendah.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac V300H-V500H High Vacuum Model",
-                subtitle: "High vacuum version of the standard model",
-                description:
-                    "Enhanced vacuum capability for applications requiring lower pressure.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-    {
-        id: 7,
-        slug: "blovac-v530w-v550w-high-capacity-model",
-        category: "vacuum",
-        brand: "blovac",
-        brandLogo: Blovac,
-        brandName: "Blovac",
-        image: VacuumBlovacBlovacV530wV550wHighCapacityModel,
-        images: [VacuumBlovacBlovacV530wV550wHighCapacityModel],
-        title: "Blovac V530W-V550W High Capacity Model",
-        subtitle: "Kapasitas ekstra besar untuk produksi massal",
-        description:
-            "Ideal untuk lini produksi dengan volume debu sangat tinggi dan operasi 24/7.",
-        specifications: false,
-        features: false,
-        translations: {
-            EN: {
-                title: "Blovac V530W-V550W High Capacity Model",
-                subtitle: "Extra-large capacity for mass production",
-                description:
-                    "Ideal for production lines with extremely high dust volume and 24/7 operation.",
-                specifications: false,
-                features: false,
-            },
-        },
-    },
-
     // ─── COMPRESSOR - IHI (6 produk) ──────────────────────────
     {
-        id: 8,
+        id: 1,
         slug: "ihi-compressor-t2-series",
         category: "compressor",
         isFeatured: true,
@@ -302,9 +117,10 @@ export const products = [
         },
     },
     {
-        id: 9,
+        id: 2,
         slug: "ihi-compressor-t3-series",
         category: "compressor",
+        isFeatured: true,
         brand: "ihi",
         brandLogo: IHI,
         brandName: "IHI",
@@ -328,7 +144,7 @@ export const products = [
         },
     },
     {
-        id: 10,
+        id: 3,
         slug: "ihi-compressor-tra-series",
         category: "compressor",
         brand: "ihi",
@@ -354,7 +170,7 @@ export const products = [
         },
     },
     {
-        id: 11,
+        id: 4,
         slug: "ihi-compressor-tre-series",
         category: "compressor",
         brand: "ihi",
@@ -380,7 +196,7 @@ export const products = [
         },
     },
     {
-        id: 12,
+        id: 5,
         slug: "ihi-compressor-trx-series",
         category: "compressor",
         brand: "ihi",
@@ -406,7 +222,7 @@ export const products = [
         },
     },
     {
-        id: 13,
+        id: 6,
         slug: "ihi-compressor-trz-series",
         category: "compressor",
         brand: "ihi",
@@ -434,7 +250,7 @@ export const products = [
 
     // ─── COMPRESSOR - RAI FU (1 produk, 2 angle) ──────────────
     {
-        id: 14,
+        id: 7,
         slug: "raifu-me-ms-series-power-frequency-compressor",
         category: "compressor",
         isFeatured: true,
@@ -464,7 +280,7 @@ export const products = [
         },
     },
     {
-        id: 15,
+        id: 8,
         slug: "raifu-ms-series-single-stage-screw-air-compressor",
         category: "compressor",
         brand: "raifu",
@@ -493,7 +309,7 @@ export const products = [
         },
     },
     {
-        id: 16,
+        id: 9,
         slug: "raifu-we-series-single-stage-screw-air-compressor",
         category: "compressor",
         brand: "raifu",
@@ -523,7 +339,7 @@ export const products = [
         },
     },
     {
-        id: 17,
+        id: 10,
         slug: "raifu-yt-series-integrated-pm-vsd-compressor",
         category: "compressor",
         brand: "raifu",
@@ -555,7 +371,7 @@ export const products = [
 
     // ─── COMPRESSOR - TAITIAN (7 produk, semua 2 angle) ────────
     {
-        id: 18,
+        id: 11,
         slug: "taitian-screw-compressor-ta",
         category: "compressor",
         isFeatured: true,
@@ -585,7 +401,7 @@ export const products = [
         },
     },
     {
-        id: 19,
+        id: 12,
         slug: "taitian-screw-compressor-tb",
         category: "compressor",
         brand: "taitian",
@@ -614,7 +430,7 @@ export const products = [
         },
     },
     {
-        id: 20,
+        id: 13,
         slug: "taitian-screw-compressor-te",
         category: "compressor",
         brand: "taitian",
@@ -643,7 +459,7 @@ export const products = [
         },
     },
     {
-        id: 21,
+        id: 14,
         slug: "taitian-screw-compressor-tf",
         category: "compressor",
         brand: "taitian",
@@ -672,7 +488,7 @@ export const products = [
         },
     },
     {
-        id: 22,
+        id: 15,
         slug: "taitian-screw-compressor-tg",
         category: "compressor",
         brand: "taitian",
@@ -701,7 +517,7 @@ export const products = [
         },
     },
     {
-        id: 23,
+        id: 16,
         slug: "taitian-screw-compressor-tk-200-8",
         category: "compressor",
         brand: "taitian",
@@ -730,7 +546,7 @@ export const products = [
         },
     },
     {
-        id: 24,
+        id: 17,
         slug: "taitian-screw-compressor-tk-75-8",
         category: "compressor",
         brand: "taitian",
@@ -759,7 +575,7 @@ export const products = [
         },
     },
     {
-        id: 25,
+        id: 18,
         slug: "taitian-screw-compressor-tq",
         category: "compressor",
         brand: "taitian",
@@ -782,6 +598,191 @@ export const products = [
                 subtitle: "Advanced technology for precise control",
                 description:
                     "Equipped with advanced digital control system for accurate pressure and flow regulation.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+
+    // ─── VACUUM (7 produk) ────────────────────────────────────
+    {
+        id: 19,
+        slug: "blovac-blowback-drum",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacBlowbackDrum,
+        images: [VacuumBlovacBlovacBlowbackDrum],
+        title: "Blovac Blowback Drum",
+        subtitle: "Sistem vacuum industri dengan teknologi blowback otomatis",
+        description:
+            "Blovac Blowback Drum menawarkan pembersihan kontinu tanpa henti operasi, ideal untuk aplikasi debu berat di pabrik dan workshop.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac Blowback Drum",
+                subtitle:
+                    "Industrial vacuum system with automatic blowback technology",
+                description:
+                    "The Blovac Blowback Drum enables continuous operation with automatic filter cleaning, perfect for heavy-duty dust applications in factories and workshops.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 20,
+        slug: "blovac-silent-vs300-vs500-standard-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacSilentVs300Vs500StandardModel,
+        images: [VacuumBlovacBlovacSilentVs300Vs500StandardModel],
+        title: "Blovac Silent VS300-VS500 Standard Model",
+        subtitle: "Vacuum industri senyap dengan kapasitas menengah",
+        description:
+            "Dirancang untuk lingkungan kerja yang membutuhkan kebisingan rendah tanpa mengorbankan daya hisap.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac Silent VS300-VS500 Standard Model",
+                subtitle: "Quiet industrial vacuum with medium capacity",
+                description:
+                    "Designed for low-noise environments without compromising suction power.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 21,
+        slug: "blovac-silent-vs300h-vs500h-high-vacuum-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacSilentVs300hVs500hHighVacuumModel,
+        images: [VacuumBlovacBlovacSilentVs300hVs500hHighVacuumModel],
+        title: "Blovac Silent VS300H-VS500H High Vacuum Model",
+        subtitle: "Model vacuum tekanan tinggi untuk aplikasi khusus",
+        description:
+            "Menyediakan tingkat vakum lebih dalam untuk kebutuhan proses industri yang memerlukan tekanan rendah ekstrem.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac Silent VS300H-VS500H High Vacuum Model",
+                subtitle: "High vacuum model for specialized applications",
+                description:
+                    "Delivers deeper vacuum levels for industrial processes requiring extreme low pressure.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 22,
+        slug: "blovac-silent-vs530w-vs550w-high-capacity-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacSilentVs530wVs550wHighCapacityModel,
+        images: [VacuumBlovacBlovacSilentVs530wVs550wHighCapacityModel],
+        title: "Blovac Silent VS530W-VS550W High Capacity Model",
+        subtitle: "Kapasitas besar untuk volume debu tinggi",
+        description:
+            "Dirancang untuk menangani volume debu sangat besar dalam operasi berkelanjutan.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac Silent VS530W-VS550W High Capacity Model",
+                subtitle: "High-capacity model for high dust volume",
+                description:
+                    "Designed to handle very high dust volumes in continuous operation.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 23,
+        slug: "blovac-v300-v500-standard-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacV300V500StandardModel,
+        images: [VacuumBlovacBlovacV300V500StandardModel],
+        title: "Blovac V300-V500 Standard Model",
+        subtitle: "Model standar andalan untuk berbagai aplikasi",
+        description:
+            "Solusi vacuum serbaguna yang telah terbukti di berbagai industri manufaktur.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac V300-V500 Standard Model",
+                subtitle: "Reliable standard model for various applications",
+                description:
+                    "A versatile vacuum solution proven across multiple manufacturing industries.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 24,
+        slug: "blovac-v300h-v500h-high-vacuum-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacV300hV500hHighVacuumModel,
+        images: [VacuumBlovacBlovacV300hV500hHighVacuumModel],
+        title: "Blovac V300H-V500H High Vacuum Model",
+        subtitle: "Versi high vacuum dari model standar",
+        description:
+            "Meningkatkan kemampuan vakum untuk aplikasi yang memerlukan tekanan lebih rendah.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac V300H-V500H High Vacuum Model",
+                subtitle: "High vacuum version of the standard model",
+                description:
+                    "Enhanced vacuum capability for applications requiring lower pressure.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 25,
+        slug: "blovac-v530w-v550w-high-capacity-model",
+        category: "vacuum",
+        brand: "blovac",
+        brandLogo: Blovac,
+        brandName: "Blovac",
+        image: VacuumBlovacBlovacV530wV550wHighCapacityModel,
+        images: [VacuumBlovacBlovacV530wV550wHighCapacityModel],
+        title: "Blovac V530W-V550W High Capacity Model",
+        subtitle: "Kapasitas ekstra besar untuk produksi massal",
+        description:
+            "Ideal untuk lini produksi dengan volume debu sangat tinggi dan operasi 24/7.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "Blovac V530W-V550W High Capacity Model",
+                subtitle: "Extra-large capacity for mass production",
+                description:
+                    "Ideal for production lines with extremely high dust volume and 24/7 operation.",
                 specifications: false,
                 features: false,
             },
@@ -926,7 +927,6 @@ export const products = [
         id: 31,
         slug: "nop-1hg-high-pressure-trochoid-pump",
         category: "oil-pump",
-        isFeatured: true,
         brand: "nop",
         brandLogo: NOP,
         brandName: "NOP",
@@ -1326,6 +1326,34 @@ export const products = [
                 subtitle: "Stainless steel series for clean water",
                 description:
                     "Stainless steel material ensures water quality and long-term corrosion resistance.",
+                specifications: false,
+                features: false,
+            },
+        },
+    },
+    {
+        id: 46, // lanjutkan dari ID terakhir (sebelumnya 45)
+        slug: "s-and-g-feeler-gauge-set",
+        category: "precision-tools",
+        brand: "sg",
+        brandName: "Shim & Gauge",
+        brandLogo: SG,
+        isFeatured: false, // sesuaikan jika perlu
+        image: ShimAndGaugeFeelerGauge,
+        images: [ShimAndGaugeFeelerGauge],
+        title: "S&G Feeler Gauge Set",
+        subtitle: "Set alat ukur celah presisi untuk kalibrasi mesin industri",
+        description:
+            "S&G Feeler Gauge Set terbuat dari baja tahan karat berkualitas tinggi, dengan ketebalan akurat mulai dari 0.03 mm hingga 1.0 mm. Digunakan secara luas dalam perakitan mesin, pemeliharaan kompresor, turbin, dan aplikasi presisi lainnya di industri manufaktur.",
+        specifications: false,
+        features: false,
+        translations: {
+            EN: {
+                title: "S&G Feeler Gauge Set",
+                subtitle:
+                    "Precision gap measurement set for industrial machine calibration",
+                description:
+                    "The S&G Feeler Gauge Set is made of high-quality stainless steel with accurate thickness ranging from 0.03 mm to 1.0 mm. Widely used in engine assembly, compressor and turbine maintenance, and other precision applications in manufacturing industries.",
                 specifications: false,
                 features: false,
             },

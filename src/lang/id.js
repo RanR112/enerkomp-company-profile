@@ -279,7 +279,9 @@ export const ID = {
             vacuum: "Vacuum",
             airDryer: "Air Dryer",
             impactTools: "Impact Tools",
+            precisionTools: "Precision Tools",
             oilPump: "Oil Pump",
+            waterPump: "Water Pump",
             industrialVacuum: "Industrial Vacuum",
         },
         sidebar: {
@@ -312,6 +314,10 @@ export const ID = {
             features: "Fitur Unggulan",
             relatedProducts: "Produk Terkait",
             viewDetails: "Lihat Detail",
+        },
+        pagination: {
+            previous: "Sebelumnya",
+            next: "Berikutnya",
         },
     },
     contact: {

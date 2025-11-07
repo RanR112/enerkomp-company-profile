@@ -2,8 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import "../sass/pages/PrivacyPolicy/PrivacyPolicy.css";
 import { useLanguage } from "../hooks/useLanguage";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 const PrivacyPolicy = () => {
+    useAnalytics('/privacy-policy', 'Privacy Policy');
+
     const { t } = useLanguage();
 
     return (

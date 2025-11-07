@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Home, Search, ArrowLeft, MapPin, AlertCircle } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 import "../sass/components/NotFound/NotFound.css";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 const NotFound = () => {
+    useAnalytics('/*', 'Not Found');
+
+
     const navigate = useNavigate();
     const { t } = useLanguage();
     const isAnimated = true

@@ -3,15 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { productBg, productHero } from "../assets/images";
 import {
     Blovac,
-    Horisan,
     IHI,
     NOP,
-    SMK,
-    SUTO,
     Teral,
-    Trident,
     Taitian,
     Raifu,
+    SG,
 } from "../assets/brands";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../sass/pages/Product/Product.css";
@@ -20,8 +17,11 @@ import { products } from "../utils/data/productData";
 import Form from "../components/Form";
 import { call } from "../assets/icons";
 import { useLanguage } from "../hooks/useLanguage";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function Product() {
+    useAnalytics('/products', 'Products');
+
     const { t, currentLanguage } = useLanguage();
     const [activeCategory, setActiveCategory] = useState("all");
     const [activeBrand, setActiveBrand] = useState("all");
@@ -30,15 +30,12 @@ export default function Product() {
 
     const brandLogos = [
         { id: "blovac", name: "Blovac", logo: Blovac },
-        { id: "horisan", name: "Horisan", logo: Horisan },
         { id: "ihi", name: "IHI", logo: IHI },
         { id: "nop", name: "NOP", logo: NOP },
-        { id: "smk", name: "SMK", logo: SMK },
-        { id: "suto", name: "SUTO", logo: SUTO },
         { id: "teral", name: "Teral", logo: Teral },
-        { id: "trident", name: "Trident", logo: Trident },
         { id: "taitian", name: "Taitian", logo: Taitian },
         { id: "raifu", name: "Raifu", logo: Raifu },
+        { id: "sg", name: "S&G", logo: SG },
     ];
 
     // Auto slide brands every 3 seconds
@@ -57,9 +54,14 @@ export default function Product() {
         { id: "all", name: t("products.categories.all") },
         { id: "compressor", name: t("products.categories.compressor") },
         { id: "vacuum", name: t("products.categories.vacuum") },
-        { id: "air-dryer", name: t("products.categories.airDryer") },
+        // { id: "air-dryer", name: t("products.categories.airDryer") },
         { id: "impact-tools", name: t("products.categories.impactTools") },
+        {
+            id: "precision-tools",
+            name: t("products.categories.precisionTools"),
+        },
         { id: "oil-pump", name: t("products.categories.oilPump") },
+        { id: "water-pump", name: t("products.categories.waterPump") },
     ];
 
     // Filter products based on category and brand
@@ -70,6 +72,57 @@ export default function Product() {
             activeBrand === "all" || product.brand === activeBrand;
         return categoryMatch && brandMatch;
     });
+
+    // Tambahkan state untuk pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 9;
+
+    // Reset ke halaman 1 saat filter berubah
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [activeCategory, activeBrand]);
+
+    // Hitung produk untuk halaman saat ini
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(
+        indexOfFirstProduct,
+        indexOfLastProduct
+    );
+
+    // Hitung total halaman
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+    // Fungsi ganti halaman
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        // Scroll ke atas section produk
+        productSectionRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
+    // Fungsi previous/next
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+            productSectionRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    };
+
+    const goToNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+            productSectionRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    };
 
     // Get visible brands for carousel
     const getVisibleBrands = () => {
@@ -453,15 +506,15 @@ export default function Product() {
 
                         <AnimatePresence mode="wait">
                             <motion.div
-                                key={`${activeCategory}-${activeBrand}`}
+                                key={`${activeCategory}-${activeBrand}-page-${currentPage}`}
                                 className="product-grid"
                                 variants={staggerContainer}
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
                             >
-                                {filteredProducts.length > 0 ? (
-                                    filteredProducts.map((product, index) => (
+                                {currentProducts.length > 0 ? (
+                                    currentProducts.map((product, index) => (
                                         <ProductCard
                                             key={product.id}
                                             product={product}
@@ -492,6 +545,130 @@ export default function Product() {
                                 )}
                             </motion.div>
                         </AnimatePresence>
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <motion.div
+                                className="pagination"
+                                variants={fadeInUp}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                                <button
+                                    className="pagination-btn"
+                                    onClick={goToPreviousPage}
+                                    disabled={currentPage === 1}
+                                    aria-label={t(
+                                        "products.pagination.previous"
+                                    )}
+                                >
+                                    <ChevronLeft size={18} />
+                                </button>
+
+                                {/* Halaman 1 selalu ditampilkan */}
+                                <motion.button
+                                    key={1}
+                                    className={`pagination-btn ${
+                                        currentPage === 1 ? "active" : ""
+                                    }`}
+                                    onClick={() => handlePageChange(1)}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    1
+                                </motion.button>
+
+                                {/* Elipsis di kiri (jika diperlukan) */}
+                                {currentPage > 3 && totalPages > 5 && (
+                                    <span className="pagination-ellipsis">
+                                        ...
+                                    </span>
+                                )}
+
+                                {/* Halaman di sekitar halaman aktif */}
+                                {(() => {
+                                    const pages = [];
+                                    const start = Math.max(2, currentPage - 1);
+                                    const end = Math.min(
+                                        totalPages - 1,
+                                        currentPage + 1
+                                    );
+
+                                    // Pastikan tidak lebih dari 3 halaman di tengah
+                                    if (end - start > 2) {
+                                        const adjustedStart =
+                                            currentPage === totalPages - 1
+                                                ? end - 2
+                                                : start;
+                                        for (
+                                            let i = adjustedStart;
+                                            i <= end;
+                                            i++
+                                        ) {
+                                            pages.push(i);
+                                        }
+                                    } else {
+                                        for (let i = start; i <= end; i++) {
+                                            pages.push(i);
+                                        }
+                                    }
+
+                                    return pages.map((page) => (
+                                        <motion.button
+                                            key={page}
+                                            className={`pagination-btn ${
+                                                currentPage === page
+                                                    ? "active"
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                handlePageChange(page)
+                                            }
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
+                                            {page}
+                                        </motion.button>
+                                    ));
+                                })()}
+
+                                {/* Elipsis di kanan (jika diperlukan) */}
+                                {currentPage < totalPages - 2 &&
+                                    totalPages > 5 && (
+                                        <span className="pagination-ellipsis">
+                                            ...
+                                        </span>
+                                    )}
+
+                                {/* Halaman terakhir (jika lebih dari 1) */}
+                                {totalPages > 1 && (
+                                    <motion.button
+                                        key={totalPages}
+                                        className={`pagination-btn ${
+                                            currentPage === totalPages
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                        onClick={() =>
+                                            handlePageChange(totalPages)
+                                        }
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        {totalPages}
+                                    </motion.button>
+                                )}
+
+                                <button
+                                    className="pagination-btn"
+                                    onClick={goToNextPage}
+                                    disabled={currentPage === totalPages}
+                                    aria-label={t("products.pagination.next")}
+                                >
+                                    <ChevronRight size={18} />
+                                </button>
+                            </motion.div>
+                        )}
                     </div>
                 </div>
             </motion.section>

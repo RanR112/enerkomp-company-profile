@@ -11,6 +11,56 @@
     --LayerSecondary: rgba(45, 76, 82, 0.85);
     --Card: #f4f6f6;
     --Footer: #1c2e33;
+
+    --gap-base: clamp(1rem, 2.5vw, 2rem);
+    --gap-small: clamp(0.5rem, 1.5vw, 1rem);
+    --gap-large: clamp(1.5rem, 4vw, 3rem);
+}
+
+$breakpoints: (
+    "xs": 320px,
+    "sm": 480px,
+    "md": 768px,
+    "lg": 992px,
+    "xl": 1200px,
+    "xxl": 1400px,
+    "xxxl": 1600px
+);
+
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (max-width: #{map-get($breakpoints, $breakpoint) - 1px}) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint #{$breakpoint} not found in $breakpoints.";
+    }
+}
+
+@mixin respond-from($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: map-get($breakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint #{$breakpoint} not found in $breakpoints.";
+    }
+}
+
+@mixin respond-between($min, $max) {
+    @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+        @media (min-width: map-get($breakpoints, $min)) and (max-width: #{map-get($breakpoints, $max) - 1px}) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoints #{$min} or #{$max} not found in $breakpoints.";
+    }
+}
+
+@mixin landscape {
+    @media (orientation: landscape) and (max-height: 600px) {
+        @content;
+    }
 }
 
 .product-detail-page {
@@ -334,6 +384,11 @@
         max-width: 1200px;
         margin: 40px auto 0;
         padding: 0 20px;
+        min-height: 500;
+
+        @include respond-to("sm") {
+            max-width: fit-content;
+        }
 
         h2 {
             font-size: 24px;
@@ -343,9 +398,53 @@
         }
 
         .related-products-grid {
-            display: flex;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            display: grid;
+            gap: clamp(1rem, 2.5vw, 2rem);
+            justify-content: center;
+
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+            @include respond-from("xxl") {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            @include respond-between("xl", "xxl") {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+
+            @include respond-between("lg", "xl") {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            @include respond-between("md", "lg") {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: var(--gap-base);
+            }
+
+            @include respond-between("sm", "md") {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: var(--gap-base);
+            }
+
+            // Small mobile screens - single column with option for 2 columns
+            @include respond-to("sm") {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: var(--gap-small);
+            }
+
+            // Extra small screens - single column
+            @include respond-to("xs") {
+                grid-template-columns: 1fr;
+                gap: var(--gap-small);
+            }
+
+            // Landscape mobile optimization
+            @include landscape {
+                @include respond-to("md") {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: var(--gap-small);
+                }
+            }
         }
     }
 

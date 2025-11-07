@@ -3,24 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../hooks/useLanguage";
 import "../sass/pages/About/About.css";
 import {
-    aboutBanner,
     aboutBg,
     aboutHero,
-    Banner1,
-    Banner2,
-    Banner3,
-    valuesBg,
+    galeri3,
+    galeri4,
+    galeri5,
+    galeri6,
+    galeri7,
+    galeri8,
+    galeri9,
+    galeri10,
 } from "../assets/images";
 import { graduate, idea, lock, teamwork } from "../assets/icons";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 const About = () => {
+    useAnalytics('/about', 'About');
+
     const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState("HISTORY");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [previewIndex, setPreviewIndex] = useState(null);
 
-    const images = [Banner1, Banner2, Banner3, aboutBanner, valuesBg, aboutBg];
+    const images = [galeri3, galeri4, galeri5, galeri6, galeri7, galeri8, galeri9, galeri10];
     const itemsPerPage = 3;
     const maxIndex = images.length - itemsPerPage;
 
@@ -600,19 +606,19 @@ const About = () => {
             >
                 <div className="statistics-container">
                     <div className="stat-item">
-                        <h3>1000+</h3>
+                        <h3>150+</h3>
                         <p>{t("about.statistics.compressors")}</p>
                     </div>
                     <div className="stat-item">
-                        <h3>500+</h3>
+                        <h3>20+</h3>
                         <p>{t("about.statistics.customers")}</p>
                     </div>
                     <div className="stat-item">
-                        <h3>200+</h3>
+                        <h3>800+</h3>
                         <p>{t("about.statistics.projects")}</p>
                     </div>
                     <div className="stat-item">
-                        <h3>15+</h3>
+                        <h3>19+</h3>
                         <p>{t("about.statistics.experience")}</p>
                     </div>
                 </div>

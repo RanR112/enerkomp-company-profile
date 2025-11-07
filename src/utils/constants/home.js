@@ -4,19 +4,16 @@ import {
     Blovac,
     Chemco,
     Daihatsu,
-    Horisan,
     IHI,
     Karunia,
     Marugo,
     Musashi,
     NOP,
-    SMK,
-    SUTO,
     Teral,
     Toyota,
-    Trident,
     Taitian,
-    Raifu
+    Raifu,
+    SG
 } from "../../assets/brands";
 import {
     certified,
@@ -44,15 +41,12 @@ export const heroImages = [Banner1, Banner2, Banner3];
 
 export const brandLogos = [
     Blovac,
-    Horisan,
     IHI,
     NOP,
-    SMK,
-    SUTO,
     Teral,
-    Trident,
     Taitian,
-    Raifu
+    Raifu,
+    SG
 ];
 
 export const aboutImages = [slide1, slide2, slide3];

@@ -51,13 +51,13 @@ export { default as ImpactToolsRaifuRaifuImpactToolsRf800 } from './Impact Tools
 export { default as ImpactToolsRaifuRaifuImpactToolsRf990 } from './Impact Tools/Raifu/Raifu Impact Tools RF-990.png';
 
 // Oil Pump - NOP
-export { default as OilPumpNopNop1hgHighPressureTrochoidPumpSmallCapacityOilPumpUpTo25MpaForHydraulicSystems } from './Oil Pump/NOP Trochoid/NOP 1HG High Pressure Trochoid Pump – Small Capacity Oil Pump up to 2.5 MPa for Hydraulic Systems.png';
-export { default as OilPumpNopNop1meTrochoidPumpCompactOilPumpForLubricationAndHydraulicOil18LminMadeInJapan } from './Oil Pump/NOP Trochoid/NOP 1ME Trochoid Pump – Compact Oil Pump for Lubrication and Hydraulic Oil (1–8 L_min) Made in Japan.png';
-export { default as OilPumpNopNop1raTrochoidPumpBiDirectionalReversibleOilPumpForHydraulicAndCirculationSystems } from './Oil Pump/NOP Trochoid/NOP 1RA Trochoid Pump – Bi-Directional Reversible Oil Pump for Hydraulic and Circulation Systems.png';
-export { default as OilPumpNopNop2hbTrochoidPumpMediumCapacityInternalGearPumpForIndustrialLubricatingOil } from './Oil Pump/NOP Trochoid/NOP 2HB Trochoid Pump – Medium Capacity Internal Gear Pump for Industrial Lubricating Oil.png';
-export { default as OilPumpNopNop2hwmTrochoidPumpCoolantFluidTransferPumpWithFilterForCncAndMachineTools } from './Oil Pump/NOP Trochoid/NOP 2HWM Trochoid Pump – Coolant Fluid Transfer Pump with Filter for CNC and Machine Tools.png';
-export { default as OilPumpNopNop3vTrochoidPumpHighViscosityOilPumpForGearOilAndHeavyLubricantApplications } from './Oil Pump/NOP Trochoid/NOP 3V Trochoid Pump – High Viscosity Oil Pump for Gear Oil and Heavy Lubricant Applications.png';
-export { default as OilPumpNopNop4amTrochoidPumpLargeCapacityOilPumpUpTo586LminForMarineAndTurbineSystems } from './Oil Pump/NOP Trochoid/NOP 4AM Trochoid Pump – Large Capacity Oil Pump (up to 586 L_min) for Marine and Turbine Systems.png';
+export { default as OilPumpNopNop1hgHighPressureTrochoidPumpSmallCapacityOilPumpUpTo25MpaForHydraulicSystems } from './Oil Pump/NOP Trochoid/NOP 1HG High Pressure Trochoid Pump Small Capacity Oil Pump up to 2.5 MPa for Hydraulic Systems.png';
+export { default as OilPumpNopNop1meTrochoidPumpCompactOilPumpForLubricationAndHydraulicOil18LminMadeInJapan } from './Oil Pump/NOP Trochoid/NOP 1ME Trochoid Pump Compact Oil Pump for Lubrication and Hydraulic Oil (1-8 L_min) Made in Japan.png';
+export { default as OilPumpNopNop1raTrochoidPumpBiDirectionalReversibleOilPumpForHydraulicAndCirculationSystems } from './Oil Pump/NOP Trochoid/NOP 1RA Trochoid Pump Bi-Directional Reversible Oil Pump for Hydraulic and Circulation Systems.png';
+export { default as OilPumpNopNop2hbTrochoidPumpMediumCapacityInternalGearPumpForIndustrialLubricatingOil } from './Oil Pump/NOP Trochoid/NOP 2HB Trochoid Pump Medium Capacity Internal Gear Pump for Industrial Lubricating Oil.png';
+export { default as OilPumpNopNop2hwmTrochoidPumpCoolantFluidTransferPumpWithFilterForCncAndMachineTools } from './Oil Pump/NOP Trochoid/NOP 2HWM Trochoid Pump Coolant Fluid Transfer Pump with Filter for CNC and Machine Tools.png';
+export { default as OilPumpNopNop3vTrochoidPumpHighViscosityOilPumpForGearOilAndHeavyLubricantApplications } from './Oil Pump/NOP Trochoid/NOP 3V Trochoid Pump High Viscosity Oil Pump for Gear Oil and Heavy Lubricant Applications.png';
+export { default as OilPumpNopNop4amTrochoidPumpLargeCapacityOilPumpUpTo586LminForMarineAndTurbineSystems } from './Oil Pump/NOP Trochoid/NOP 4AM Trochoid Pump Large Capacity Oil Pump (up to 586 L_min) for Marine and Turbine Systems.png';
 
 // Water Pump - Teral
 export { default as WaterPumpTeralLpLinePump } from './Water Pump/Teral Above-Ground/LP Line Pump.png';
@@ -68,3 +68,5 @@ export { default as WaterPumpTeralSjmsVolutePumps } from './Water Pump/Teral Abo
 export { default as WaterPumpTeralMsuDeepWellSubmersiblePumps } from './Water Pump/Teral Submersible/MSU Deep well submersible pumps.png';
 export { default as WaterPumpTeralMsuhDeepWellSubmersiblePumps } from './Water Pump/Teral Submersible/MSUH Deep well submersible pumps.png';
 export { default as WaterPumpTeralMsusDeepWellSubmersiblePumps } from './Water Pump/Teral Submersible/MSUS Deep well submersible pumps.png';
+
+export { default as ShimAndGaugeFeelerGauge } from './Additional/Feeler Gauge/Shim & gauge Feeler Gauge.jpg';

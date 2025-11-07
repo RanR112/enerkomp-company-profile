@@ -5,25 +5,9 @@ import { ChevronLeft, ChevronRight, Phone, Download } from "lucide-react";
 import { findProductBySlug, getRelatedProducts } from "../utils/productUtils";
 import { useLanguage } from "../hooks/useLanguage";
 import "../sass/components/ProductDetail/ProductDetail.css";
-
-// Import images (sesuaikan dengan struktur project Anda)
-import {
-    turboCompressor,
-    // tambahkan import gambar lainnya sesuai kebutuhan
-} from "../assets/images";
-
-import {
-    Blovac,
-    Horisan,
-    IHI,
-    NOP,
-    SMK,
-    SUTO,
-    Teral,
-    Trident,
-} from "../assets/brands";
 import { products } from "../utils/data/productData";
 import ProductCard from "./ProductCard";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function ProductDetail() {
     const { slug } = useParams();
@@ -33,14 +17,6 @@ export default function ProductDetail() {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
     const [relatedProducts, setRelatedProducts] = useState([]);
-
-    // Function to generate slug from product name
-    const generateSlug = (brandName, productTitle) => {
-        return `${brandName.toLowerCase()}-${productTitle.toLowerCase()}`
-            .replace(/\s+/g, "-")
-            .replace(/[^a-z0-9-]/g, "")
-            .replace(/-+/g, "-");
-    };
 
     // Find product by slug
     useEffect(() => {
@@ -96,6 +72,11 @@ export default function ProductDetail() {
         };
     };
 
+    const { title, subtitle, description, specifications, features } =
+        getTranslatedContent();
+
+    useAnalytics(`/product/${slug}`, `Product ${title}`);
+
     // Animation variants
     const fadeIn = {
         hidden: { opacity: 0 },
@@ -133,9 +114,6 @@ export default function ProductDetail() {
             </div>
         );
     }
-
-    const { title, subtitle, description, specifications, features } =
-        getTranslatedContent();
 
     return (
         <div className="product-detail-page">
