@@ -6,9 +6,6 @@ import "../sass/components/NotFound/NotFound.css";
 import { useAnalytics } from "../hooks/useAnalytics";
 
 const NotFound = () => {
-    useAnalytics('/*', 'Not Found');
-
-
     const navigate = useNavigate();
     const { t } = useLanguage();
     const isAnimated = true
@@ -123,13 +120,13 @@ const NotFound = () => {
                             <span>{t("notFound.goBack") || "Go Back"}</span>
                         </button>
 
-                        <button
+                        {/* <button
                             className="not-found__btn not-found__btn--tertiary"
                             onClick={handleSearch}
                         >
                             <Search size={18} />
                             <span>{t("notFound.search") || "Search"}</span>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 

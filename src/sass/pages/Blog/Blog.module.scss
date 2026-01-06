@@ -1,0 +1,151 @@
+// src/pages/Blog/BlogPage.module.scss
+@import "../../variables";
+
+.blogPage {
+    min-height: 100dvh;
+    background: linear-gradient(to bottom, rgba($fourth, 0.3), $white);
+}
+
+.hero {
+    position: relative;
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+    padding: $spacing-xxl $spacing-md;
+    padding-top: 7rem;
+    text-align: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("../../../assets/images/blog-hero.jpg");
+        opacity: 0.3;
+    }
+
+    @include tablet {
+        padding: $spacing-xl $spacing-md;
+        padding-top: 5rem;
+    }
+}
+
+.heroContent {
+    position: relative;
+    @include container;
+    z-index: 1;
+}
+
+.heroTitle {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $white;
+    margin: 0 0 $spacing-md;
+    letter-spacing: -0.02em;
+
+    @include tablet {
+        font-size: $font-size-3xl;
+    }
+
+    @include mobile {
+        font-size: $font-size-2xl;
+    }
+}
+
+.heroSubtitle {
+    font-size: $font-size-lg;
+    color: var(--White);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+
+    @include tablet {
+        font-size: $font-size-base;
+    }
+
+    @include mobile {
+        font-size: $font-size-sm;
+    }
+}
+
+.container {
+    @include container;
+    padding-top: $spacing-xl;
+    padding-bottom: $spacing-xxl;
+
+    @include tablet {
+        padding-top: $spacing-lg;
+        padding-bottom: $spacing-xl;
+    }
+}
+
+.blogGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @include tablet {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: $spacing-lg;
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+        gap: $spacing-md;
+    }
+}
+
+.noResults {
+    @include flex-column;
+    @include flex-center;
+    padding: $spacing-xxl $spacing-md;
+    text-align: center;
+    background: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-sm;
+    min-height: 400px;
+
+    @include tablet {
+        padding: $spacing-xl $spacing-md;
+        min-height: 300px;
+    }
+}
+
+.noResultsIcon {
+    color: $third;
+    margin-bottom: $spacing-lg;
+    opacity: 0.5;
+}
+
+.noResultsTitle {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    margin: 0 0 $spacing-lg;
+
+    @include tablet {
+        font-size: $font-size-xl;
+    }
+}
+
+.resetButton {
+    @include button-reset;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $white;
+    background: $accent;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $hover;
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-md;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,185 @@
+// src/styles/_variables.scss
+
+// ============================================
+// COLOR VARIABLES
+// ============================================
+$primary: var(--Primary);
+$secondary: var(--Secondary);
+$third: var(--Third);
+$fourth: var(--Fourth);
+$accent: var(--Accent);
+$hover: var(--Hover);
+$white: var(--White);
+$black: var(--Black);
+$layer-primary: var(--LayerPrimary);
+$layer-secondary: var(--LayerSecondary);
+$card: var(--Card);
+$footer: var(--Footer);
+$description: var(--Description);
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+// ============================================
+// SPACING
+// ============================================
+$spacing-xs: 0.5rem; // 8px
+$spacing-sm: 1rem; // 16px
+$spacing-md: 1.5rem; // 24px
+$spacing-lg: 2rem; // 32px
+$spacing-xl: 3rem; // 48px
+$spacing-xxl: 4rem; // 64px
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+$font-family:
+    -apple-system, BlinkMacSystemFont, "Roboto", "Barlow", sans-serif;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 2rem; // 32px
+$font-size-4xl: 2.5rem; // 40px
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// ============================================
+// EFFECTS
+// ============================================
+$border-radius-sm: 0.25rem; // 4px
+$border-radius-md: 0.5rem; // 8px
+$border-radius-lg: 1rem; // 16px
+
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+$box-shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+$transition-fast: 0.2s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// ============================================
+// Z-INDEX
+// ============================================
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-tooltip: 1070;
+
+// ============================================
+// MIXINS
+// ============================================
+
+// Responsive breakpoints
+@mixin mobile {
+    @media (max-width: #{$breakpoint-mobile}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: #{$breakpoint-tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+
+@mixin wide {
+    @media (min-width: #{$breakpoint-wide}) {
+        @content;
+    }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+// Text utilities
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// Container
+@mixin container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+
+    @include tablet {
+        padding: 0 $spacing-sm;
+    }
+}
+
+// Button reset
+@mixin button-reset {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// Card
+@mixin card {
+    background: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-md;
+    transition:
+        transform $transition-base,
+        box-shadow $transition-base;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $box-shadow-lg;
+    }
+}

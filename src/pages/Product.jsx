@@ -1,45 +1,153 @@
-import React, { useState, useRef, useEffect } from "react";
+// src/pages/Product.jsx (REFACTORED - Backend Pagination)
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { productBg, productHero } from "../assets/images";
-import {
-    Blovac,
-    IHI,
-    NOP,
-    Teral,
-    Taitian,
-    Raifu,
-    SG,
-} from "../assets/brands";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../sass/pages/Product/Product.css";
 import ProductCard from "../components/ProductCard";
-import { products } from "../utils/data/productData";
-import Form from "../components/Form";
-import { call } from "../assets/icons";
+import CatalogSection from "../components/CatalogSelection";
 import { useLanguage } from "../hooks/useLanguage";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { useProducts } from "../hooks/useProducts";
+import { useBrands } from "../hooks/useBrands";
+import { useCategories } from "../hooks/useCategories";
+import { useSearchParams } from "react-router-dom";
+
+const PHOTO_URL = import.meta.env.VITE_PHOTO_URL || "";
 
 export default function Product() {
-    useAnalytics('/products', 'Products');
+    useAnalytics("/products", "Products");
 
     const { t, currentLanguage } = useLanguage();
-    const [activeCategory, setActiveCategory] = useState("all");
-    const [activeBrand, setActiveBrand] = useState("all");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const preferredLanguage =
+        typeof window !== "undefined"
+            ? localStorage.getItem("preferredLanguage") ||
+              currentLanguage ||
+              "ID"
+            : currentLanguage || "ID";
+
+    // ============================================================
+    // 🔥 STATE: FILTER & PAGINATION
+    // ============================================================
+    const [activeCategory, setActiveCategory] = useState(() =>
+        (searchParams.get("categories") || "all").toLowerCase()
+    );
+
+    const [activeBrand, setActiveBrand] = useState(() =>
+        (searchParams.get("brands") || "all").toLowerCase()
+    );
+
+    const [currentPage, setCurrentPage] = useState(() => {
+        const pageParam = searchParams.get("page");
+        return pageParam ? parseInt(pageParam, 10) : 1;
+    });
+
     const [currentBrandIndex, setCurrentBrandIndex] = useState(0);
     const productSectionRef = useRef(null);
 
-    const brandLogos = [
-        { id: "blovac", name: "Blovac", logo: Blovac },
-        { id: "ihi", name: "IHI", logo: IHI },
-        { id: "nop", name: "NOP", logo: NOP },
-        { id: "teral", name: "Teral", logo: Teral },
-        { id: "taitian", name: "Taitian", logo: Taitian },
-        { id: "raifu", name: "Raifu", logo: Raifu },
-        { id: "sg", name: "S&G", logo: SG },
-    ];
+    // ============================================================
+    // 🔥 FETCH DATA DENGAN BACKEND PAGINATION
+    // ============================================================
+    const productsPerPage = 9;
 
-    // Auto slide brands every 3 seconds
+    // Build query params for useProducts
+    const productQueryParams = useMemo(() => {
+        const params = {
+            page: currentPage,
+            limit: productsPerPage,
+        };
+
+        // Only add filters if not "all"
+        if (activeCategory !== "all") {
+            params.categories = activeCategory;
+        }
+        if (activeBrand !== "all") {
+            params.brands = activeBrand;
+        }
+
+        return params;
+    }, [currentPage, activeCategory, activeBrand]);
+
+    // Fetch products with backend pagination
+    const {
+        products,
+        meta,
+        loading: productsLoading,
+        error: productsError,
+    } = useProducts(productQueryParams);
+
+    // Fetch brands & categories (keep limit 100 for filter options)
+    const {
+        brands,
+        loading: brandsLoading,
+        error: brandsError,
+    } = useBrands({
+        type: "PRODUCT",
+        limit: 100,
+    });
+
+    const {
+        categories,
+        loading: categoriesLoading,
+        error: categoriesError,
+    } = useCategories({ limit: 100 });
+
+    const errors = [productsError, brandsError, categoriesError].filter(
+        Boolean
+    );
+
+    // ============================================================
+    // 🔥 PAGINATION METADATA DARI BACKEND
+    // ============================================================
+    const totalPages = meta?.lastPage || 1;
+    const totalProducts = meta?.total || 0;
+
+    // Translation helper
+    const pickTranslation = (entity) => {
+        if (!entity) return null;
+        if (entity.translation) return entity.translation;
+        if (typeof entity.getTranslation === "function") {
+            try {
+                const fromGetter = entity.getTranslation(preferredLanguage);
+                if (fromGetter) return fromGetter;
+            } catch (e) {}
+        }
+        if (Array.isArray(entity.translations)) {
+            return (
+                entity.translations.find(
+                    (tr) => tr.language === preferredLanguage
+                ) ||
+                entity.translations[0] ||
+                null
+            );
+        }
+        return null;
+    };
+
+    // Brand carousel data
+    const brandLogos = useMemo(
+        () =>
+            (brands || []).map((brand) => {
+                const brandTrans = pickTranslation(brand);
+                return {
+                    id: brand.id,
+                    slug: brand.slug,
+                    name:
+                        (brandTrans &&
+                            (brandTrans.name || brandTrans.metaTitle)) ||
+                        brand.name ||
+                        "",
+                    logo: brand.logo || "",
+                };
+            }),
+        [brands, preferredLanguage]
+    );
+
+    // Auto brand slider
     useEffect(() => {
+        if (brandLogos.length <= 5) return;
+
         const interval = setInterval(() => {
             setCurrentBrandIndex((prevIndex) =>
                 prevIndex >= brandLogos.length - 5 ? 0 : prevIndex + 1
@@ -49,107 +157,142 @@ export default function Product() {
         return () => clearInterval(interval);
     }, [brandLogos.length]);
 
-    // Sample product categories
-    const productCategories = [
-        { id: "all", name: t("products.categories.all") },
-        { id: "compressor", name: t("products.categories.compressor") },
-        { id: "vacuum", name: t("products.categories.vacuum") },
-        // { id: "air-dryer", name: t("products.categories.airDryer") },
-        { id: "impact-tools", name: t("products.categories.impactTools") },
-        {
-            id: "precision-tools",
-            name: t("products.categories.precisionTools"),
-        },
-        { id: "oil-pump", name: t("products.categories.oilPump") },
-        { id: "water-pump", name: t("products.categories.waterPump") },
-    ];
+    // Categories list
+    const productCategories = useMemo(() => {
+        const base = [
+            { id: "all", name: t("products.categories.all") || "Semua" },
+        ];
 
-    // Filter products based on category and brand
-    const filteredProducts = products.filter((product) => {
-        const categoryMatch =
-            activeCategory === "all" || product.category === activeCategory;
-        const brandMatch =
-            activeBrand === "all" || product.brand === activeBrand;
-        return categoryMatch && brandMatch;
-    });
+        const mapped = (categories || []).map((cat) => {
+            const catTrans = pickTranslation(cat);
+            return {
+                id: cat.id,
+                slug: cat.slug,
+                name:
+                    (catTrans && (catTrans.name || catTrans.metaTitle)) ||
+                    cat.name ||
+                    "",
+            };
+        });
 
-    // Tambahkan state untuk pagination
-    const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 9;
+        return [...base, ...mapped];
+    }, [categories, preferredLanguage, currentLanguage, t]);
 
-    // Reset ke halaman 1 saat filter berubah
+    // ============================================================
+    // 🔥 SYNC STATE DARI URL PARAMS
+    // ============================================================
     useEffect(() => {
-        setCurrentPage(1);
-    }, [activeCategory, activeBrand]);
+        const cat = (searchParams.get("categories") || "all").toLowerCase();
+        const br = (searchParams.get("brands") || "all").toLowerCase();
+        const pg = searchParams.get("page");
+        const pageNum = pg ? parseInt(pg, 10) : 1;
 
-    // Hitung produk untuk halaman saat ini
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = filteredProducts.slice(
-        indexOfFirstProduct,
-        indexOfLastProduct
-    );
+        if (cat !== activeCategory) setActiveCategory(cat);
+        if (br !== activeBrand) setActiveBrand(br);
+        if (pageNum !== currentPage) setCurrentPage(pageNum);
 
-    // Hitung total halaman
-    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams]);
 
-    // Fungsi ganti halaman
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-        // Scroll ke atas section produk
-        productSectionRef.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
+    // ============================================================
+    // 🔥 AUTO-SCROLL KE PRODUCT SAAT ADA FILTER/PAGINATION
+    // ============================================================
+    useEffect(() => {
+        const shouldScroll = 
+            activeCategory !== "all" || 
+            activeBrand !== "all" || 
+            currentPage > 1;
+
+        if (shouldScroll && productSectionRef.current) {
+            scrollToProductSection();
+        }
+    }, [activeCategory, activeBrand, currentPage]);
+
+    // ============================================================
+    // 🔥 UPDATE URL PARAMS
+    // ============================================================
+    const applyFiltersToParams = (category, brand, page = 1) => {
+        setSearchParams(() => {
+            const params = new URLSearchParams();
+
+            if (category && category !== "all")
+                params.set("categories", category);
+            if (brand && brand !== "all") 
+                params.set("brands", brand);
+            if (page > 1)
+                params.set("page", page);
+
+            return params;
         });
     };
 
-    // Fungsi previous/next
+    const handleCategoryChange = (categoryId) => {
+        setActiveCategory(categoryId);
+        setCurrentPage(1); // Reset to page 1
+        applyFiltersToParams(categoryId, activeBrand, 1);
+        scrollToProductSection();
+    };
+
+    const handleBrandClick = (brandId) => {
+        setActiveBrand(brandId);
+        setCurrentPage(1); // Reset to page 1
+        applyFiltersToParams(activeCategory, brandId, 1);
+        scrollToProductSection();
+    };
+
+    // ============================================================
+    // 🔥 PAGINATION HANDLERS
+    // ============================================================
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        applyFiltersToParams(activeCategory, activeBrand, pageNumber);
+        scrollToProductSection();
+    };
+
     const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-            productSectionRef.current?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        }
+        if (currentPage > 1) handlePageChange(currentPage - 1);
     };
 
     const goToNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-            productSectionRef.current?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        }
+        if (currentPage < totalPages) handlePageChange(currentPage + 1);
     };
 
-    // Get visible brands for carousel
+    // ============================================================
+    // 🔥 SCROLL UTIL
+    // ============================================================
+    const scrollToProductSection = () => {
+        setTimeout(() => {
+            if (productSectionRef.current) {
+                const offset = -120; // navbar height
+                const elementTop =
+                    productSectionRef.current.getBoundingClientRect().top +
+                    window.scrollY;
+
+                window.scrollTo({
+                    top: elementTop + offset,
+                    behavior: "smooth",
+                });
+            }
+        }, 150);
+    };
+
+    // ============================================================
+    // 🔥 BRAND CAROUSEL HANDLERS
+    // ============================================================
     const getVisibleBrands = () => {
+        if (brandLogos.length === 0) return [];
+        const visibleCount = Math.min(5, brandLogos.length);
         const visible = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < visibleCount; i++) {
             const index = (currentBrandIndex + i) % brandLogos.length;
             visible.push(brandLogos[index]);
         }
         return visible;
     };
 
-    // Handle category change with scroll to product section
-    const handleCategoryChange = (categoryId) => {
-        setActiveCategory(categoryId);
-        scrollToProductSection();
-    };
-
-    // Handle brand selection
-    const handleBrandClick = (brandId) => {
-        setActiveBrand(brandId);
-        scrollToProductSection();
-    };
-
-    // Handle brand navigation
     const handlePrevBrand = () => {
         setCurrentBrandIndex((prevIndex) =>
-            prevIndex <= 0 ? brandLogos.length - 5 : prevIndex - 1
+            prevIndex <= 0 ? Math.max(0, brandLogos.length - 5) : prevIndex - 1
         );
     };
 
@@ -159,57 +302,34 @@ export default function Product() {
         );
     };
 
-    // Scroll to product section
-    const scrollToProductSection = () => {
-        setTimeout(() => {
-            if (productSectionRef.current) {
-                const navbarHeight = 80;
-                const elementPosition = productSectionRef.current.offsetTop;
-                const offsetPosition = elementPosition - navbarHeight;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth",
-                });
-            }
-        }, 100);
-    };
-
-    // Get dynamic category title
+    // ============================================================
+    // 🔥 CATEGORY TITLE
+    // ============================================================
     const getCategoryTitle = () => {
         if (activeCategory === "all" && activeBrand === "all") {
-            return t("products.catalog.allProducts");
+            return t("products.catalog.allProducts") || "Semua Produk";
         }
-        if (activeCategory !== "all" && activeBrand === "all") {
-            return productCategories.find((cat) => cat.id === activeCategory)
-                ?.name;
-        }
-        if (activeCategory === "all" && activeBrand !== "all") {
-            const brandName = brandLogos.find(
-                (brand) => brand.id === activeBrand
-            )?.name;
+
+        const brandName = brandLogos.find((b) => b.id === activeBrand)?.name;
+        const categoryName = productCategories.find(
+            (c) => c.id === activeCategory
+        )?.name;
+
+        if (activeCategory !== "all" && activeBrand === "all")
+            return categoryName;
+        if (activeCategory === "all" && activeBrand !== "all") 
             return brandName;
-        }
-        if (activeCategory !== "all" && activeBrand !== "all") {
-            const brandName = brandLogos.find(
-                (brand) => brand.id === activeBrand
-            )?.name;
-            const categoryName = productCategories.find(
-                (cat) => cat.id === activeCategory
-            )?.name;
-            return `${brandName} - ${categoryName}`;
-        }
+
+        return `${brandName} - ${categoryName}`;
     };
 
-    // Animation variants
+    // ============================================================
+    // 🔥 ANIMATIONS
+    // ============================================================
     const fadeIn = {
         hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { duration: 0.4, ease: "easeOut" },
-        },
+        visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
     };
-
     const fadeInUp = {
         hidden: { opacity: 0, y: 20 },
         visible: {
@@ -218,18 +338,13 @@ export default function Product() {
             transition: { duration: 0.4, ease: "easeOut" },
         },
     };
-
     const staggerContainer = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                duration: 0.3,
-            },
+            transition: { staggerChildren: 0.1, duration: 0.3 },
         },
     };
-
     const cardAnimation = {
         hidden: { opacity: 0, y: 20 },
         visible: {
@@ -238,7 +353,6 @@ export default function Product() {
             transition: { duration: 0.3, ease: "easeOut" },
         },
     };
-
     const slideAnimation = {
         hidden: { opacity: 0, x: 50 },
         visible: {
@@ -253,6 +367,9 @@ export default function Product() {
         },
     };
 
+    // ============================================================
+    // 🔥 RENDER
+    // ============================================================
     return (
         <div className="product-page">
             {/* Hero Section */}
@@ -284,7 +401,10 @@ export default function Product() {
                         >
                             <img
                                 src={productHero}
-                                alt={t("products.hero.imageAlt")}
+                                alt={
+                                    t("products.hero.imageAlt") ||
+                                    "Product Hero"
+                                }
                                 className="hero-image"
                             />
                         </motion.div>
@@ -309,29 +429,31 @@ export default function Product() {
                                     className="btn-primary"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        const targetElement =
-                                            document.getElementById("product");
-                                        targetElement?.scrollIntoView({
-                                            behavior: "smooth",
-                                        });
-                                    }}
+                                    onClick={() =>
+                                        document
+                                            .getElementById("product")
+                                            ?.scrollIntoView({
+                                                behavior: "smooth",
+                                            })
+                                    }
                                 >
-                                    {t("products.hero.buttons.viewProducts")}
+                                    {t("products.hero.buttons.viewProducts") ||
+                                        "Lihat Produk"}
                                 </motion.button>
                                 <motion.button
                                     className="btn-secondary"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        const targetElement =
-                                            document.getElementById("catalog");
-                                        targetElement?.scrollIntoView({
-                                            behavior: "smooth",
-                                        });
-                                    }}
+                                    onClick={() =>
+                                        document
+                                            .getElementById("catalog")
+                                            ?.scrollIntoView({
+                                                behavior: "smooth",
+                                            })
+                                    }
                                 >
-                                    {t("products.hero.buttons.getCatalog")}
+                                    {t("products.hero.buttons.getCatalog") ||
+                                        "Dapatkan Katalog"}
                                 </motion.button>
                             </div>
                         </motion.div>
@@ -340,76 +462,95 @@ export default function Product() {
             </motion.section>
 
             {/* Brand Carousel Section */}
-            <motion.section
-                className="brand-carousel-section"
-                initial="hidden"
-                animate="visible"
-                variants={fadeIn}
-                id="product"
-            >
-                <div className="brand-carousel-container">
-                    <div className="brand-carousel-wrapper">
-                        <motion.button
-                            className="brand-nav-button prev"
-                            onClick={handlePrevBrand}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            aria-label={t("products.brandCarousel.prevButton")}
-                        >
-                            <ChevronLeft size={24} />
-                        </motion.button>
-
-                        <div className="brand-carousel">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentBrandIndex}
-                                    className="brand-logos-container"
-                                    variants={slideAnimation}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="exit"
+            {brandLogos.length > 0 && (
+                <motion.section
+                    className="brand-carousel-section"
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeIn}
+                    id="product"
+                >
+                    <div className="brand-carousel-container">
+                        <div className="brand-carousel-wrapper">
+                            {brandLogos.length > 5 && (
+                                <motion.button
+                                    className="brand-nav-button prev"
+                                    onClick={handlePrevBrand}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    aria-label={
+                                        t(
+                                            "products.brandCarousel.prevButton"
+                                        ) || "Previous"
+                                    }
                                 >
-                                    {getVisibleBrands().map((brand, index) => (
-                                        <motion.div
-                                            key={`${brand.id}-${currentBrandIndex}-${index}`}
-                                            className={`brand-logo-item ${
-                                                activeBrand === brand.id
-                                                    ? "active"
-                                                    : ""
-                                            }`}
-                                            onClick={() =>
-                                                handleBrandClick(brand.id)
-                                            }
-                                            whileHover={{
-                                                // scale: 1.05,
-                                                // y: -5,
-                                                transition: { duration: 0.2 },
-                                            }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
-                                            <img
-                                                src={brand.logo}
-                                                alt={brand.name}
-                                                className="brand-logo"
-                                            />
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
+                                    <ChevronLeft size={24} />
+                                </motion.button>
+                            )}
 
-                        <motion.button
-                            className="brand-nav-button next"
-                            onClick={handleNextBrand}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            aria-label={t("products.brandCarousel.nextButton")}
-                        >
-                            <ChevronRight size={24} />
-                        </motion.button>
+                            <div className="brand-carousel">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={currentBrandIndex}
+                                        className="brand-logos-container"
+                                        variants={slideAnimation}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
+                                    >
+                                        {getVisibleBrands().map(
+                                            (brand, index) => (
+                                                <motion.div
+                                                    key={`${brand.id}-${currentBrandIndex}-${index}`}
+                                                    className={`brand-logo-item ${
+                                                        activeBrand === brand.id
+                                                            ? "active"
+                                                            : ""
+                                                    }`}
+                                                    onClick={() =>
+                                                        handleBrandClick(
+                                                            brand.id
+                                                        )
+                                                    }
+                                                    whileHover={{
+                                                        transition: {
+                                                            duration: 0.2,
+                                                        },
+                                                    }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                >
+                                                    <img
+                                                        src={`${PHOTO_URL}${brand.logo}`}
+                                                        alt={brand.name}
+                                                        className="brand-logo"
+                                                        loading="lazy"
+                                                    />
+                                                </motion.div>
+                                            )
+                                        )}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+
+                            {brandLogos.length > 5 && (
+                                <motion.button
+                                    className="brand-nav-button next"
+                                    onClick={handleNextBrand}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    aria-label={
+                                        t(
+                                            "products.brandCarousel.nextButton"
+                                        ) || "Next"
+                                    }
+                                >
+                                    <ChevronRight size={24} />
+                                </motion.button>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </motion.section>
+                </motion.section>
+            )}
 
             {/* Product Catalog Section */}
             <motion.section
@@ -426,7 +567,7 @@ export default function Product() {
                         variants={fadeInUp}
                     >
                         <h3 className="sidebar-title">
-                            {t("products.sidebar.categories")}
+                            {t("products.sidebar.categories") || "Kategori"}
                         </h3>
                         <div className="category-list">
                             {productCategories.map((category) => (
@@ -449,7 +590,7 @@ export default function Product() {
                         </div>
 
                         <h3 className="sidebar-title brand-title">
-                            {t("products.sidebar.brands")}
+                            {t("products.sidebar.brands") || "Brand"}
                         </h3>
                         <div className="brand-list">
                             <motion.button
@@ -460,7 +601,8 @@ export default function Product() {
                                 whileHover={{ x: 5 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                {t("products.sidebar.allBrands")}
+                                {t("products.sidebar.allBrands") ||
+                                    "Semua Brand"}
                             </motion.button>
                             {brandLogos.map((brand) => (
                                 <motion.button
@@ -490,64 +632,90 @@ export default function Product() {
                             {(activeCategory !== "all" ||
                                 activeBrand !== "all") && (
                                 <p className="filter-info">
-                                    {(() => {
-                                        const base = t(
-                                            "products.catalog.showingResults"
-                                        ); // "Showing products"
-                                        const [first, ...rest] =
-                                            base.split(" ");
-                                        return `${first} ${
-                                            filteredProducts.length
-                                        } ${rest.join(" ")}`;
-                                    })()}
+                                    {t(
+                                        "products.catalog.showingResults"
+                                    )?.replace(
+                                        "{count}",
+                                        totalProducts
+                                    ) ||
+                                        `Menampilkan ${totalProducts} produk`}
                                 </p>
                             )}
                         </motion.div>
 
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`${activeCategory}-${activeBrand}-page-${currentPage}`}
-                                className="product-grid"
-                                variants={staggerContainer}
-                                initial="hidden"
-                                animate="visible"
-                                exit="hidden"
-                            >
-                                {currentProducts.length > 0 ? (
-                                    currentProducts.map((product, index) => (
-                                        <ProductCard
-                                            key={product.id}
-                                            product={product}
-                                            index={index}
-                                            variants={cardAnimation}
-                                        />
-                                    ))
-                                ) : (
-                                    <motion.div
-                                        className="no-products"
-                                        variants={fadeInUp}
-                                    >
-                                        <p>
-                                            {t("products.catalog.noProducts")}
-                                        </p>
-                                        <motion.button
-                                            className="reset-filter-btn"
-                                            onClick={() => {
-                                                setActiveCategory("all");
-                                                setActiveBrand("all");
-                                            }}
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
+                        {/* Loading State */}
+                        {productsLoading && (
+                            <div className="loading-state">
+                                <div className="loading-spinner"></div>
+                                <p>{t("products.loading") || "Memuat produk..."}</p>
+                            </div>
+                        )}
+
+                        {/* Error State */}
+                        {errors.length > 0 && !productsLoading && (
+                            <div className="error-banner">
+                                {errors.map((err, i) => (
+                                    <p key={i}>{err}</p>
+                                ))}
+                                <button
+                                    onClick={() => window.location.reload()}
+                                >
+                                    {t("products.error.retry") || "Coba Lagi"}
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Product Grid */}
+                        {!productsLoading && (
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={`${activeCategory}-${activeBrand}-page-${currentPage}`}
+                                    className="product-grid"
+                                    variants={staggerContainer}
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="hidden"
+                                >
+                                    {products.length > 0 ? (
+                                        products.map((product) => (
+                                            <ProductCard
+                                                key={product.id}
+                                                product={product}
+                                                variants={cardAnimation}
+                                            />
+                                        ))
+                                    ) : (
+                                        <motion.div
+                                            className="no-products"
+                                            variants={fadeInUp}
                                         >
-                                            {t("products.catalog.resetFilter")}
-                                        </motion.button>
-                                    </motion.div>
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
+                                            <p>
+                                                {t("products.catalog.noProducts") ||
+                                                    "Tidak ada produk ditemukan"}
+                                            </p>
+                                            <motion.button
+                                                className="reset-filter-btn"
+                                                onClick={() => {
+                                                    setActiveCategory("all");
+                                                    setActiveBrand("all");
+                                                    setCurrentPage(1);
+                                                    applyFiltersToParams("all", "all", 1);
+                                                }}
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                            >
+                                                {t(
+                                                    "products.catalog.resetFilter"
+                                                ) || "Reset Filter"}
+                                            </motion.button>
+                                        </motion.div>
+                                    )}
+                                </motion.div>
+                            </AnimatePresence>
+                        )}
 
                         {/* Pagination */}
-                        {totalPages > 1 && (
+                        {totalPages > 1 && !productsLoading && (
                             <motion.div
                                 className="pagination"
                                 variants={fadeInUp}
@@ -558,16 +726,16 @@ export default function Product() {
                                     className="pagination-btn"
                                     onClick={goToPreviousPage}
                                     disabled={currentPage === 1}
-                                    aria-label={t(
-                                        "products.pagination.previous"
-                                    )}
+                                    aria-label={
+                                        t("products.pagination.previous") ||
+                                        "Previous"
+                                    }
                                 >
                                     <ChevronLeft size={18} />
                                 </button>
 
-                                {/* Halaman 1 selalu ditampilkan */}
+                                {/* Page 1 */}
                                 <motion.button
-                                    key={1}
                                     className={`pagination-btn ${
                                         currentPage === 1 ? "active" : ""
                                     }`}
@@ -578,14 +746,14 @@ export default function Product() {
                                     1
                                 </motion.button>
 
-                                {/* Elipsis di kiri (jika diperlukan) */}
+                                {/* Left ellipsis */}
                                 {currentPage > 3 && totalPages > 5 && (
                                     <span className="pagination-ellipsis">
                                         ...
                                     </span>
                                 )}
 
-                                {/* Halaman di sekitar halaman aktif */}
+                                {/* Middle pages */}
                                 {(() => {
                                     const pages = [];
                                     const start = Math.max(2, currentPage - 1);
@@ -593,26 +761,8 @@ export default function Product() {
                                         totalPages - 1,
                                         currentPage + 1
                                     );
-
-                                    // Pastikan tidak lebih dari 3 halaman di tengah
-                                    if (end - start > 2) {
-                                        const adjustedStart =
-                                            currentPage === totalPages - 1
-                                                ? end - 2
-                                                : start;
-                                        for (
-                                            let i = adjustedStart;
-                                            i <= end;
-                                            i++
-                                        ) {
-                                            pages.push(i);
-                                        }
-                                    } else {
-                                        for (let i = start; i <= end; i++) {
-                                            pages.push(i);
-                                        }
-                                    }
-
+                                    for (let i = start; i <= end; i++)
+                                        pages.push(i);
                                     return pages.map((page) => (
                                         <motion.button
                                             key={page}
@@ -632,7 +782,7 @@ export default function Product() {
                                     ));
                                 })()}
 
-                                {/* Elipsis di kanan (jika diperlukan) */}
+                                {/* Right ellipsis */}
                                 {currentPage < totalPages - 2 &&
                                     totalPages > 5 && (
                                         <span className="pagination-ellipsis">
@@ -640,10 +790,9 @@ export default function Product() {
                                         </span>
                                     )}
 
-                                {/* Halaman terakhir (jika lebih dari 1) */}
+                                {/* Last page */}
                                 {totalPages > 1 && (
                                     <motion.button
-                                        key={totalPages}
                                         className={`pagination-btn ${
                                             currentPage === totalPages
                                                 ? "active"
@@ -663,7 +812,9 @@ export default function Product() {
                                     className="pagination-btn"
                                     onClick={goToNextPage}
                                     disabled={currentPage === totalPages}
-                                    aria-label={t("products.pagination.next")}
+                                    aria-label={
+                                        t("products.pagination.next") || "Next"
+                                    }
                                 >
                                     <ChevronRight size={18} />
                                 </button>
@@ -674,13 +825,7 @@ export default function Product() {
             </motion.section>
 
             <section className="catalog-form" id="catalog">
-                <h3 className="catalog-form-title">
-                    {t("products.catalogForm.title.part1")}{" "}
-                    <span className="highlight">
-                        {t("products.catalogForm.title.highlight")}
-                    </span>
-                </h3>
-                <Form type="catalog" />
+                <CatalogSection />
             </section>
         </div>
     );

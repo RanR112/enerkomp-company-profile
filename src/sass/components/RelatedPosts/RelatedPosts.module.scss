@@ -1,0 +1,139 @@
+// src/components/Blog/RelatedPosts/RelatedPosts.module.scss
+@import "../../variables";
+
+.relatedWrapper {
+    margin-top: $spacing-xxl;
+    padding-top: $spacing-xxl;
+    border-top: 2px solid rgba($primary, 0.1);
+
+    @include tablet {
+        margin-top: $spacing-xl;
+        padding-top: $spacing-xl;
+    }
+}
+
+.title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    margin: 0 0 $spacing-xl;
+    text-align: center;
+
+    @include tablet {
+        font-size: $font-size-xl;
+        margin-bottom: $spacing-lg;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-lg;
+
+    @include tablet {
+        grid-template-columns: 1fr;
+        gap: $spacing-md;
+    }
+}
+
+.card {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.imageLink {
+    text-decoration: none;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: $card;
+
+    @include tablet {
+        height: 180px;
+    }
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    flex: 1;
+}
+
+.date {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.titleLink {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover .cardTitle {
+        color: $accent;
+    }
+}
+
+.cardTitle {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    line-height: 1.3;
+    margin: 0;
+    transition: color $transition-fast;
+    @include line-clamp(2);
+
+    @include tablet {
+        font-size: $font-size-base;
+    }
+}
+
+.excerpt {
+    font-size: $font-size-sm;
+    color: $secondary;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    @include line-clamp(2);
+
+    @include tablet {
+        font-size: $font-size-xs;
+    }
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-top: auto;
+}
+
+.tag {
+    padding: 4px $spacing-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $third;
+    background: rgba($third, 0.1);
+    border-radius: $border-radius-sm;
+}

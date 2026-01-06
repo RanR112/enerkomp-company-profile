@@ -2,34 +2,34 @@ import React, { useState } from "react";
 import "../sass/components/Form/Form.css";
 import { catalogBanner, contactBanner } from "../assets/images";
 import { useLanguage } from "../hooks/useLanguage";
+import { submitClientForm } from "../lib/api"; // ✅ Reuse hook yang sudah ada
 
-const Form = ({ type }) => {
+const Form = ({ type, catalogId = null }) => {
     const { t } = useLanguage();
 
     const [formData, setFormData] = useState({
-        perusahaan: "",
-        alamat: "",
-        negara: "",
-        nama: "",
+        company: "",
+        address: "",
+        country: "",
+        name: "",
         email: "",
         phone: "",
         fax: "",
-        pesan: "",
+        message: "",
     });
 
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState("");
+    const [submitStatus, setSubmitStatus] = useState(""); // idle | submitting | success | error
 
     const requiredFields = [
-        "perusahaan",
-        "alamat",
-        "negara",
-        "nama",
+        "company",
+        "address",
+        "country",
+        "name",
         "email",
         "phone",
-        "pesan",
+        "message",
     ];
 
     const banner = type === "catalog" ? catalogBanner : contactBanner;
@@ -41,7 +41,6 @@ const Form = ({ type }) => {
             [name]: value,
         }));
 
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors((prev) => ({
                 ...prev,
@@ -53,14 +52,12 @@ const Form = ({ type }) => {
     const validateForm = () => {
         const newErrors = {};
 
-        // Check required fields
         requiredFields.forEach((field) => {
-            if (!formData[field].trim()) {
+            if (!formData[field]?.trim()) {
                 newErrors[field] = t("form.validation.required");
             }
         });
 
-        // Email validation
         if (
             formData.email &&
             !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
@@ -68,12 +65,10 @@ const Form = ({ type }) => {
             newErrors.email = t("form.validation.invalidEmail");
         }
 
-        // Phone validation
         if (formData.phone && !/^[0-9+\-\s()]+$/.test(formData.phone)) {
             newErrors.phone = t("form.validation.invalidPhone");
         }
 
-        // Terms agreement
         if (!agreedToTerms) {
             newErrors.terms = t("form.validation.termsRequired");
         }
@@ -82,111 +77,61 @@ const Form = ({ type }) => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const submitToGoogleSheets = async (data) => {
-        const SCRIPT_URL =
-            "https://script.google.com/macros/s/AKfycbwAqdAHVYvxMNVR4zjMmC-TE7o9tp2CUbt0Zq4BIdXpVrD1jWm1rYuY71WEn-YypfHL/exec";
+    // ✅ Kirim ke backend Enerkomp
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        setSubmitStatus("submitting");
 
         try {
-            // Buat FormData untuk menghindari preflight request
-            const formData = new FormData();
-
-            // Tambahkan data sebagai JSON string dengan formType
-            const dataWithType = {
-                ...data,
-                formType: type, // Tambahkan form type (catalog atau contact)
-            };
-
-            formData.append("data", JSON.stringify(dataWithType));
-
-            console.log("Submitting data:", dataWithType); // Debug log
-
-            const response = await fetch(SCRIPT_URL, {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            console.log("Response from server:", result); // Debug log
-
-            if (result.success === false) {
-                throw new Error(result.message || "Submission failed");
-            }
-
-            return result;
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            throw error;
-        }
-    };
-
-    const downloadCatalog = () => {
-        // Simulate catalog download
-        const link = document.createElement("a");
-        link.href = "#"; // Replace with actual catalog file URL
-        link.download = "catalog.pdf";
-        link.click();
-    };
-
-    const handleSubmit = async () => {
-        if (!validateForm()) {
-            return;
-        }
-
-        setIsSubmitting(true);
-        setSubmitStatus("");
-
-        try {
-            const submissionData = {
+            const payload = {
                 ...formData,
-                timestamp: new Date().toISOString(),
-                agreedToTerms: agreedToTerms,
+                formType: type.toUpperCase(),
+                agreedToTerms,
+                source: window.location.href,
             };
 
-            const result = await submitToGoogleSheets(submissionData);
+            let catalogTab = null;
 
-            console.log("Submission successful:", result); // Debug log
+            // Jika tipe CATALOG → buka tab loader dulu
+            if (type === "catalog" && catalogId) {
+                payload.catalogId = catalogId;
+
+                catalogTab = window.open("/catalog?status=loading", "_blank");
+            }
+
+            // Submit form ke backend
+            const result = await submitClientForm(payload);
+
+            if (catalogTab && result.emailSent) {
+                catalogTab.location.href = "/catalog?status=emailsent";
+            }
+
+            if (catalogTab && result?.catalogUrl && !result.emailSent) {
+                catalogTab.location.href = result.catalogUrl;
+            }
 
             setSubmitStatus("success");
 
-            // Download catalog hanya untuk form catalog
-            if (type === "catalog") {
-                setTimeout(() => {
-                    downloadCatalog();
-                }, 1000);
-            }
-
             // Reset form
             setFormData({
-                perusahaan: "",
-                alamat: "",
-                negara: "",
-                nama: "",
+                company: "",
+                address: "",
+                country: "",
+                name: "",
                 email: "",
                 phone: "",
                 fax: "",
-                pesan: "",
+                message: "",
             });
             setAgreedToTerms(false);
 
-            // Clear success message setelah 5 detik
-            setTimeout(() => {
-                setSubmitStatus("");
-            }, 5000);
-        } catch (error) {
-            console.error("Submission error:", error);
+            setTimeout(() => setSubmitStatus(""), 5000);
+        } catch (err) {
+            console.error("Form submission failed:", err);
             setSubmitStatus("error");
-
-            // Clear error message setelah 5 detik
-            setTimeout(() => {
-                setSubmitStatus("");
-            }, 5000);
-        } finally {
-            setIsSubmitting(false);
+            setTimeout(() => setSubmitStatus(""), 5000);
         }
     };
 
@@ -195,223 +140,249 @@ const Form = ({ type }) => {
             <div className="catalog-form-wrapper">
                 <div className="form-section">
                     <div className="catalog-form">
-                        <div className="form-group">
-                            <label htmlFor="perusahaan">
-                                {t("form.fields.company")}
-                                <span className="required">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="perusahaan"
-                                name="perusahaan"
-                                value={formData.perusahaan}
-                                onChange={handleInputChange}
-                                placeholder={t("form.placeholders.company")}
-                                className={errors.perusahaan ? "error" : ""}
-                            />
-                            {errors.perusahaan && (
-                                <span className="error-message">
-                                    {errors.perusahaan}
-                                </span>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="alamat">
-                                {t("form.fields.address")}
-                                <span className="required">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="alamat"
-                                name="alamat"
-                                value={formData.alamat}
-                                onChange={handleInputChange}
-                                placeholder={t("form.placeholders.address")}
-                                className={errors.alamat ? "error" : ""}
-                            />
-                            {errors.alamat && (
-                                <span className="error-message">
-                                    {errors.alamat}
-                                </span>
-                            )}
-                        </div>
-
-                        <div className="form-row">
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label htmlFor="negara">
-                                    {t("form.fields.country")}
+                                <label htmlFor="company">
+                                    {t("form.fields.company")}
                                     <span className="required">*</span>
                                 </label>
                                 <input
                                     type="text"
-                                    id="negara"
-                                    name="negara"
-                                    value={formData.negara}
+                                    id="company"
+                                    name="company"
+                                    value={formData.company}
                                     onChange={handleInputChange}
-                                    placeholder={t("form.placeholders.country")}
-                                    className={errors.negara ? "error" : ""}
+                                    placeholder={t("form.placeholders.company")}
+                                    className={errors.company ? "error" : ""}
+                                    required
                                 />
-                                {errors.negara && (
+                                {errors.company && (
                                     <span className="error-message">
-                                        {errors.negara}
+                                        {errors.company}
                                     </span>
                                 )}
                             </div>
-                        </div>
 
-                        <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="nama">
-                                    {t("form.fields.name")}
+                                <label htmlFor="address">
+                                    {t("form.fields.address")}
                                     <span className="required">*</span>
                                 </label>
                                 <input
                                     type="text"
-                                    id="nama"
-                                    name="nama"
-                                    value={formData.nama}
+                                    id="address"
+                                    name="address"
+                                    value={formData.address}
                                     onChange={handleInputChange}
-                                    placeholder={t("form.placeholders.name")}
-                                    className={errors.nama ? "error" : ""}
+                                    placeholder={t("form.placeholders.address")}
+                                    className={errors.address ? "error" : ""}
+                                    required
                                 />
-                                {errors.nama && (
+                                {errors.address && (
                                     <span className="error-message">
-                                        {errors.nama}
+                                        {errors.address}
                                     </span>
                                 )}
                             </div>
 
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label htmlFor="country">
+                                        {t("form.fields.country")}
+                                        <span className="required">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="country"
+                                        name="country"
+                                        value={formData.country}
+                                        onChange={handleInputChange}
+                                        placeholder={t(
+                                            "form.placeholders.country"
+                                        )}
+                                        className={
+                                            errors.country ? "error" : ""
+                                        }
+                                        required
+                                    />
+                                    {errors.country && (
+                                        <span className="error-message">
+                                            {errors.country}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label htmlFor="name">
+                                        {t("form.fields.name")}
+                                        <span className="required">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                        placeholder={t(
+                                            "form.placeholders.name"
+                                        )}
+                                        className={errors.name ? "error" : ""}
+                                        required
+                                    />
+                                    {errors.name && (
+                                        <span className="error-message">
+                                            {errors.name}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="email">
+                                        {t("form.fields.email")}
+                                        <span className="required">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        placeholder={t(
+                                            "form.placeholders.email"
+                                        )}
+                                        className={errors.email ? "error" : ""}
+                                        required
+                                    />
+                                    {errors.email && (
+                                        <span className="error-message">
+                                            {errors.email}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label htmlFor="phone">
+                                        {t("form.fields.phone")}
+                                        <span className="required">*</span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleInputChange}
+                                        placeholder={t(
+                                            "form.placeholders.phone"
+                                        )}
+                                        className={errors.phone ? "error" : ""}
+                                        required
+                                    />
+                                    {errors.phone && (
+                                        <span className="error-message">
+                                            {errors.phone}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="fax">
+                                        {t("form.fields.fax")}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="fax"
+                                        name="fax"
+                                        value={formData.fax}
+                                        onChange={handleInputChange}
+                                        placeholder={t("form.placeholders.fax")}
+                                    />
+                                </div>
+                            </div>
+
                             <div className="form-group">
-                                <label htmlFor="email">
-                                    {t("form.fields.email")}
+                                <label htmlFor="message">
+                                    {t("form.fields.message")}
                                     <span className="required">*</span>
                                 </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
                                     onChange={handleInputChange}
-                                    placeholder={t("form.placeholders.email")}
-                                    className={errors.email ? "error" : ""}
+                                    rows="5"
+                                    placeholder={t("form.placeholders.message")}
+                                    className={errors.message ? "error" : ""}
+                                    required
                                 />
-                                {errors.email && (
+                                {errors.message && (
                                     <span className="error-message">
-                                        {errors.email}
+                                        {errors.message}
                                     </span>
                                 )}
                             </div>
-                        </div>
 
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="phone">
-                                    {t("form.fields.phone")}
+                            <div className="checkbox-group">
+                                <label className="checkbox-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={agreedToTerms}
+                                        onChange={(e) =>
+                                            setAgreedToTerms(e.target.checked)
+                                        }
+                                        required
+                                    />
+                                    <span className="checkmark"></span>
                                     <span className="required">*</span>
+                                    {t("form.termsAgreement")}
                                 </label>
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleInputChange}
-                                    placeholder={t("form.placeholders.phone")}
-                                    className={errors.phone ? "error" : ""}
-                                />
-                                {errors.phone && (
+                                {errors.terms && (
                                     <span className="error-message">
-                                        {errors.phone}
+                                        {errors.terms}
                                     </span>
                                 )}
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="fax">
-                                    {t("form.fields.fax")}
-                                </label>
-                                <input
-                                    type="text"
-                                    id="fax"
-                                    name="fax"
-                                    value={formData.fax}
-                                    onChange={handleInputChange}
-                                    placeholder={t("form.placeholders.fax")}
-                                />
-                            </div>
-                        </div>
+                            <button
+                                type="submit"
+                                className="submit-button"
+                                disabled={submitStatus === "submitting"}
+                                style={{
+                                    cursor:
+                                        agreedToTerms === false
+                                            ? "not-allowed"
+                                            : "pointer",
+                                    opacity: agreedToTerms === false ? 0.6 : 1,
+                                }}
+                            >
+                                {submitStatus === "submitting"
+                                    ? t("form.buttons.submitting")
+                                    : t("form.buttons.submit")}
+                            </button>
 
-                        <div className="form-group">
-                            <label htmlFor="pesan">
-                                {t("form.fields.message")}
-                                <span className="required">*</span>
-                            </label>
-                            <textarea
-                                id="pesan"
-                                name="pesan"
-                                value={formData.pesan}
-                                onChange={handleInputChange}
-                                rows="5"
-                                placeholder={t("form.placeholders.message")}
-                                className={errors.pesan ? "error" : ""}
-                            />
-                            {errors.pesan && (
-                                <span className="error-message">
-                                    {errors.pesan}
-                                </span>
+                            {submitStatus === "success" && (
+                                <div className="success-message">
+                                    {type === "catalog"
+                                        ? t("form.messages.catalogSuccess")
+                                        : t("form.messages.contactSuccess")}
+                                </div>
                             )}
-                        </div>
 
-                        <div className="checkbox-group">
-                            <label className="checkbox-label">
-                                <input
-                                    type="checkbox"
-                                    checked={agreedToTerms}
-                                    onChange={(e) =>
-                                        setAgreedToTerms(e.target.checked)
-                                    }
-                                />
-                                <span className="checkmark"></span>
-                                <span className="required">*</span>
-                                {t("form.termsAgreement")}
-                            </label>
-                            {errors.terms && (
-                                <span className="error-message">
-                                    {errors.terms}
-                                </span>
+                            {submitStatus === "error" && (
+                                <div className="error-message">
+                                    {t("form.messages.error")}
+                                </div>
                             )}
-                        </div>
 
-                        <button
-                            type="button"
-                            className="submit-button"
-                            disabled={isSubmitting}
-                            onClick={handleSubmit}
-                        >
-                            {isSubmitting
-                                ? t("form.buttons.submitting")
-                                : t("form.buttons.submit")}
-                        </button>
-
-                        {submitStatus === "success" && (
-                            <div className="success-message">
-                                {type === "catalog"
-                                    ? t("form.messages.catalogSuccess")
-                                    : t("form.messages.contactSuccess")}
-                            </div>
-                        )}
-
-                        {submitStatus === "error" && (
-                            <div className="error-message">
-                                {t("form.messages.error")}
-                            </div>
-                        )}
-
-                        {type === "catalog" && (
-                            <p className="download-note">
-                                {t("form.catalogNote")}
-                            </p>
-                        )}
+                            {type === "catalog" && (
+                                <p className="download-note">
+                                    {t("form.catalogNote")}
+                                </p>
+                            )}
+                        </form>
                     </div>
                 </div>
 

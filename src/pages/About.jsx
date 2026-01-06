@@ -2,31 +2,22 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../hooks/useLanguage";
 import "../sass/pages/About/About.css";
-import {
-    aboutBg,
-    aboutHero,
-    galeri3,
-    galeri4,
-    galeri5,
-    galeri6,
-    galeri7,
-    galeri8,
-    galeri9,
-    galeri10,
-} from "../assets/images";
+import { aboutBg, aboutHero } from "../assets/images";
 import { graduate, idea, lock, teamwork } from "../assets/icons";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { useGalleries } from "../hooks/useGalleries";
 
 const About = () => {
-    useAnalytics('/about', 'About');
+    useAnalytics("/about", "About");
 
     const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState("HISTORY");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [previewIndex, setPreviewIndex] = useState(null);
 
-    const images = [galeri3, galeri4, galeri5, galeri6, galeri7, galeri8, galeri9, galeri10];
+    const { data, loading } = useGalleries({ limit: 10 });
+    const images = Array.isArray(data) ? data.map(g => g.imageUrl) : [];
     const itemsPerPage = 3;
     const maxIndex = images.length - itemsPerPage;
 

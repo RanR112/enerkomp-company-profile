@@ -1,26 +1,64 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../sass/pages/Home/Home.css";
-import {
-    aboutImages,
-    brandLogos,
-    heroImages,
-    servicesIcon,
-    trustedBrands,
-} from "../utils/constants/home";
-import { aboutBanner, Banner1 } from "../assets/images";
+import { aboutImages, heroImages, servicesIcon } from "../utils/constants/home";
+import { aboutBanner } from "../assets/images";
 import { call } from "../assets/icons";
 import { useLanguage } from "../hooks/useLanguage";
 import ProductCard from "../components/ProductCard"; // Import komponen baru
-import { NavLink } from "react-router-dom";
-import { products } from "../utils/data/productData";
+import { Link, NavLink } from "react-router-dom";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { useBrands } from "../hooks/useBrands";
+import { useProducts } from "../hooks/useProducts";
 
 const Home = () => {
-    useAnalytics('/', 'Home');
+    useAnalytics("/", "Home");
 
     const { t } = useLanguage();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const { brands: productBrands, loading: loadingProductBrands } = useBrands({
+        type: "PRODUCT",
+        limit: 100,
+    });
+    const { brands: clientBrands, loading: loadingClientBrands } = useBrands({
+        type: "CLIENT",
+        limit: 100,
+    });
+    const { products, loading, error } = useProducts({});
+
+    const sortedProductBrands = useMemo(() => {
+        if (!Array.isArray(productBrands)) return [];
+        return [...productBrands].sort(
+            (a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)
+        );
+    }, [productBrands]);
+
+    const sortedClientsBrands = useMemo(() => {
+        if (!Array.isArray(clientBrands)) return [];
+        return [...clientBrands].sort(
+            (a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)
+        );
+    }, [clientBrands]);
+
+    const sortedProducts = useMemo(() => {
+        if (!Array.isArray(products)) return [];
+        return [...products].sort(
+            (a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)
+        );
+    }, [products]);
+
+    // Ambil hanya logo
+    const brandLogos = sortedProductBrands.map((b) => ({
+        logo: import.meta.env.VITE_PHOTO_URL + b.logo,
+        slug: b.slug,
+    }));
+    const trustedBrands = sortedClientsBrands.map(
+        (b) => import.meta.env.VITE_PHOTO_URL + b.logo
+    );
+
+    const featuredProducts = sortedProducts
+        .filter((p) => p.isFeatured)
+        .slice(0, 4);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -30,7 +68,7 @@ const Home = () => {
         }, 6000);
 
         return () => clearInterval(interval);
-    }, [heroImages.length]);
+    }, []);
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -149,7 +187,10 @@ const Home = () => {
                                     </h1>
                                     <p>{t("home.hero.subtitle")}</p>
                                     <div className="hero-buttons">
-                                        <NavLink to={'/contact'} className="btn-layer">
+                                        <NavLink
+                                            to={"/contact"}
+                                            className="btn-layer"
+                                        >
                                             <motion.button
                                                 className="btn-primary"
                                                 whileHover={{ scale: 1.05 }}
@@ -187,10 +228,27 @@ const Home = () => {
             <section className="brand-marquee" id="brand">
                 <div className="marquee">
                     <div className="marquee-content">
-                        {[...brandLogos, ...brandLogos].map((logo, index) => (
-                            <div key={index} className="brand-item">
-                                <img src={logo} alt={`Brand ${index + 1}`} />
-                            </div>
+                        {brandLogos.map(({ logo, slug }, index) => (
+                            <Link key={index} to={`/products?brands=${slug}`}>
+                                <div className="brand-item">
+                                    <img src={logo} alt={`Brand ${index}`} />
+                                </div>
+                            </Link>
+                        ))}
+
+                        {/* Duplicate sekali untuk efek infinite */}
+                        {brandLogos.map(({ logo, slug }, index) => (
+                            <Link
+                                key={`dup-${index}`}
+                                to={`/products?brands=${slug}`}
+                            >
+                                <div className="brand-item">
+                                    <img
+                                        src={logo}
+                                        alt={`Brand Duplicate ${index}`}
+                                    />
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -310,7 +368,10 @@ const Home = () => {
                                     <div className="shimmer"></div>
                                     <div className="service-icon">
                                         {/* You'll need to import and use the actual icons here */}
-                                        <img src={service.icon} alt={service.alt} />
+                                        <img
+                                            src={service.icon}
+                                            alt={service.alt}
+                                        />
                                     </div>
                                     <h3>{service.title}</h3>
                                     <p>{service.description}</p>
@@ -326,7 +387,8 @@ const Home = () => {
                 className="products"
                 variants={containerVariants}
                 initial="hidden"
-                whileInView="visible"
+                animate="visible"
+                // whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
             >
                 <div className="container">
@@ -348,7 +410,7 @@ const Home = () => {
                         className="products-grid"
                         variants={containerVariants}
                     >
-                        {products.filter(product => product.isFeatured).slice(0, 4).map((product, index) => (
+                        {featuredProducts.map((product, index) => (
                             <ProductCard
                                 key={product.id}
                                 product={product}
@@ -426,18 +488,27 @@ const Home = () => {
                     <div className="brands-marquee">
                         <div className="marquee">
                             <div className="marquee-content">
-                                {[...trustedBrands, ...trustedBrands].map(
-                                    (brand, index) => (
-                                        <div key={index} className="brand-item">
-                                            <img
-                                                src={brand}
-                                                alt={`Trusted Brand ${
-                                                    index + 1
-                                                }`}
-                                            />
-                                        </div>
-                                    )
-                                )}
+                                {trustedBrands.map((logo, index) => (
+                                    <div key={index} className="brand-item">
+                                        <img
+                                            src={logo}
+                                            alt={`Brand ${index}`}
+                                        />
+                                    </div>
+                                ))}
+
+                                {/* Duplicate sekali untuk efek infinite */}
+                                {trustedBrands.map((logo, index) => (
+                                    <div
+                                        key={`dup-${index}`}
+                                        className="brand-item"
+                                    >
+                                        <img
+                                            src={logo}
+                                            alt={`Brand Duplicate ${index}`}
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

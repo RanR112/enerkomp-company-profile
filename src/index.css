@@ -13,12 +13,13 @@
     --Fourth: #D8F6DA;
     --Accent: #F3994B;
     --Hover: #D95D39;
-    --White: #FFFFFF;
-    --Black: #000000;
+    --White: #F5F5F5;
+    --Black: #121212 ;
     --LayerPrimary: rgba(45, 76, 82, 0.7);
     --LayerSecondary: rgba(45, 76, 82, 0.85);
     --Card: #F4F6F6;
     --Footer: #1C2E33;
+    --Description: #4a5d63;
 }
 
 /* TODO: Add Darkmode */

@@ -6,6 +6,7 @@ export const EN = {
         services: "Services",
         contact: "Contact Us",
         blog: "Blog",
+        privacyPolicy: "Privacy Policy",
     },
     home: {
         hero: {
@@ -18,11 +19,11 @@ export const EN = {
         about: {
             title: "About Enerkomp",
             description1:
-                "PT ENERKOMP PERSADA RAYA is a trusted provider of integrated air compressor solutions in Indonesia.",
+                "PT Enerkomp Persada Raya is a trusted provider of integrated industrial air compressor solutions in Indonesia.",
             description2:
-                "We are the official distributor of IHI Compressor and IHI Turbo Compressorin Indonesia, supplying high-performance equipment for various industries. In addition, we also provide screw compressors, Taitian compressors, and other industrial compressor solutions tailored to customer needs.",
+                "As the authorized distributor of IHI Compressors, we specialize in high-performance turbo centrifugal compressors for demanding industrial applications. We also supply screw compressors, Taitian compressors, and complete compressed air system solutions tailored to customer requirements.",
             description3:
-                " Our mission is to deliver complete professional services and reliable air compressor systems throughout Indonesia. With years of experience, Enerkomp Persada Raya ensures that every compressor solution meets the highest standards for performance, efficiency, and durability",
+                "With years of industry experience, Enerkomp delivers reliable equipment, professional engineering support, and dependable after-sales service to ensure optimal performance, efficiency, and long-term durability.",
         },
         whyChoose: {
             title: "Why Choose Enerkomp - Industrial Air Compressor Solutions in Indonesia",
@@ -299,6 +300,9 @@ export const EN = {
                 part1: "GET OUR LATEST",
                 highlight: "CATALOG",
             },
+            selectBtn: "Get Catalog",
+            backBtn: "Back",
+            formTitle: "Fill Form to Get",
         },
         detail: {
             loading: "Loading product...",
@@ -309,13 +313,18 @@ export const EN = {
             contactUs: "Contact Us",
             downloadCatalog: "Download Catalog",
             specifications: "Product Specifications",
-            features: "Key Features",
+            features: "Product Advantages",
             relatedProducts: "Related Products",
             viewDetails: "View Detail",
         },
         pagination: {
             previous: "Previous",
             next: "Next",
+        },
+        loading: "Loading Products...",
+        error: {
+            title: "Failed to load product",
+            retry: "Please retry again",
         },
     },
     contact: {
@@ -353,23 +362,33 @@ export const EN = {
             },
             email: {
                 title: "Email",
-                description: "sales@enerkomp.id",
+                description: "sales@enerkomp.co.id",
             },
         },
         offices: {
             jakarta: {
-                name: "JAKARTA OFFICE",
+                name: "JAKARTA",
+                subname: "OFFICE",
                 address:
                     "Grand Slipi Tower Building 42nd Floor Unit G-H Kav 22-24, West Jakarta, DKI Jakarta 11480",
                 location: "West Jakarta",
                 mapAlt: "Jakarta office location map showing West Jakarta area",
             },
             cikarang: {
-                name: "CIKARANG OFFICE",
+                name: "CIKARANG",
+                subname: "OPERATIONAL OFFICE",
                 address:
                     "CBD Shop, Jl. Niaga Raya Block B-11, Pasirsari, South Cikarang, Bekasi Regency, West Java 17530",
                 location: "Bekasi Regency",
                 mapAlt: "Cikarang office location map showing Bekasi Regency area",
+            },
+            surabaya: {
+                name: "SURABAYA",
+                subname: "OFFICE",
+                address:
+                    "Jl. Nanas IV No.405, Tambaksari, Pondok Chandra, Waru District, Sidoarjo Regency, East Java 61256",
+                location: "Sidoarjo Regency",
+                mapAlt: "Map of the Surabaya office location showing the Sidoarjo Regency area",
             },
         },
     },
@@ -414,7 +433,7 @@ export const EN = {
             error: "An error occurred. Please try again.",
         },
         catalogNote:
-            "*Catalog will be downloaded automatically after you fill out the form above.",
+            "*Catalog will be sent automatically after you fill out the form above.",
         infoCard: {
             catalog: {
                 title: {
@@ -433,20 +452,80 @@ export const EN = {
                     "Please fill in the required questions or messages in the following form, then press the Submit button.",
             },
         },
+        catalogTab: {
+            title: "Preparing Your Catalog...",
+            loading: "Please wait a moment while we prepare your catalog.",
+            successTitle: "Success",
+            success:
+                "Your catalog has been sent to your email. This tab will close automatically.",
+            error: "Unable to open the catalog. Please try again or contact our support team.",
+        },
+    },
+    blog: {
+        title: "Blog & Insights",
+        subtitle:
+            "Latest news, tips, and insights about industrial compressor systems",
+        search: {
+            placeholder: "Search articles...",
+            results: "results found",
+            noResults: "No articles found matching your search",
+        },
+        filter: {
+            allTags: "All Tags",
+            filterByTag: "Filter by Tag",
+            clearFilters: "Clear Filters",
+            selectedTags: "Selected Tags",
+        },
+        card: {
+            readMore: "Read More",
+            minRead: "min read",
+        },
+        detail: {
+            author: "Author",
+            publishedOn: "Published on",
+            views: "views",
+            tags: "Tags",
+            share: "Share this article",
+            relatedPosts: "Related Articles",
+            backToBlog: "Back to Blog",
+            link: "Visit Link",
+        },
+        pagination: {
+            previous: "Previous",
+            next: "Next",
+            page: "Page",
+            of: "of",
+            showing: "Showing",
+            to: "to",
+            results: "of",
+        },
+        social: {
+            facebook: "Share on Facebook",
+            twitter: "Share on Twitter",
+            whatsapp: "Share on WhatsApp",
+            copyLink: "Copy Link",
+            linkCopied: "Link copied to clipboard!",
+        },
+        loading: "Loading articles...",
+        error: "Failed to load articles. Please try again.",
+        notFound: "Article not found",
     },
     footer: {
         brandName: "PT. ENERKOMP PERSADA RAYA",
-        address:
-            "Address: Grand Slipi Tower Building 42nd Floor Unit G-H Kav 22-24, West Jakarta, DKI Jakarta 11480",
+        office: "Office: Grand Slipi Tower Building 42nd Floor Unit G-H Kav 22-24, West Jakarta, DKI Jakarta 11480",
+        operationalOffice:
+            "Operational Office: CBD Shop, St. Niaga Raya Block B-11, Pasirsari, South Cikarang, Bekasi Regency, West Java 17530",
+        branchOffice:
+            "Branch Office: St. Nanas IV No.405, Tambaksari, Pondok Chandra, Waru District, Sidoarjo Regency, East Java 61256",
         followUs: "Follow Us",
-        brand: "Brand",
+        brand: "Brands",
+        category: "Categories",
         contactUs: "Contact Us",
         social: {
             facebook: "Facebook",
             instagram: "Instagram",
             linkedin: "LinkedIn",
         },
-        brands: ["IHI", "Taitian", "Raifu", "NOP", "Blovac"],
         legal: "Legal",
         legals: {
             privacyPolicy: "Privacy Policy",

@@ -1,0 +1,381 @@
+// src/pages/Blog/BlogDetail.module.scss
+@import "../../variables";
+
+.blogDetail {
+    min-height: 100vh;
+    background: $white;
+    padding: $spacing-xl 0;
+
+    @include tablet {
+        padding: $spacing-lg 0;
+    }
+}
+
+.container {
+    @include container;
+    padding-top: 4rem;
+}
+
+.loading {
+    @include flex-column;
+    @include flex-center;
+    min-height: 60vh;
+    gap: $spacing-lg;
+
+    p {
+        font-size: $font-size-lg;
+        color: $secondary;
+    }
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba($accent, 0.2);
+    border-top-color: $accent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.notFound {
+    @include flex-column;
+    @include flex-center;
+    min-height: 60vh;
+    text-align: center;
+    gap: $spacing-lg;
+
+    h1 {
+        font-size: $font-size-3xl;
+        color: $primary;
+    }
+}
+
+.backButton {
+    @include button-reset;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $white;
+    background: $accent;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $hover;
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-md;
+    }
+}
+
+.article {
+    background: $white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $box-shadow-lg;
+    margin-bottom: $spacing-xl;
+}
+
+.headerImage {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: $card;
+
+    @include tablet {
+        height: 350px;
+    }
+
+    @include mobile {
+        height: 250px;
+    }
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header {
+    padding: $spacing-xxl $spacing-xl $spacing-xl;
+    border-bottom: 2px solid rgba($primary, 0.1);
+
+    @include tablet {
+        padding: $spacing-xl $spacing-lg $spacing-lg;
+    }
+
+    @include mobile {
+        padding: $spacing-lg $spacing-md $spacing-md;
+    }
+}
+
+.title {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    line-height: 1.2;
+    margin: 0 0 $spacing-lg;
+
+    @include tablet {
+        font-size: $font-size-3xl;
+    }
+
+    @include mobile {
+        font-size: $font-size-2xl;
+    }
+}
+
+.excerpt {
+    font-size: $font-size-xl;
+    color: $secondary;
+    line-height: 1.6;
+    margin: 0 0 $spacing-xl;
+
+    @include tablet {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-lg;
+    }
+
+    @include mobile {
+        font-size: $font-size-base;
+    }
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+
+    @include mobile {
+        gap: $spacing-md;
+    }
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $secondary;
+
+    svg {
+        flex-shrink: 0;
+        color: $third;
+    }
+
+    @include mobile {
+        font-size: $font-size-xs;
+    }
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+
+    svg {
+        flex-shrink: 0;
+        color: $third;
+    }
+}
+
+.tag {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $third;
+    background: rgba($third, 0.1);
+    border-radius: $border-radius-md;
+
+    @include mobile {
+        font-size: $font-size-xs;
+        padding: 6px $spacing-sm;
+    }
+}
+
+.content {
+    padding: $spacing-xl;
+    font-size: $font-size-lg;
+    line-height: 1.8;
+    color: $primary;
+
+    @include tablet {
+        padding: $spacing-lg;
+        font-size: $font-size-base;
+    }
+
+    @include mobile {
+        padding: $spacing-md;
+        font-size: $font-size-sm;
+    }
+
+    // Typography styles
+    h2 {
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
+        color: $primary;
+        margin: 0 0 $spacing-lg;
+        line-height: 1.3;
+
+        @include tablet {
+            font-size: $font-size-2xl;
+            margin: 0 0 $spacing-md;
+        }
+    }
+
+    h3 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        color: $primary;
+        margin: $spacing-lg 0 $spacing-md;
+        line-height: 1.3;
+
+        @include tablet {
+            font-size: $font-size-xl;
+        }
+    }
+
+    h4 {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $secondary;
+        margin: $spacing-md 0 $spacing-sm;
+
+        @include tablet {
+            font-size: $font-size-lg;
+        }
+    }
+
+    p {
+        margin: 0 0 $spacing-md;
+        color: $description;
+    }
+
+    ul,
+    ol {
+        margin: $spacing-md 0;
+        padding-left: $spacing-xl;
+
+        @include mobile {
+            padding-left: $spacing-lg;
+        }
+    }
+
+    li {
+        margin-bottom: $spacing-sm;
+        color: $secondary;
+
+        strong {
+            color: $primary;
+            font-weight: $font-weight-semibold;
+        }
+    }
+
+    a {
+        color: $accent;
+        text-decoration: underline;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $hover;
+        }
+    }
+
+    strong {
+        color: $primary;
+        font-weight: $font-weight-semibold;
+    }
+
+    blockquote {
+        margin: $spacing-lg 0;
+        padding: $spacing-md $spacing-lg;
+        border-left: 4px solid $accent;
+        background: rgba($fourth, 0.3);
+        border-radius: 0 $border-radius-md $border-radius-md 0;
+        font-style: italic;
+        color: $secondary;
+    }
+
+    code {
+        padding: 2px $spacing-xs;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        background: rgba($third, 0.1);
+        border-radius: $border-radius-sm;
+        color: $primary;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: $border-radius-md;
+        margin: $spacing-lg 0;
+    }
+}
+
+.externalLinkWrapper {
+    margin: 0 $spacing-xl;
+    max-width: auto;
+    padding: 1.2rem 1.6rem;
+    border-left: 4px solid var(--Third);
+    background: var(--Card);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease-in-out;
+
+    @include tablet {
+        margin: 0 $spacing-lg;
+    }
+
+    @include mobile {
+        margin: 0 $spacing-md;
+    }
+
+    &:hover {
+        background: var(--Fourth);
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.externalLinkIcon {
+    width: 18px;
+    height: 18px;
+    color: var(--Primary);
+    flex-shrink: 0;
+}
+
+.externalLink {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--Primary);
+    text-decoration: none;
+    transition: 0.2s ease;
+    word-break: break-word;
+
+    &:hover {
+        color: var(--Secondary);
+    }
+}
+
+.shareSection {
+    padding: $spacing-xl;
+    border-top: 2px solid rgba($primary, 0.1);
+
+    @include tablet {
+        padding: $spacing-lg;
+    }
+
+    @include mobile {
+        padding: $spacing-md;
+    }
+}

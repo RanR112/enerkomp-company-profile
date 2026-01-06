@@ -1,0 +1,92 @@
+[
+    {
+        "language": "EN",
+        "shortDescription": "Thickness: 0.01 ~ 0.06 mm - 0.70 ~ 3.00 mm",
+        "longDescription": "A feeler gauge is used to measure gaps, and can and accurately measure and inspect extremely fine gaps between two planes that cannot be measured with other measuring instruments. They are mainly used to measure gaps between pistons and cylinders in automobiles, electric motors, and generator engines, as well as for adjusting aircraft, marine machine tools, and various industrial equipment. They have stricter precision and tolerances than general products (thickness gauges), so they are JIS equivalent products.",
+        "specifications": {
+            "Material": "SK2 to 5 (New No. SKS81, SK85, SK95) carbon tool steel and equivalents",
+            "Hardness": "HRC45 ~ 55",
+            "Thickness": "0.01 ~ 0.06 mm - 0.70 ~ 3.00 mm",
+            "Tolerance": "±0.003 mm - ±0.010",
+            "Width": "12.7 mm",
+            "Length": "75-300mm",
+            "Sheets": "10-25"
+        },
+        "features": [
+            "High-precision thickness measurement",
+            "Made from high-grade carbon tool steel",
+            "Wide thickness range for various gap measurements",
+            "High durability with heat-treated hardness HRC45-55",
+            "Strict tolerances meeting JIS-equivalent standards",
+            "Suitable for automotive, industrial, marine, and aircraft applications"
+        ],
+        "metaTitle": "High-precision gap gauge (thickness gauge)",
+        "metaDescription": "High-precision feeler gauge designed for measuring extremely fine gaps. Made from high-grade carbon tool steel with strict tolerances, suitable for automotive, industrial, marine, and aircraft applications.",
+        "metaKeywords": "feeler gauge, thickness gauge, precision gauge, gap measurement tool, JIS standard, carbon tool steel, industrial measurement tools"
+    },
+    {
+        "language": "ID",
+        "shortDescription": "Ketebalan: 0.01 ~ 0.06 mm - 0.70 ~ 3.00 mm",
+        "longDescription": "Feeler gauge digunakan untuk mengukur celah dan mampu mengukur serta memeriksa celah yang sangat kecil antara dua bidang yang tidak dapat diukur dengan alat ukur lainnya. Alat ini digunakan terutama untuk mengukur celah antara piston dan silinder pada mobil, motor listrik, dan mesin generator, serta untuk penyetelan pesawat, permesinan laut, dan berbagai peralatan industri. Feeler gauge memiliki tingkat presisi dan toleransi yang lebih ketat dibandingkan produk umum (thickness gauge), sehingga setara dengan standar JIS.",
+        "specifications": {
+            "Material": "Baja perkakas karbon SK2 hingga 5 (SKS81, SK85, SK95) dan setara",
+            "Kekerasan": "HRC45 ~ 55",
+            "Ketebalan": "0.01 ~ 0.06 mm - 0.70 ~ 3.00 mm",
+            "Toleransi": "±0.003 mm - ±0.010",
+            "Lebar": "12.7 mm",
+            "Panjang": "75-300mm",
+            "Jumlah Lembar": "10-25"
+        },
+        "features": [
+            "Pengukuran ketebalan berpresisi tinggi",
+            "Terbuat dari baja perkakas karbon berkualitas tinggi",
+            "Rentang ketebalan luas untuk berbagai jenis pengukuran celah",
+            "Daya tahan tinggi dengan kekerasan HRC45-55",
+            "Toleransi ketat sesuai standar setara JIS",
+            "Cocok untuk aplikasi otomotif, industri, kelautan, dan penerbangan"
+        ],
+        "metaTitle": "Feeler Gauge (Thickness Gauge) Presisi Tinggi",
+        "metaDescription": "Feeler gauge presisi tinggi untuk mengukur celah sangat kecil, dibuat dari baja perkakas karbon berkualitas dengan toleransi ketat setara JIS. Ideal untuk keperluan otomotif, industri, kelautan, dan penerbangan.",
+        "metaKeywords": "feeler gauge, thickness gauge, alat ukur celah, pengukuran presisi, standar JIS, baja perkakas karbon, alat ukur industri"
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[
+    {
+        "language": "EN",
+        "shortDescription": "Professional-grade hammer drill for heavy tasks",
+        "longDescription": "Designed for professionals who need durable tools with consistent performance across various materials.",
+        "metaTitle": "Raifu Impact Tools RF-990",
+        "metaDescription": "Professional-grade hammer drill for heavy tasks",
+        "metaKeywords": "Raifu, impact tools"
+    },
+    {
+        "language": "ID",
+        "shortDescription": "Palu bor profesional untuk tugas berat",
+        "longDescription": "Dirancang untuk profesional yang membutuhkan alat tahan lama dengan performa konsisten di berbagai material.",
+        "metaTitle": "Raifu Impact Tools RF-990",
+        "metaDescription": "Palu bor profesional untuk tugas berat",
+        "metaKeywords": "Raifu, alat dampak"
+    }
+]

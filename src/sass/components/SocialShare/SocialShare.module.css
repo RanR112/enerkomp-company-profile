@@ -1,0 +1,125 @@
+.shareWrapper {
+  padding: 2rem;
+  background: var(--Card);
+  border-radius: 1rem;
+}
+@media (max-width: 768px) {
+  .shareWrapper {
+    padding: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--Primary);
+  margin: 0 0 1.5rem;
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--White);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.button:focus {
+  outline: none;
+}
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.button:active {
+  transform: translateY(0);
+}
+.button:focus-visible {
+  outline: 2px solid var(--Accent);
+  outline-offset: 2px;
+}
+@media (max-width: 768px) {
+  .button {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (max-width: 480px) {
+  .button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.facebook {
+  background: #1877f2;
+}
+.facebook:hover {
+  background: #0c63d4;
+}
+
+.twitter {
+  background: #000000;
+}
+.twitter:hover {
+  background: #1a1a1a;
+}
+
+.whatsapp {
+  background: #25d366;
+}
+.whatsapp:hover {
+  background: #1da851;
+}
+
+.copy {
+  background: var(--Secondary);
+  width: auto;
+  padding: 0 1.5rem;
+  gap: 0.5rem;
+}
+.copy:hover {
+  background: var(--Primary);
+}
+.copy.copied {
+  background: #10b981;
+}
+.copy.copied:hover {
+  background: #059669;
+}
+@media (max-width: 768px) {
+  .copy {
+    padding: 0 1rem;
+  }
+}
+
+.copyText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .copyText {
+    display: none;
+  }
+}/*# sourceMappingURL=SocialShare.module.css.map */

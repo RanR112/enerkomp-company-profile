@@ -270,16 +270,19 @@
 }
 .home .brand-marquee .marquee {
   overflow: hidden;
-  position: relative;
   width: 100%;
+  position: relative;
 }
 .home .brand-marquee .marquee .marquee-content {
   display: flex;
-  animation: marquee 29s linear infinite;
-  width: calc(200% + 2rem);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-animation: marquee-scroll 25s linear infinite;
+          animation: marquee-scroll 25s linear infinite;
 }
 .home .brand-marquee .marquee .marquee-content .brand-item {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   margin-right: 5rem;
   opacity: 0.6;
   transition: opacity 0.3s ease;
@@ -317,11 +320,19 @@
 .home .brand-marquee .marquee .marquee-content .brand-item img:hover {
   filter: grayscale(0%);
 }
-@keyframes marquee {
-  0% {
+@-webkit-keyframes marquee-scroll {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
     transform: translateX(-50%);
   }
 }
@@ -406,7 +417,7 @@
     gap: 3rem;
   }
   .home .about .about-content .about-text,
-  .home .about .about-content .about-image {
+.home .about .about-content .about-image {
     width: 100%;
     max-width: 680px;
   }
@@ -431,10 +442,10 @@
     padding: 0;
   }
   .home .about .about-content .about-text h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .home .about .about-content .about-text p {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
   .home .about .about-content .about-image img {
     max-height: 320px;
@@ -701,6 +712,7 @@
   .home .products .products-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
+    max-width: -webkit-fit-content;
     max-width: -moz-fit-content;
     max-width: fit-content;
     margin: auto;
@@ -779,17 +791,20 @@
 }
 .home .trusted-brands .brands-marquee {
   background: var(--White);
-  padding: 0 0 5rem;
+  padding: 2rem 0;
 }
 .home .trusted-brands .brands-marquee .marquee {
   overflow: hidden;
-  position: relative;
   width: 100%;
+  position: relative;
 }
 .home .trusted-brands .brands-marquee .marquee .marquee-content {
   display: flex;
-  animation: marquee 29s linear infinite;
-  width: calc(200% + 2rem);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-animation: marquee-scroll 25s linear infinite;
+          animation: marquee-scroll 25s linear infinite;
 }
 .home .trusted-brands .brands-marquee .marquee .marquee-content .brand-item {
   flex-shrink: 0;
@@ -829,6 +844,14 @@
 }
 .home .trusted-brands .brands-marquee .marquee .marquee-content .brand-item img:hover {
   filter: grayscale(0%);
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 .home .trusted-brands .contact-section {
   background: var(--Card);
@@ -872,4 +895,5 @@
 }
 .home .trusted-brands .contact-section .btn-primary:hover {
   background: var(--Accent);
-}/*# sourceMappingURL=Home.css.map */
+}
+/*# sourceMappingURL=Home.css.map */

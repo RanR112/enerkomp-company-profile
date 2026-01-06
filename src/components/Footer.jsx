@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Linkedin, PhoneCall, Mail } from "lucide-react";
 import "../sass/components/Footer/Footer.css";
 import { footer, LogoWhite } from "../assets/images";
 import { useLanguage } from "../hooks/useLanguage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useBrands } from "../hooks/useBrands";
+import { useCategories } from "../hooks/useCategories";
 
 const Footer = () => {
     const { t } = useLanguage();
     const navigate = useNavigate();
+
+    const {
+        brands,
+        loading: brandsLoading,
+        error: brandsError,
+    } = useBrands({ type: "PRODUCT", limit: 5, isActive: true });
+
+    const {
+        categories,
+        loading: categoriesLoading,
+        error: categoriesError,
+    } = useCategories({ limit: 5, isActive: true });
 
     const footerLegals = [
         {
@@ -16,6 +30,20 @@ const Footer = () => {
             path: "/legal/privacy-policy",
         },
     ];
+
+    const sortedBrands = useMemo(() => {
+        if (!Array.isArray(brands)) return [];
+        return [...brands].sort(
+            (a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)
+        );
+    }, [brands]);
+
+    const sortedCategories = useMemo(() => {
+        if (!Array.isArray(categories)) return [];
+        return [...categories].sort((a, b) => {
+            return new Date(a.createdAt) - new Date(b.createdAt);
+        });
+    }, [categories]);
 
     const handleFooterClick = (path) => {
         navigate(path);
@@ -130,8 +158,18 @@ const Footer = () => {
                     {t("footer.brandName")}
                 </motion.h2>
                 <motion.p className="brand-address" variants={itemVariants}>
-                    <span>{t("footer.address").split(":")[0]}:</span>{" "}
-                    {t("footer.address").split(":")[1]}
+                    <span>{t("footer.office").split(":")[0]}:</span>{" "}
+                    {t("footer.office").split(":")[1]}
+                    <br />
+                    <span>
+                        {t("footer.operationalOffice").split(":")[0]}:
+                    </span>{" "}
+                    {t("footer.operationalOffice").split(":")[1]}
+                    <br />
+                    <span>
+                        {t("footer.branchOffice").split(":")[0]}:
+                    </span>{" "}
+                    {t("footer.branchOffice").split(":")[1]}
                 </motion.p>
             </motion.div>
 
@@ -188,15 +226,43 @@ const Footer = () => {
                         {t("footer.brand")}
                     </motion.h3>
                     <motion.ul className="brands">
-                        {t("footer.brands").map((brand, index) => (
-                            <motion.li
-                                key={brand}
-                                variants={brandItemVariants}
-                                whileHover="hover"
-                                custom={index}
+                        {sortedBrands.map((brand, index) => (
+                            <Link
+                                to={`/products?brands=${brand.slug}`}
+                                key={brand.id}
                             >
-                                {brand}
-                            </motion.li>
+                                <motion.li
+                                    key={brand.id}
+                                    variants={brandItemVariants}
+                                    whileHover="hover"
+                                    custom={index}
+                                >
+                                    {brand.name}
+                                </motion.li>
+                            </Link>
+                        ))}
+                    </motion.ul>
+                </motion.div>
+
+                {/* Category list */}
+                <motion.div className="col" variants={itemVariants}>
+                    <motion.h3 variants={itemVariants}>
+                        {t("footer.category")}
+                    </motion.h3>
+                    <motion.ul className="brands">
+                        {sortedCategories.map((category, index) => (
+                            <Link
+                                to={`/products?categories=${category.slug}`}
+                                key={category.id}
+                            >
+                                <motion.li
+                                    variants={brandItemVariants}
+                                    whileHover="hover"
+                                    custom={index}
+                                >
+                                    {category.name}
+                                </motion.li>
+                            </Link>
                         ))}
                     </motion.ul>
                 </motion.div>

@@ -1,0 +1,142 @@
+@import "../../variables";
+
+.blogDetail {
+    min-height: 100vh;
+    background: $white;
+    padding: $spacing-xl 0;
+}
+
+.container {
+    @include container;
+    padding-top: 4rem;
+}
+
+.article {
+    background: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-lg;
+    overflow: hidden;
+    margin-bottom: $spacing-xl;
+}
+
+/* Skeleton base */
+.skeleton {
+    background: linear-gradient(90deg, rgba($third, 0.08) 25%, rgba($third, 0.15) 37%, rgba($third, 0.08) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: $border-radius-sm;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    width: 240px;
+    height: 14px;
+    margin-bottom: $spacing-lg;
+    @extend .skeleton;
+}
+
+/* Image */
+.image {
+    width: 100%;
+    height: 420px;
+    border-radius: 0;
+}
+
+/* Header */
+.header {
+    padding: $spacing-xxl $spacing-xl;
+}
+
+.title {
+    height: 42px;
+    width: 70%;
+    margin-bottom: $spacing-lg;
+}
+
+.excerpt {
+    height: 20px;
+    width: 90%;
+    margin-bottom: $spacing-xl;
+}
+
+.meta {
+    display: flex;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+}
+
+.metaItem {
+    width: 140px;
+    height: 16px;
+}
+
+.tags {
+    display: flex;
+    gap: $spacing-sm;
+}
+
+.tag {
+    width: 80px;
+    height: 24px;
+    border-radius: $border-radius-md;
+}
+
+/* Content */
+.content {
+    padding: $spacing-xl;
+}
+
+.line {
+    height: 16px;
+    margin-bottom: $spacing-md;
+    width: 100%;
+
+    &:nth-child(2) {
+        width: 95%;
+    }
+    &:nth-child(3) {
+        width: 90%;
+    }
+    &:nth-child(4) {
+        width: 85%;
+    }
+}
+
+/* Related */
+.related {
+    margin-top: $spacing-xl;
+}
+
+.section {
+    width: 200px;
+    height: 28px;
+    margin-bottom: $spacing-lg;
+}
+
+.relatedGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+
+    @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.relatedCard {
+    height: 220px;
+    border-radius: $border-radius-lg;
+}

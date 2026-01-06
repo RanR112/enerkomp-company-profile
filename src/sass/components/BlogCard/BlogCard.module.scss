@@ -1,0 +1,168 @@
+// src/components/Blog/BlogCard/BlogCard.module.scss
+@import "../../variables";
+
+.card {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.imageLink {
+    text-decoration: none;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: $card;
+
+    @include tablet {
+        height: 200px;
+    }
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+.featuredBadge {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: $white;
+    background: $accent;
+    border-radius: $border-radius-sm;
+    box-shadow: $box-shadow-md;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    flex: 1;
+
+    @include tablet {
+        padding: $spacing-md;
+    }
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $secondary;
+}
+
+.date {
+    font-weight: $font-weight-medium;
+}
+
+.separator {
+    color: rgba($secondary, 0.4);
+}
+
+.readTime {
+    color: rgba($secondary, 0.8);
+}
+
+.titleLink {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover .title {
+        color: $accent;
+    }
+}
+
+.title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    line-height: 1.3;
+    margin: 0;
+    transition: color $transition-fast;
+    @include line-clamp(2);
+
+    @include tablet {
+        font-size: $font-size-lg;
+    }
+}
+
+.excerpt {
+    font-size: $font-size-base;
+    color: $secondary;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+    @include line-clamp(3);
+
+    @include tablet {
+        font-size: $font-size-sm;
+    }
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-top: auto;
+}
+
+.tag {
+    padding: 4px $spacing-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $third;
+    background: rgba($third, 0.1);
+    border-radius: $border-radius-sm;
+}
+
+.readMore {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $accent;
+    text-decoration: none;
+    margin-top: $spacing-sm;
+    transition: all $transition-fast;
+    width: fit-content;
+
+    &:hover {
+        color: $hover;
+        gap: $spacing-sm;
+    }
+
+    &:focus {
+        outline: 2px solid $accent;
+        outline-offset: 2px;
+        border-radius: $border-radius-sm;
+    }
+}
+
+.arrow {
+    transition: transform $transition-fast;
+
+    .readMore:hover & {
+        transform: translateX(2px);
+    }
+}

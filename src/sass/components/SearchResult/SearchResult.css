@@ -1,18 +1,3 @@
-:root {
-  --Primary: #2d4c52;
-  --Secondary: #46777e;
-  --Third: #6ba4a8;
-  --Fourth: #d8f6da;
-  --Accent: #f3994b;
-  --Hover: #d95d39;
-  --White: #ffffff;
-  --Black: #000000;
-  --LayerPrimary: rgba(45, 76, 82, 0.7);
-  --LayerSecondary: rgba(45, 76, 82, 0.85);
-  --Card: #f4f6f6;
-  --Footer: #1c2e33;
-}
-
 .search-results {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--Fourth) 0%, var(--Card) 100%);

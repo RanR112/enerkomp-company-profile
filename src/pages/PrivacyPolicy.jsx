@@ -3,11 +3,17 @@ import { motion } from "framer-motion";
 import "../sass/pages/PrivacyPolicy/PrivacyPolicy.css";
 import { useLanguage } from "../hooks/useLanguage";
 import { useAnalytics } from "../hooks/useAnalytics";
+import Breadcrumb from "../components/Blog/Breadcrumb";
 
 const PrivacyPolicy = () => {
     useAnalytics('/privacy-policy', 'Privacy Policy');
 
     const { t } = useLanguage();
+
+    const breadcrumbItems = [
+        { label: t("nav.home"), path: "/" },
+        { label: t("nav.privacyPolicy"), path: "/privacy-policy" },
+    ];
 
     return (
         <motion.div
@@ -18,6 +24,7 @@ const PrivacyPolicy = () => {
             transition={{ duration: 0.5 }}
         >
             <div className={"container"}>
+                <Breadcrumb items={breadcrumbItems} />
                 <motion.h1
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}

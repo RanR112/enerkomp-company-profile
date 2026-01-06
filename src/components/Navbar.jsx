@@ -11,7 +11,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { currentLanguage, changeLanguage, t } = useLanguage();
-
     const [isScrolled, setIsScrolled] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -25,11 +24,12 @@ const Navbar = () => {
         { name: t("nav.products"), path: "/products" },
         // { name: t("nav.services"), path: "/service" },
         { name: t("nav.contact"), path: "/contact" },
-        // { name: t("nav.blog"), path: "/blog" },
+        { name: t("nav.blog"), path: "/blog" },
     ];
 
     // Check if current route is product detail
     const isProductDetailRoute = location.pathname.startsWith("/product/");
+    const isBlogDetailRoute = location.pathname.startsWith("/blog/");
     const isLegalRoute = location.pathname.startsWith("/legal/");
 
     // Handle scroll effect
@@ -40,7 +40,7 @@ const Navbar = () => {
         };
 
         // If on product detail route, force isScrolled to true
-        if (isProductDetailRoute || isLegalRoute) {
+        if (isProductDetailRoute || isLegalRoute || isBlogDetailRoute) {
             setIsScrolled(true);
         } else {
             // Only add scroll listener for other routes
@@ -50,7 +50,7 @@ const Navbar = () => {
         }
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [isProductDetailRoute]);
+    }, [isProductDetailRoute, isLegalRoute, isBlogDetailRoute]);
 
     // Close mobile menu when route changes
     useEffect(() => {

@@ -1,118 +1,150 @@
+// src/components/ProductDetail.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Phone, Download } from "lucide-react";
-import { findProductBySlug, getRelatedProducts } from "../utils/productUtils";
 import { useLanguage } from "../hooks/useLanguage";
-import "../sass/components/ProductDetail/ProductDetail.css";
-import { products } from "../utils/data/productData";
-import ProductCard from "./ProductCard";
+import { useProductDetail } from "../hooks/useProductDetail"; // hook sudah refactor pakai id
 import { useAnalytics } from "../hooks/useAnalytics";
+import ProductCard from "./ProductCard";
+import "../sass/components/ProductDetail/ProductDetail.css";
+import ProductDetailSkeleton from "./ProductDetailSkeleton";
+
+const PHOTO_URL = import.meta.env.VITE_PHOTO_URL || "";
 
 export default function ProductDetail() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const { t, currentLanguage } = useLanguage();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
-    const [product, setProduct] = useState(null);
-    const [relatedProducts, setRelatedProducts] = useState([]);
 
-    // Find product by slug
-    useEffect(() => {
-        const foundProduct = findProductBySlug(products, slug);
-        if (foundProduct) {
-            setProduct(foundProduct);
-            // Find related products
-            const related = getRelatedProducts(products, foundProduct, 3);
-            setRelatedProducts(related);
+    // Gunakan hook baru untuk fetch data dari API menggunakan id
+    const { product, relatedProducts, loading, error, refetch } =
+        useProductDetail();
+
+    const getTranslatedContent = () => {
+        if (!product) return {};
+
+        if (product.translation) {
+            const tr = product.translation;
+            return {
+                title: /*tr.metaTitle ||*/ product.name,
+                subtitle: tr.shortDescription || "",
+                description: tr.longDescription || "",
+                specifications: tr.specifications || null,
+                features: tr.features || [],
+                metaTitle: tr.metaTitle || product.name,
+                metaDescription: tr.metaDescription || "",
+                metaKeywords: tr.metaKeywords || "",
+            };
         }
-        setIsLoading(false);
+
+        return {
+            title: product.name || "Untitled",
+            subtitle: "",
+            description: "",
+            specifications: null,
+            features: [],
+            metaTitle: product.name || "Product",
+            metaDescription: "",
+            metaKeywords: "",
+        };
+    };
+
+    const {
+        title,
+        subtitle,
+        description,
+        specifications,
+        features,
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+    } = getTranslatedContent();
+
+    // Update document title dan meta tags
+    useEffect(() => {
+        if (product && metaTitle) {
+            document.title = `${metaTitle} | Enerkomp Persada Raya`;
+
+            let metaDescTag = document.querySelector(
+                'meta[name="description"]'
+            );
+            if (!metaDescTag) {
+                metaDescTag = document.createElement("meta");
+                metaDescTag.name = "description";
+                document.head.appendChild(metaDescTag);
+            }
+            metaDescTag.content = metaDescription;
+
+            let metaKeywordsTag = document.querySelector(
+                'meta[name="keywords"]'
+            );
+            if (!metaKeywordsTag) {
+                metaKeywordsTag = document.createElement("meta");
+                metaKeywordsTag.name = "keywords";
+                document.head.appendChild(metaKeywordsTag);
+            }
+            metaKeywordsTag.content = metaKeywords;
+        }
+
+        return () => {
+            document.title = "Enerkomp Persada Raya";
+        };
+    }, [product, metaTitle, metaDescription, metaKeywords]);
+
+    // Analytics
+    useAnalytics(`/product/${slug}`, `Product ${title}`);
+
+    // Reset image index saat product berubah
+    useEffect(() => {
+        setCurrentImageIndex(0);
     }, [slug]);
 
-    // Handle image navigation
+    const getProductImages = () => {
+        if (!product) return [];
+        if (product.images && product.images.length > 0) {
+            return product.images.map((img) => `${PHOTO_URL}${img}`);
+        }
+        return [];
+    };
+
+    const productImages = getProductImages();
+
     const nextImage = () => {
-        if (product && product.images.length > 1) {
-            setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+        if (productImages.length > 1) {
+            setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
         }
     };
 
     const prevImage = () => {
-        if (product && product.images.length > 1) {
+        if (productImages.length > 1) {
             setCurrentImageIndex((prev) =>
-                prev === 0 ? product.images.length - 1 : prev - 1
+                prev === 0 ? productImages.length - 1 : prev - 1
             );
         }
     };
 
-    // Get translated product content
-    const getTranslatedContent = () => {
-        if (!product) return {};
-
-        // Check if product has translations
-        if (product.translations && product.translations[currentLanguage]) {
-            const translation = product.translations[currentLanguage];
-            return {
-                title: translation.title || product.title,
-                subtitle: translation.subtitle || product.subtitle,
-                description: translation.description || product.description,
-                specifications:
-                    translation.specifications || product.specifications,
-                features: translation.features || product.features,
-            };
-        }
-
-        // Fallback to original content
-        return {
-            title: product.title,
-            subtitle: product.subtitle,
-            description: product.description,
-            specifications: product.specifications,
-            features: product.features,
-        };
-    };
-
-    const { title, subtitle, description, specifications, features } =
-        getTranslatedContent();
-
-    useAnalytics(`/product/${slug}`, `Product ${title}`);
-
-    // Animation variants
     const fadeIn = {
         hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { duration: 0.5 },
-        },
+        visible: { opacity: 1, transition: { duration: 0.5 } },
     };
-
     const slideIn = {
         hidden: { opacity: 0, x: 30 },
-        visible: {
-            opacity: 1,
-            x: 0,
-            transition: { duration: 0.5 },
-        },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
     };
 
-    if (isLoading) {
-        return (
-            <div className="product-detail-loading">
-                <div className="loading-spinner"></div>
-                <p>{t("products.detail.loading")}</p>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="product-detail-loading">
+    //             <div className="loading-spinner"></div>
+    //             <p>{t("products.detail.loading") || "Loading..."}</p>
+    //         </div>
+    //     );
+    // }
 
-    if (!product) {
-        return (
-            <div className="product-not-found">
-                <h2>{t("products.detail.notFound")}</h2>
-                <button onClick={() => navigate("/products")}>
-                    {t("products.detail.backToProducts")}
-                </button>
-            </div>
-        );
+    if (error || !product) {
+        return <ProductDetailSkeleton />;
     }
 
     return (
@@ -124,10 +156,12 @@ export default function ProductDetail() {
                 animate="visible"
                 variants={fadeIn}
             >
-                <span onClick={() => navigate("/")}>{t("nav.home")}</span>
+                <span onClick={() => navigate("/")}>
+                    {t("nav.home") || "Home"}
+                </span>
                 <span>/</span>
                 <span onClick={() => navigate("/products")}>
-                    {t("nav.products")}
+                    {t("nav.products") || "Products"}
                 </span>
                 <span>/</span>
                 <span>{title}</span>
@@ -143,34 +177,39 @@ export default function ProductDetail() {
                 {/* Product Images */}
                 <div className="product-images-section">
                     <div className="main-image-container">
-                        <AnimatePresence mode="wait">
-                            <motion.img
-                                key={currentImageIndex}
-                                src={product.images[currentImageIndex]}
-                                alt={title}
-                                className="main-product-image"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </AnimatePresence>
+                        {productImages.length > 0 && (
+                            <AnimatePresence mode="wait">
+                                <motion.img
+                                    key={currentImageIndex}
+                                    src={productImages[currentImageIndex]}
+                                    alt={title}
+                                    className="main-product-image"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                            </AnimatePresence>
+                        )}
 
-                        {product.images.length > 1 && (
+                        {productImages.length > 1 && (
                             <>
                                 <button
                                     className="image-nav-btn prev"
                                     onClick={prevImage}
-                                    aria-label={t(
-                                        "products.detail.previousImage"
-                                    )}
+                                    aria-label={
+                                        t("products.detail.previousImage") ||
+                                        "Previous"
+                                    }
                                 >
                                     <ChevronLeft size={24} />
                                 </button>
                                 <button
                                     className="image-nav-btn next"
                                     onClick={nextImage}
-                                    aria-label={t("products.detail.nextImage")}
+                                    aria-label={
+                                        t("products.detail.nextImage") || "Next"
+                                    }
                                 >
                                     <ChevronRight size={24} />
                                 </button>
@@ -178,10 +217,10 @@ export default function ProductDetail() {
                         )}
                     </div>
 
-                    {/* Image thumbnails */}
-                    {product.images.length > 1 && (
+                    {/* Thumbnails */}
+                    {productImages.length > 1 && (
                         <div className="image-thumbnails">
-                            {product.images.map((image, index) => (
+                            {productImages.map((image, index) => (
                                 <button
                                     key={index}
                                     className={`thumbnail ${
@@ -194,6 +233,7 @@ export default function ProductDetail() {
                                     <img
                                         src={image}
                                         alt={`${title} ${index + 1}`}
+                                        loading="lazy"
                                     />
                                 </button>
                             ))}
@@ -203,57 +243,63 @@ export default function ProductDetail() {
 
                 {/* Product Info */}
                 <motion.div className="product-info-section" variants={slideIn}>
-                    {/* Brand Logo */}
-                    <div className="brand-header">
-                        <img
-                            src={product.brandLogo}
-                            alt={product.brandName}
-                            className="brand-logo-detail"
-                        />
-                    </div>
+                    {product.brand?.logo && (
+                        <div className="brand-header">
+                            <img
+                                src={`${PHOTO_URL}${product.brand.logo}`}
+                                alt={product.brand.name}
+                                className="brand-logo-detail"
+                            />
+                        </div>
+                    )}
 
-                    {/* Product Title */}
                     <h1 className="product-title">{title}</h1>
-                    <p className="product-subtitle">{subtitle}</p>
+                    {subtitle && <p className="product-subtitle">{subtitle}</p>}
 
-                    {/* Product Description */}
-                    <div className="product-description">
-                        {description.split("\n\n").map((paragraph, index) => (
-                            <p key={index}>{paragraph}</p>
-                        ))}
-                    </div>
+                    <div
+                        className="product-description"
+                        dangerouslySetInnerHTML={{
+                            __html: description,
+                        }}
+                    />
 
-                    {/* Action Buttons */}
                     <div className="product-actions">
                         <motion.button
                             className="btn-primary contact-btn"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate("/contact")}
                         >
                             <Phone size={20} />
-                            {t("products.detail.contactUs")}
+                            {t("products.detail.contactUs") || "Hubungi Kami"}
                         </motion.button>
 
-                        <motion.button
+                        {/* Download Catalog Button */}
+
+                        {/* <motion.button
                             className="btn-secondary download-btn"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <Download size={20} />
-                            {t("products.detail.downloadCatalog")}
-                        </motion.button>
+                            {t("products.detail.downloadCatalog") ||
+                                "Download Katalog"}
+                        </motion.button> */}
                     </div>
                 </motion.div>
             </motion.div>
 
-            {specifications && specifications !== false && (
+            {/* Specifications */}
+            {specifications && Object.keys(specifications).length > 0 && (
                 <motion.div
                     className="product-specifications"
                     initial="hidden"
                     animate="visible"
                     variants={fadeIn}
                 >
-                    <h2>{t("products.detail.specifications")}</h2>
+                    <h2>
+                        {t("products.detail.specifications") || "Spesifikasi"}
+                    </h2>
                     <div className="specs-grid">
                         {Object.entries(specifications).map(([key, value]) => (
                             <div key={key} className="spec-item">
@@ -265,15 +311,15 @@ export default function ProductDetail() {
                 </motion.div>
             )}
 
-            {/* Product Features */}
-            {features && features !== false && (
+            {/* Features */}
+            {features && features.length > 0 && (
                 <motion.div
                     className="product-features"
                     initial="hidden"
                     animate="visible"
                     variants={fadeIn}
                 >
-                    <h2>{t("products.detail.features")}</h2>
+                    <h2>{t("products.detail.features") || "Fitur"}</h2>
                     <div className="features-grid">
                         {features.map((feature, index) => (
                             <motion.div
@@ -299,7 +345,10 @@ export default function ProductDetail() {
                     animate="visible"
                     variants={fadeIn}
                 >
-                    <h2>{t("products.detail.relatedProducts")}</h2>
+                    <h2>
+                        {t("products.detail.relatedProducts") ||
+                            "Produk Terkait"}
+                    </h2>
                     <div className="related-products-grid">
                         {relatedProducts.map((relatedProduct) => (
                             <ProductCard

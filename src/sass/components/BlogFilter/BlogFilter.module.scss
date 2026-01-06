@@ -1,0 +1,119 @@
+@import "../../variables";
+
+.filterWrapper {
+    background: $white;
+    padding: $spacing-lg;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-sm;
+    margin-bottom: $spacing-xl;
+
+    @include tablet {
+        padding: $spacing-md;
+    }
+}
+
+.filterHeader {
+    @include flex-between;
+    margin-bottom: $spacing-md;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+}
+
+.filterTitle {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $primary;
+    margin: 0;
+
+    @include tablet {
+        font-size: $font-size-base;
+    }
+}
+
+.clearButton {
+    @include button-reset;
+    font-size: $font-size-sm;
+    color: $accent;
+    font-weight: $font-weight-medium;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+        color: $hover;
+        background: rgba($accent, 0.1);
+    }
+}
+
+.tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+}
+
+.tagButton {
+    @include button-reset;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $secondary;
+    background: $card;
+    border: 2px solid transparent;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba($third, 0.1);
+        border-color: $third;
+    }
+
+    &.selected {
+        color: $white;
+        background: $accent;
+        border-color: $accent;
+
+        &:hover {
+            background: $hover;
+            border-color: $hover;
+        }
+    }
+
+    @include tablet {
+        padding: 6px $spacing-sm;
+        font-size: $font-size-xs;
+    }
+}
+
+.checkIcon {
+    flex-shrink: 0;
+}
+
+.selectedInfo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding-top: $spacing-sm;
+    border-top: 1px solid rgba($primary, 0.1);
+    font-size: $font-size-sm;
+    color: $secondary;
+}
+
+.selectedLabel {
+    font-weight: $font-weight-medium;
+}
+
+.selectedCount {
+    @include flex-center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 $spacing-xs;
+    font-weight: $font-weight-bold;
+    color: $white;
+    background: $accent;
+    border-radius: 12px;
+    font-size: $font-size-xs;
+}

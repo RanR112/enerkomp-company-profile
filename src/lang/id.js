@@ -6,6 +6,7 @@ export const ID = {
         services: "Layanan",
         contact: "Hubungi Kami",
         blog: "Blog",
+        privacyPolicy: "Kebijakan Privasi",
     },
     home: {
         hero: {
@@ -18,11 +19,11 @@ export const ID = {
         about: {
             title: "Tentang Enerkomp",
             description1:
-                "PT ENERKOMP PERSADA RAYA adalah penyedia terpercaya solusi kompresor udara terintegrasi di Indonesia.",
+                "PT Enerkomp Persada Raya adalah penyedia solusi kompresor udara industri terintegrasi yang terpercaya di Indonesia.",
             description2:
-                "Kami merupakan distributor resmi IHI Compressor dan IHI Turbo Compressor di Indonesia, yang memasok peralatan berkinerja tinggi untuk berbagai industri. Selain itu, kami juga menyediakan screw compressor, Taitian compressor, serta berbagai solusi kompresor industri lainnya yang disesuaikan dengan kebutuhan pelanggan.",
+                "Sebagai distributor resmi IHI Compressors, kami mengkhususkan diri pada kompresor turbo sentrifugal berkinerja tinggi untuk aplikasi industri yang menuntut. Selain itu, kami juga menyediakan kompresor screw, kompresor Taitian, serta solusi sistem udara bertekanan lengkap yang disesuaikan dengan kebutuhan pelanggan.",
             description3:
-                "Misi kami adalah memberikan layanan profesional yang lengkap dan sistem kompresor udara yang andal di seluruh Indonesia. Dengan pengalaman bertahun-tahun, Enerkomp Persada Raya memastikan setiap solusi kompresor yang diberikan memenuhi standar tertinggi dalam hal kinerja, efisiensi, dan ketahanan.",
+                "Dengan pengalaman bertahun-tahun di industri, Enerkomp menghadirkan peralatan yang andal, dukungan rekayasa profesional, serta layanan purna jual yang dapat diandalkan guna memastikan kinerja optimal, efisiensi tinggi, dan daya tahan jangka panjang.",
         },
         whyChoose: {
             title: "Mengapa Memilih Enerkomp – Solusi Kompresor Udara Industri di Indonesia",
@@ -301,6 +302,9 @@ export const ID = {
                 part1: "DAPATKAN KATALOG TERBARU",
                 highlight: "KAMI",
             },
+            selectBtn: "Dapatkan Katalog",
+            backBtn: "Kembali",
+            formTitle: "Isi Form untuk Mendapatkan",
         },
         detail: {
             loading: "Memuat produk...",
@@ -311,13 +315,18 @@ export const ID = {
             contactUs: "Hubungi Kami",
             downloadCatalog: "Download Katalog",
             specifications: "Spesifikasi Produk",
-            features: "Fitur Unggulan",
+            features: "Keunggulan Produk",
             relatedProducts: "Produk Terkait",
             viewDetails: "Lihat Detail",
         },
         pagination: {
             previous: "Sebelumnya",
             next: "Berikutnya",
+        },
+        loading: "Memuat Produk...",
+        error: {
+            title: "Gagal memuat produk",
+            retry: "Harap coba lagi",
         },
     },
     contact: {
@@ -355,23 +364,33 @@ export const ID = {
             },
             email: {
                 title: "Email",
-                description: "sales@enerkomp.id",
+                description: "sales@enerkomp.co.id",
             },
         },
         offices: {
             jakarta: {
-                name: "KANTOR JAKARTA",
+                name: "JAKARTA",
+                subname: "KANTOR",
                 address:
                     "Gd. Grand Slipi Tower Lt 42 Unit G-H Kav 22-24, Jakarta Barat, DKI Jakarta 11480",
                 location: "Jakarta Barat",
                 mapAlt: "Peta lokasi kantor Jakarta menunjukkan area Jakarta Barat",
             },
             cikarang: {
-                name: "KANTOR CIKARANG",
+                name: "CIKARANG",
+                subname: "KANTOR OPERATIONAL",
                 address:
                     "Ruko CBD, Jl. Niaga Raya Blok B-11, Pasirsari, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530",
                 location: "Kabupaten Bekasi",
                 mapAlt: "Peta lokasi kantor Cikarang menunjukkan area Kabupaten Bekasi",
+            },
+            surabaya: {
+                name: "SURABAYA",
+                subname: "KANTOR",
+                address:
+                    "Jl. Nanas IV No.405, Tambaksari, pondok Chandra, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256",
+                location: "Kabupaten Sidoarjo",
+                mapAlt: "Peta lokasi kantor Surabaya menunjukkan area Kabupaten Sidoarjo",
             },
         },
     },
@@ -416,7 +435,7 @@ export const ID = {
             error: "Terjadi kesalahan. Silakan coba lagi.",
         },
         catalogNote:
-            "*Katalog akan terdownload otomatis setelah anda mengisi form diatas.",
+            "*Katalog akan dikirim otomatis setelah anda mengisi form diatas.",
         infoCard: {
             catalog: {
                 title: {
@@ -435,20 +454,80 @@ export const ID = {
                     "Silakan isi pertanyaan atau pesan yang diperlukan pada formulir berikut, lalu tekan tombol Kirim.",
             },
         },
+        catalogTab: {
+            title: "Menyiapkan Katalog Anda...",
+            loading: "Mohon tunggu sebentar, katalog Anda sedang disiapkan.",
+            successTitle: "Berhasil",
+            success:
+                "Katalog telah dikirim ke email Anda. Tab ini akan tertutup otomatis.",
+            error: "Katalog tidak dapat dibuka. Silakan coba lagi atau hubungi tim dukungan kami.",
+        },
+    },
+    blog: {
+        title: "Blog & Wawasan",
+        subtitle:
+            "Berita terbaru, tips, dan wawasan tentang sistem kompresor industri",
+        search: {
+            placeholder: "Cari artikel...",
+            results: "hasil ditemukan",
+            noResults: "Tidak ada artikel yang sesuai dengan pencarian Anda",
+        },
+        filter: {
+            allTags: "Semua Tag",
+            filterByTag: "Filter berdasarkan Tag",
+            clearFilters: "Hapus Filter",
+            selectedTags: "Tag Terpilih",
+        },
+        card: {
+            readMore: "Baca Selengkapnya",
+            minRead: "menit baca",
+        },
+        detail: {
+            author: "Penulis",
+            publishedOn: "Dipublikasikan pada",
+            views: "tayangan",
+            tags: "Tag",
+            share: "Bagikan artikel ini",
+            relatedPosts: "Artikel Terkait",
+            backToBlog: "Kembali ke Blog",
+            link: "Kunjungi Tautan",
+        },
+        pagination: {
+            previous: "Sebelumnya",
+            next: "Berikutnya",
+            page: "Halaman",
+            of: "dari",
+            showing: "Menampilkan",
+            to: "hingga",
+            results: "dari",
+        },
+        social: {
+            facebook: "Bagikan di Facebook",
+            twitter: "Bagikan di Twitter",
+            whatsapp: "Bagikan di WhatsApp",
+            copyLink: "Salin Link",
+            linkCopied: "Link berhasil disalin!",
+        },
+        loading: "Memuat artikel...",
+        error: "Gagal memuat artikel. Silakan coba lagi.",
+        notFound: "Artikel tidak ditemukan",
     },
     footer: {
         brandName: "PT. ENERKOMP PERSADA RAYA",
-        address:
-            "Alamat: Gd. Grand Slipi Tower Lt 42 Unit G-H Kav 22-24, Jakarta Barat, DKI Jakarta 11480",
+        office: "Kantor: Gd. Grand Slipi Tower Lt 42 Unit G-H Kav 22-24, Jakarta Barat, DKI Jakarta 11480",
+        operationalOffice:
+            "Kantor Operasional: Ruko CBD, Jl. Niaga Raya Blok B-11, Pasirsari, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530",
+        branchOffice:
+            "Kantor Cabang: Jl. Nanas IV No.405, Tambaksari, pondok Chandra, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256",
         followUs: "Ikuti kami",
         brand: "Brand",
+        category: "Kategori",
         contactUs: "Kontak Kami",
         social: {
             facebook: "Facebook",
             instagram: "Instagram",
             linkedin: "Linkedin",
         },
-        brands: ["IHI", "Taitian", "Raifu", "NOP", "Blovac"],
         legal: "Hukum",
         legals: {
             privacyPolicy: "Kebijakan Privasi",
